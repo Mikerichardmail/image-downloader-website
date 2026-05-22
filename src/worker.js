@@ -1,5 +1,5 @@
-import { onRequest as extractRequest } from '../functions/api/extract.js';
-import { onRequest as proxyRequest } from '../functions/api/proxy.js';
+import { onRequest as extractRequest } from '../api/extract.js';
+import { onRequest as proxyRequest } from '../api/proxy.js';
 
 export default {
   async fetch(request, env, ctx) {
