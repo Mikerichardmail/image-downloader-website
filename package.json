@@ -8,7 +8,8 @@
     "dev": "wrangler dev",
     "build": "vite build",
     "preview": "npm run build && wrangler dev",
-    "deploy": "npm run build && wrangler deploy"
+    "deploy": "npm run build && wrangler deploy",
+    "postinstall": "npm run build"
   },
   "dependencies": {
     "jszip": "^3.10.1"
