@@ -71,10 +71,18 @@
         </svg>
         <span>imagedownloader.org</span>
       </a>
-      <ul class="nav-links" id="nav-links">
+            <ul class="nav-links" id="nav-links">
         <li><a href="/">Home</a></li>
-        <li><a href="/chrome-extension" class="active">Chrome Extension</a></li>
-        <li><a href="/firefox-extension">Firefox Extension</a></li>
+        <li class="dropdown">
+          <a href="#" class="dropdown-trigger active">Extensions <span class="chevron">▼</span></a>
+          <ul class="dropdown-menu">
+            <li><a href="/chrome-extension" class="active">Chrome Extension</a></li>
+            <li><a href="/firefox-extension">Firefox Extension</a></li>
+            <li><a href="/edge-extension">Edge Extension</a></li>
+            <li><a href="/brave-extension">Brave Extension</a></li>
+            <li><a href="/opera-extension">Opera Extension</a></li>
+          </ul>
+        </li>
         <li><a href="/pricing">Pricing</a></li>
         <li><a href="/blog">Blog</a></li>
         <li><a href="/about">About</a></li>

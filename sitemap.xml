@@ -3,6 +3,9 @@
   <url><loc>https://imagedownloader.org/</loc><priority>1.0</priority></url>
   <url><loc>https://imagedownloader.org/chrome-extension</loc><priority>0.9</priority></url>
   <url><loc>https://imagedownloader.org/firefox-extension</loc><priority>0.9</priority></url>
+  <url><loc>https://imagedownloader.org/edge-extension</loc><priority>0.8</priority></url>
+  <url><loc>https://imagedownloader.org/brave-extension</loc><priority>0.8</priority></url>
+  <url><loc>https://imagedownloader.org/opera-extension</loc><priority>0.8</priority></url>
   <url><loc>https://imagedownloader.org/pricing</loc><priority>0.9</priority></url>
   <url><loc>https://imagedownloader.org/about</loc><priority>0.6</priority></url>
   <url><loc>https://imagedownloader.org/blog</loc><priority>0.8</priority></url>

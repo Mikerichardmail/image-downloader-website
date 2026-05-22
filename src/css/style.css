@@ -161,6 +161,91 @@ header {
   font-weight: 600;
 }
 
+/* --- DROPDOWN NAVIGATION --- */
+.dropdown {
+  position: relative;
+}
+
+.dropdown-trigger {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  cursor: pointer;
+}
+
+.dropdown-trigger .chevron {
+  font-size: 0.6rem;
+  transition: transform 0.3s ease;
+  pointer-events: none;
+}
+
+.dropdown:hover .dropdown-trigger .chevron {
+  transform: rotate(180deg);
+}
+
+.dropdown-menu {
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%) translateY(10px);
+  background-color: var(--bg-secondary);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-md);
+  padding: 12px 0;
+  min-width: 190px;
+  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.5), var(--shadow-glow);
+  list-style: none;
+  z-index: 1000;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s ease, transform 0.3s ease, visibility 0.3s ease;
+  pointer-events: none;
+}
+
+.dropdown-menu::before {
+  content: '';
+  position: absolute;
+  top: -6px;
+  left: 50%;
+  transform: translateX(-50%) rotate(45deg);
+  width: 10px;
+  height: 10px;
+  background-color: var(--bg-secondary);
+  border-top: 1px solid var(--border-color);
+  border-left: 1px solid var(--border-color);
+}
+
+.dropdown:hover .dropdown-menu {
+  opacity: 1;
+  visibility: visible;
+  transform: translateX(-50%) translateY(4px);
+  pointer-events: auto;
+}
+
+.dropdown-menu li {
+  width: 100%;
+}
+
+.dropdown-menu a {
+  display: block;
+  padding: 10px 20px;
+  font-size: 0.9rem;
+  color: var(--text-secondary) !important;
+  font-weight: 500 !important;
+  transition: var(--transition);
+  white-space: nowrap;
+}
+
+.dropdown-menu a:hover {
+  background-color: rgba(255, 255, 255, 0.03);
+  color: var(--accent-cyan) !important;
+}
+
+.dropdown-menu .active {
+  color: var(--accent-indigo) !important;
+  font-weight: 600 !important;
+}
+
 .header-actions {
   display: flex;
   align-items: center;
@@ -1096,7 +1181,48 @@ footer {
 
 @media (max-width: 768px) {
   .nav-links {
-    display: none; /* In production, we'll toggle classes with JS */
+    display: none;
+    flex-direction: column;
+    position: absolute;
+    top: 72px;
+    left: 0;
+    width: 100%;
+    background-color: var(--bg-secondary);
+    border-bottom: 1px solid var(--border-color);
+    padding: 24px;
+    gap: 20px;
+    box-shadow: var(--shadow-lg);
+    z-index: 99;
+  }
+
+  .nav-links.active {
+    display: flex;
+  }
+
+  /* Mobile Dropdown styles */
+  .nav-links .dropdown-menu {
+    position: static;
+    transform: none;
+    display: none;
+    box-shadow: none;
+    border: none;
+    padding: 8px 0 0 16px;
+    background-color: transparent;
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+  }
+
+  .nav-links .dropdown-menu::before {
+    display: none;
+  }
+
+  .nav-links .dropdown.open .dropdown-menu {
+    display: block;
+  }
+
+  .nav-links .dropdown.open .dropdown-trigger .chevron {
+    transform: rotate(180deg);
   }
   .menu-toggle {
     display: flex;
