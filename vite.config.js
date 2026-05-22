@@ -33,7 +33,7 @@ function getHtmlInputs() {
 }
 
 export default defineConfig({
-  plugins: [cloudflare()],
+  plugins: [process.env.NODE_ENV !== 'production' && cloudflare()].filter(Boolean),
   build: {
     rollupOptions: {
       input: getHtmlInputs()

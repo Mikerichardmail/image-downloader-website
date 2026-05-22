@@ -5,10 +5,10 @@
   "description": "Free web-based bulk image downloader website",
   "main": "index.html",
   "scripts": {
-    "dev": "wrangler pages dev",
+    "dev": "wrangler dev",
     "build": "vite build",
-    "preview": "npm run build && wrangler pages dev",
-    "deploy": "npm run build && wrangler pages deploy dist"
+    "preview": "npm run build && wrangler dev",
+    "deploy": "npm run build && wrangler deploy"
   },
   "dependencies": {
     "jszip": "^3.10.1"
