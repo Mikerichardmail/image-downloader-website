@@ -1258,3 +1258,115 @@ footer {
     text-align: center;
   }
 }
+
+/* --- SMART EXTENSION PROMOTION BANNER --- */
+.smart-banner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  padding: 12px 24px;
+  background: rgba(17, 24, 39, 0.95);
+  backdrop-filter: var(--glass-blur);
+  border-bottom: 1px solid var(--border-color);
+  position: relative;
+  z-index: 1001;
+  font-family: var(--font-body);
+  transition: opacity 0.3s cubic-bezier(0.4, 0, 0.2, 1), 
+              margin-top 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+              height 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  overflow: hidden;
+  box-shadow: var(--shadow-sm);
+  animation: slideDown 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes slideDown {
+  from {
+    transform: translateY(-100%);
+  }
+  to {
+    transform: translateY(0);
+  }
+}
+
+.smart-banner.dismissed {
+  opacity: 0;
+  margin-top: -64px;
+  height: 0;
+  padding-top: 0;
+  padding-bottom: 0;
+  border-bottom-width: 0;
+  pointer-events: none;
+}
+
+.smart-banner-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex: 1;
+  gap: 16px;
+}
+
+.smart-banner-text {
+  font-size: 0.9rem;
+  color: var(--text-primary);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.smart-banner-text strong {
+  color: var(--accent-cyan);
+}
+
+.smart-banner-icon {
+  font-size: 1.2rem;
+  display: inline-flex;
+  align-items: center;
+}
+
+.smart-banner-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: linear-gradient(135deg, var(--accent-indigo) 0%, var(--accent-cyan) 100%);
+  color: #ffffff;
+  padding: 8px 18px;
+  border-radius: 100px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  text-decoration: none;
+  transition: var(--transition);
+  box-shadow: 0 0 15px rgba(99, 102, 241, 0.2);
+}
+
+.smart-banner-btn:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 0 20px rgba(99, 102, 241, 0.5);
+  color: #ffffff;
+}
+
+.smart-banner-close {
+  background: none;
+  border: none;
+  color: var(--text-muted);
+  font-size: 1.5rem;
+  cursor: pointer;
+  padding: 4px 8px;
+  line-height: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: color 0.2s ease;
+}
+
+.smart-banner-close:hover {
+  color: var(--text-primary);
+}
+
+/* Hide on mobile devices */
+@media (max-width: 768px) {
+  .smart-banner {
+    display: none !important;
+  }
+}

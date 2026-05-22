@@ -47,6 +47,8 @@ document.addEventListener('DOMContentLoaded', () => {
   }
   setupFilterEvents();
   setupSelectionActions();
+  initSmartExtensionBanner();
+  personalizeHomepageCTA();
 });
 
 // Setup Mobile Menu Toggle
@@ -379,4 +381,128 @@ function updateProgressUI(completed, total) {
   const percent = total > 0 ? Math.round((completed / total) * 100) : 0;
   progressFill.style.width = `${percent}%`;
   progressText.textContent = `Downloading: ${completed} of ${total} images (${percent}%)`;
+}
+
+// Browser Detection & Smart Extension Promotion Banner
+function detectBrowser() {
+  const ua = navigator.userAgent;
+  
+  // Edge
+  if (/edg/i.test(ua)) return 'edge';
+  
+  // Opera
+  if (/opr|opera/i.test(ua)) return 'opera';
+  
+  // Brave
+  if (navigator.brave && typeof navigator.brave.isBrave === 'function') return 'brave';
+  
+  // Firefox
+  if (/firefox|iceweasel|fxios/i.test(ua)) return 'firefox';
+  
+  // Chrome
+  if (/chrome|crios/i.test(ua) && !/edg/i.test(ua) && !/opr|opera/i.test(ua)) return 'chrome';
+  
+  // Safari
+  if (/safari/i.test(ua) && !/chrome|crios|edg|opr|opera/i.test(ua)) return 'safari';
+  
+  return 'other';
+}
+
+function initSmartExtensionBanner() {
+  // Only show on desktop screens
+  if (window.innerWidth <= 768) return;
+
+  // Check if dismissed
+  if (localStorage.getItem('dismiss-smart-banner') === 'true') return;
+
+  const browser = detectBrowser();
+  
+  // We only show banner for supported browsers
+  if (!['chrome', 'firefox', 'edge', 'brave', 'opera'].includes(browser)) {
+    return;
+  }
+
+  // Determine store URL & Browser Name
+  let storeUrl = '';
+  let browserName = '';
+  let browserIcon = '';
+
+  if (browser === 'firefox') {
+    storeUrl = 'https://addons.mozilla.org/en-US/firefox/addon/bulk-image-download/';
+    browserName = 'Firefox';
+    browserIcon = '🦊';
+  } else {
+    storeUrl = 'https://chromewebstore.google.com/detail/image-downloader-imagemas/hmghdknfmhfbbdedplpdakfbhflfikhm';
+    if (browser === 'chrome') { browserName = 'Chrome'; browserIcon = '🌐'; }
+    else if (browser === 'edge') { browserName = 'Edge'; browserIcon = '🌀'; }
+    else if (browser === 'brave') { browserName = 'Brave'; browserIcon = '🦁'; }
+    else if (browser === 'opera') { browserName = 'Opera'; browserIcon = '⭕'; }
+  }
+
+  // Create Banner Element
+  const banner = document.createElement('div');
+  banner.className = 'smart-banner';
+  banner.innerHTML = `
+    <div class="smart-banner-container">
+      <div class="smart-banner-text">
+        <span class="smart-banner-icon">${browserIcon}</span>
+        <span>Install the <strong>ImageMaster Pro</strong> extension for ${browserName} to extract images from protected sites like Instagram, Amazon, and Pinterest.</span>
+      </div>
+      <a href="${storeUrl}" target="_blank" class="smart-banner-btn">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+          <polyline points="7 10 12 15 17 10"></polyline>
+          <line x1="12" y1="15" x2="12" y2="3"></line>
+        </svg>
+        Install Extension
+      </a>
+    </div>
+    <button class="smart-banner-close" aria-label="Dismiss banner">&times;</button>
+  `;
+
+  // Insert banner at the top of the body
+  document.body.insertBefore(banner, document.body.firstChild);
+
+  // Setup dismiss event
+  const closeBtn = banner.querySelector('.smart-banner-close');
+  closeBtn.addEventListener('click', () => {
+    banner.classList.add('dismissed');
+    localStorage.setItem('dismiss-smart-banner', 'true');
+    setTimeout(() => {
+      banner.remove();
+    }, 300); // match transition duration
+  });
+}
+
+function personalizeHomepageCTA() {
+  const badgeRow = document.querySelector('.badge-row');
+  if (!badgeRow) return;
+
+  const browser = detectBrowser();
+  if (!['chrome', 'firefox', 'edge', 'brave', 'opera'].includes(browser)) return;
+
+  // Let's create browser-specific primary badges/buttons
+  let primaryHTML = '';
+  let secondaryHTML = '';
+  const proHTML = `<a href="/pricing" class="btn btn-glow">Get Pro Lifetime ($5.99)</a>`;
+
+  if (browser === 'firefox') {
+    primaryHTML = `<a href="/firefox-extension" class="btn btn-primary" style="background: linear-gradient(135deg, var(--accent-indigo) 0%, var(--accent-cyan) 100%); line-height: 1.5; padding: 12px 24px; border-radius: var(--radius-sm); font-weight: 600;">Get Firefox Addon</a>`;
+    secondaryHTML = `<a href="/chrome-extension"><img src="https://developer.chrome.com/static/docs/webstore/brand-guidelines/image/crx-badge-install.png" alt="Install Chrome Extension" style="height: 48px; border-radius: 6px;"></a>`;
+  } else if (browser === 'edge') {
+    primaryHTML = `<a href="/edge-extension" class="btn btn-primary" style="background: linear-gradient(135deg, var(--accent-indigo) 0%, var(--accent-cyan) 100%); line-height: 1.5; padding: 12px 24px; border-radius: var(--radius-sm); font-weight: 600;">Get Edge Extension</a>`;
+    secondaryHTML = `<a href="/chrome-extension"><img src="https://developer.chrome.com/static/docs/webstore/brand-guidelines/image/crx-badge-install.png" alt="Install Chrome Extension" style="height: 48px; border-radius: 6px;"></a>`;
+  } else if (browser === 'brave') {
+    primaryHTML = `<a href="/brave-extension" class="btn btn-primary" style="background: linear-gradient(135deg, var(--accent-indigo) 0%, var(--accent-cyan) 100%); line-height: 1.5; padding: 12px 24px; border-radius: var(--radius-sm); font-weight: 600;">Get Brave Extension</a>`;
+    secondaryHTML = `<a href="/chrome-extension"><img src="https://developer.chrome.com/static/docs/webstore/brand-guidelines/image/crx-badge-install.png" alt="Install Chrome Extension" style="height: 48px; border-radius: 6px;"></a>`;
+  } else if (browser === 'opera') {
+    primaryHTML = `<a href="/opera-extension" class="btn btn-primary" style="background: linear-gradient(135deg, var(--accent-indigo) 0%, var(--accent-cyan) 100%); line-height: 1.5; padding: 12px 24px; border-radius: var(--radius-sm); font-weight: 600;">Get Opera Extension</a>`;
+    secondaryHTML = `<a href="/chrome-extension"><img src="https://developer.chrome.com/static/docs/webstore/brand-guidelines/image/crx-badge-install.png" alt="Install Chrome Extension" style="height: 48px; border-radius: 6px;"></a>`;
+  } else {
+    // Chrome (default)
+    primaryHTML = `<a href="/chrome-extension"><img src="https://developer.chrome.com/static/docs/webstore/brand-guidelines/image/crx-badge-install.png" alt="Install Chrome Extension" style="height: 48px; border-radius: 6px;"></a>`;
+    secondaryHTML = `<a href="/firefox-extension" class="btn btn-secondary">Get Firefox Addon</a>`;
+  }
+
+  badgeRow.innerHTML = `${primaryHTML}${secondaryHTML}${proHTML}`;
 }
