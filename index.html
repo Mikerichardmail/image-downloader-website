@@ -1,0 +1,486 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <!-- PRIMARY SEO -->
+  <title>Bulk Image Downloader — Download All Images from Any Website Free</title>
+  <meta name="description" content="Free online bulk image downloader. Paste any website URL to extract, filter, and download all images in one click or save as ZIP. Chrome and Firefox extensions available." />
+  <meta name="keywords" content="bulk image downloader, image downloader online, download images from website, save images from webpage, free image downloader" />
+  <link rel="canonical" href="https://imagedownloader.org/" />
+
+  <!-- OPEN GRAPH -->
+  <meta property="og:title" content="Bulk Image Downloader — imagedownloader.org" />
+  <meta property="og:description" content="Free online bulk image downloader. Paste any website URL to extract, filter, and download all images in one click or save as ZIP." />
+  <meta property="og:image" content="https://imagedownloader.org/og/home.png" />
+  <meta property="og:url" content="https://imagedownloader.org/" />
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="imagedownloader.org" />
+
+  <!-- TWITTER CARD -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Bulk Image Downloader — imagedownloader.org" />
+  <meta name="twitter:description" content="Free online bulk image downloader. Extract, filter, and download all website images instantly." />
+  <meta name="twitter:image" content="https://imagedownloader.org/og/home.png" />
+  <meta name="robots" content="index, follow" />
+
+  <!-- FAVICONS -->
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2280%22>🖼️</text></svg>">
+  
+  <!-- CSS -->
+  <link rel="stylesheet" href="/src/css/style.css">
+
+  <!-- SCHEMA MARKUPS -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "name": "Image Downloader — imagedownloader.org",
+    "url": "https://imagedownloader.org",
+    "description": "Free bulk image downloader. Paste any URL and download all images from any webpage instantly.",
+    "applicationCategory": "UtilitiesApplication",
+    "operatingSystem": "All",
+    "offers": {
+      "@type": "Offer",
+      "price": "0",
+      "priceCurrency": "USD"
+    }
+  }
+  </script>
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "Is this online image downloader free?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes! The online tool on our homepage is 100% free. You can paste any website URL and extract and download images without registration or limits."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Does it work on all websites?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes, our tool extracts images from almost any public website. If a site uses custom loading blocks, you can download our Chrome or Firefox extensions to bypass browser restrictions and scrape them locally."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What image formats does it support?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "It supports and extracts all web-based image formats including PNG, JPG/JPEG, WEBP, SVG, GIF, BMP, and ICO files."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Can I download images in a ZIP format?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Absolutely. You can select individual images or click 'Select All' and download them compiled together in a single ZIP file instantly."
+        }
+      }
+    ]
+  }
+  </script>
+</head>
+<body>
+  <div class="bg-gradient-overlay"></div>
+
+  <!-- HEADER -->
+  <header>
+    <div class="container header-container">
+      <a href="/" class="logo">
+        <svg width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
+          <circle cx="8.5" cy="8.5" r="1.5"></circle>
+          <polyline points="21 15 16 10 5 21"></polyline>
+        </svg>
+        <span>imagedownloader.org</span>
+      </a>
+      <ul class="nav-links" id="nav-links">
+        <li><a href="/" class="active">Home</a></li>
+        <li><a href="/chrome-extension">Chrome Extension</a></li>
+        <li><a href="/firefox-extension">Firefox Extension</a></li>
+        <li><a href="/pricing">Pricing</a></li>
+        <li><a href="/about">About</a></li>
+        <li><a href="/contact">Contact</a></li>
+      </ul>
+      <div class="header-actions">
+        <a href="/pricing" class="btn btn-outline-cyan">Get Pro</a>
+      </div>
+      <div class="menu-toggle" id="menu-toggle">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <!-- HERO SECTION -->
+    <section class="hero">
+      <div class="container">
+        <div class="hero-tag">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+            <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>
+          </svg>
+          100% Free Online Bulk Downloader
+        </div>
+        <h1>Download Every Image. <span>Instantly.</span></h1>
+        <p>Extract, filter, and bulk download images from any webpage. Paste the URL below to scrape all images and download them individually or as a packed ZIP.</p>
+      </div>
+    </section>
+
+    <!-- DOWNLOADER TOOL SECTION -->
+    <section class="tool-section">
+      <div class="container">
+        <div class="tool-card">
+          <form id="url-form">
+            <div class="input-group">
+              <input type="text" id="url-input" placeholder="Paste website URL here (e.g., https://unsplash.com)" required>
+              <button type="submit" id="extract-btn" class="btn btn-primary">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline>
+                </svg>
+                Extract Images
+              </button>
+            </div>
+          </form>
+
+          <!-- Loading Spinner -->
+          <div class="extractor-loader" id="loader">
+            <div class="spinner"></div>
+            <p>Fetching webpage and parsing assets...</p>
+          </div>
+
+          <!-- Dynamic Grid Controls (hidden by default) -->
+          <div class="grid-controls" id="grid-controls">
+            <!-- Filter Bar -->
+            <div class="filter-bar">
+              <div class="filter-item">
+                <label for="search-input">Search / Filter by Name</label>
+                <input type="text" id="search-input" class="filter-input" placeholder="Filter by keyword...">
+              </div>
+              <div class="filter-item">
+                <label>Min Width: <span id="width-value">0px</span></label>
+                <div class="range-group">
+                  <input type="range" id="width-slider" min="0" max="1920" value="0">
+                </div>
+              </div>
+              <div class="filter-item">
+                <label>Min Height: <span id="height-value">0px</span></label>
+                <div class="range-group">
+                  <input type="range" id="height-slider" min="0" max="1080" value="0">
+                </div>
+              </div>
+            </div>
+
+            <!-- Format Filters -->
+            <div class="filter-item" style="margin-bottom: 24px;">
+              <label style="margin-bottom: 8px; display: block;">Filter by Format</label>
+              <div class="format-tags" id="format-tags">
+                <!-- Javascript will inject extensions tags -->
+              </div>
+            </div>
+
+            <!-- Stats and Bulk Actions -->
+            <div class="stats-actions">
+              <span class="stats-text" id="stats-text">Showing 0 images</span>
+              <div class="action-buttons">
+                <button type="button" id="select-all-btn" class="btn btn-secondary btn-sm">Select All</button>
+                <button type="button" id="deselect-all-btn" class="btn btn-secondary btn-sm">Deselect All</button>
+                <button type="button" id="download-selected-btn" class="btn btn-glow" disabled>Download Selected ZIP (0)</button>
+              </div>
+            </div>
+
+            <!-- The Image Grid -->
+            <div class="image-grid" id="image-grid">
+              <!-- Cards will be dynamically injected here -->
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- HOW IT WORKS SECTION -->
+    <section class="process-section">
+      <div class="container">
+        <div class="section-header">
+          <h2>How It Works</h2>
+          <p>Extracting page images has never been easier. Just follow these three simple steps.</p>
+        </div>
+        <div class="steps-grid">
+          <div class="step-card">
+            <div class="step-num">1</div>
+            <h3>Paste the Link</h3>
+            <p>Copy any webpage link containing the images you want, paste it into our input box above, and click Extract.</p>
+          </div>
+          <div class="step-card">
+            <div class="step-num">2</div>
+            <h3>Filter & Select</h3>
+            <p>Use our advanced filters to sort by image dimensions (width/height), type, or name. Toggle selection checklist.</p>
+          </div>
+          <div class="step-card">
+            <div class="step-num">3</div>
+            <h3>Bulk Download</h3>
+            <p>Download individual files directly or export all selected assets packed neatly inside a single ZIP file.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- FEATURE GRID SECTION -->
+    <section class="features-section">
+      <div class="container">
+        <div class="section-header">
+          <h2>Packed with Powerful Features</h2>
+          <p>The ultimate toolkit to scrape and save image assets for designers, web developers, and marketing experts.</p>
+        </div>
+        <div class="features-grid">
+          <div class="feature-card">
+            <div class="feature-icon">
+              <svg width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <polygon points="12 2 2 7 12 12 22 7 12 2"></polygon>
+                <polyline points="2 17 12 22 22 17"></polyline>
+                <polyline points="2 12 12 17 22 12"></polyline>
+              </svg>
+            </div>
+            <h3>Bulk ZIP Export</h3>
+            <p>Compile all selected files into a single, light ZIP archive without any rate limits.</p>
+          </div>
+          <div class="feature-card">
+            <div class="feature-icon">
+              <svg width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="12" cy="12" r="10"></circle>
+                <line x1="12" y1="16" x2="12" y2="12"></line>
+                <line x1="12" y1="8" x2="12.01" y2="8"></line>
+              </svg>
+            </div>
+            <h3>Smart URL Resolving</h3>
+            <p>Automatically resolves relative links (`/images/pic.png`) and sources into fully valid absolute URLs.</p>
+          </div>
+          <div class="feature-card">
+            <div class="feature-icon">
+              <svg width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
+                <line x1="9" y1="3" x2="9" y2="21"></line>
+                <line x1="15" y1="3" x2="15" y2="21"></line>
+                <line x1="3" y1="9" x2="21" y2="9"></line>
+                <line x1="3" y1="15" x2="21" y2="15"></line>
+              </svg>
+            </div>
+            <h3>Resolution Filtering</h3>
+            <p>Quickly ignore tiny icons, tracking pixels, or layout files by setting minimum width/height rules.</p>
+          </div>
+          <div class="feature-card">
+            <div class="feature-icon">
+              <svg width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="16 16 12 12 8 16"></polyline>
+                <line x1="12" y1="12" x2="12" y2="21"></line>
+                <path d="M20.39 18.39A5 5 0 0 0 18 9h-1.26A8 8 0 1 0 3 16.3"></path>
+                <polyline points="16 16 12 12 8 16"></polyline>
+              </svg>
+            </div>
+            <h3>Lazy-load Extraction</h3>
+            <p>Extracts files matching advanced web standards: standard `src`, lazy `data-src`, or inline background images.</p>
+          </div>
+          <div class="feature-card">
+            <div class="feature-icon">
+              <svg width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+              </svg>
+            </div>
+            <h3>Alt Text Searching</h3>
+            <p>Search image filenames and context alt tags dynamically to find specific visuals faster.</p>
+          </div>
+          <div class="feature-card">
+            <div class="feature-icon">
+              <svg width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+              </svg>
+            </div>
+            <h3>Client-side Processing</h3>
+            <p>Your privacy is guaranteed. Images are rendered and zipped entirely inside your browser locally.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- FREE VS PRO COMPARISON -->
+    <section class="comparison-section">
+      <div class="container">
+        <div class="section-header">
+          <h2>Free Web Tool vs Browser Extensions</h2>
+          <p>While our web tool is free, browser security constraints limit what it can scan. Upgrade to the browser extension for ultimate access.</p>
+        </div>
+        <div class="table-wrapper">
+          <table>
+            <thead>
+              <tr>
+                <th>Feature</th>
+                <th>Online Tool (Free)</th>
+                <th>Extension (Free)</th>
+                <th>Extension (Pro - $5.99)</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>Bulk Download Page Images</strong></td>
+                <td><span class="check-icon">✓</span></td>
+                <td><span class="check-icon">✓</span></td>
+                <td><span class="check-icon">✓</span> (Unlimited)</td>
+              </tr>
+              <tr>
+                <td><strong>Filter by dimensions & format</strong></td>
+                <td><span class="check-icon">✓</span></td>
+                <td><span class="check-icon">✓</span></td>
+                <td><span class="check-icon">✓</span></td>
+              </tr>
+              <tr>
+                <td><strong>Bypass logins/captchas</strong></td>
+                <td><span class="cross-icon">✗</span> (Fails on auth pages)</td>
+                <td><span class="check-icon">✓</span> (Runs in tab)</td>
+                <td><span class="check-icon">✓</span></td>
+              </tr>
+              <tr>
+                <td><strong>Instagram, Pinterest, Amazon HD Resolvers</strong></td>
+                <td><span class="cross-icon">✗</span></td>
+                <td><span class="cross-icon">✗</span></td>
+                <td><span class="check-icon">✓</span> (Fetches full-size)</td>
+              </tr>
+              <tr>
+                <td><strong>Auto-scroll lazy loading</strong></td>
+                <td><span class="cross-icon">✗</span></td>
+                <td><span class="cross-icon">✗</span></td>
+                <td><span class="check-icon">✓</span></td>
+              </tr>
+              <tr>
+                <td><strong>WebP to JPG converter tool</strong></td>
+                <td><span class="cross-icon">✗</span></td>
+                <td><span class="cross-icon">✗</span></td>
+                <td><span class="check-icon">✓</span></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- EXTENSION CTA BANNER -->
+    <section class="extension-cta-section">
+      <div class="container">
+        <div class="cta-banner">
+          <div class="cta-content">
+            <h2>Download the Extension for Full Power</h2>
+            <p>Automate page scroll, bypass CORS restrictions on protected domains, and fetch full-size HD sources on Instagram, Amazon, Pinterest, and Shopify.</p>
+            <div class="badge-row">
+              <a href="/chrome-extension"><img src="https://developer.chrome.com/static/docs/webstore/brand-guidelines/image/crx-badge-install.png" alt="Install Chrome Extension"></a>
+              <a href="/firefox-extension" class="btn btn-secondary">Get Firefox Addon</a>
+              <a href="/pricing" class="btn btn-glow">Get Pro Lifetime ($5.99)</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- FAQ SECTION -->
+    <section class="faq-section">
+      <div class="container">
+        <div class="section-header">
+          <h2>Frequently Asked Questions</h2>
+          <p>Find quick answers to common questions about bulk downloading image assets.</p>
+        </div>
+        <div class="faq-accordion">
+          <details>
+            <summary>Is this online image downloader free?</summary>
+            <p>Yes. The web tool at imagedownloader.org is completely free, with no signup required and no daily constraints on individual files download.</p>
+          </details>
+          <details>
+            <summary>Does it work on all websites?</summary>
+            <p>It works on almost all public-facing webpages. However, some protected, paywalled, or login-required pages (like private social feeds or admin dashboards) cannot be scraped via the online tool. For those, we recommend installing our browser extension, which runs directly inside your browser window.</p>
+          </details>
+          <details>
+            <summary>What image formats does it support?</summary>
+            <p>It extracts and supports popular web image formats including JPG, PNG, WEBP, GIF, SVG, BMP, and ICO. You can choose to download all files or filter by type.</p>
+          </details>
+          <details>
+            <summary>How many images can I download at once?</summary>
+            <p>Our online bulk tool does not have any strict limits. However, download zip requests larger than 100 images can take a few seconds to compile depending on your connection speed. We throttle fetches internally to prevent rate-limiting by hosts.</p>
+          </details>
+          <details>
+            <summary>Do I need to create an account?</summary>
+            <p>No, there is no email registration or account required. Paste the URL, filter the files, and download what you need instantly.</p>
+          </details>
+          <details>
+            <summary>Is my data private?</summary>
+            <p>Absolutely. We do not store or track any URLs you paste, nor do we host or look at your images. The entire extraction and downloading process happens locally on your computer via client-side JavaScript execution.</p>
+          </details>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- PROGRESS MODAL (Fixed Overlay) -->
+  <div class="download-progress-container" id="progress-container">
+    <h4 id="progress-text">Downloading: 0 of 0 images (0%)</h4>
+    <div class="download-progress-bar">
+      <div class="download-progress-fill" id="progress-fill"></div>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <a href="/" class="logo">
+            <svg width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
+              <circle cx="8.5" cy="8.5" r="1.5"></circle>
+              <polyline points="21 15 16 10 5 21"></polyline>
+            </svg>
+            <span>imagedownloader.org</span>
+          </a>
+          <p>Free bulk image downloading web tool and browser extension for designers, developers, and researchers. Created by ConverterWordToPDF Labs.</p>
+        </div>
+        <div class="footer-links">
+          <h4>Extensions</h4>
+          <ul>
+            <li><a href="/chrome-extension">Chrome Extension</a></li>
+            <li><a href="/firefox-extension">Firefox Addon</a></li>
+            <li><a href="/pricing">Pro Pricing</a></li>
+          </ul>
+        </div>
+        <div class="footer-links">
+          <h4>Legal</h4>
+          <ul>
+            <li><a href="/privacy-policy">Privacy Policy</a></li>
+            <li><a href="/terms-of-service">Terms of Service</a></li>
+          </ul>
+        </div>
+        <div class="footer-links">
+          <h4>Support</h4>
+          <ul>
+            <li><a href="/about">About Us</a></li>
+            <li><a href="/contact">Contact Support</a></li>
+            <li><a href="mailto:admin@imagedownloader.org">admin@imagedownloader.org</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2026 imagedownloader.org. All rights reserved.</p>
+        <p>Built with privacy in mind. No trackers.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script type="module" src="/src/js/main.js"></script>
+</body>
+</html>
