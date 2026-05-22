@@ -12,3 +12,7 @@ dist/
 .dev.vars*
 !.dev.vars.example
 !.env.example
+
+# Local deployment guide (not for GitHub)
+cloudflare-deployment-guide.md
+
