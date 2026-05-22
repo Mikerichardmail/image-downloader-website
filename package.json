@@ -1,6 +1,7 @@
 {
   "name": "imagedownloader-org",
   "version": "1.0.0",
+  "type": "module",
   "description": "Free web-based bulk image downloader website",
   "main": "index.html",
   "scripts": {
