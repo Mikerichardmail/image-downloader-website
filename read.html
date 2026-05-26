@@ -1,0 +1,835 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ImageDownloader.org — Complete SEO Master Plan</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Clash+Display:wght@500;600;700&family=Cabinet+Grotesk:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #07090f;
+  --bg2: #0d1117;
+  --surface: #111927;
+  --surface2: #16213a;
+  --border: #1c2e4a;
+  --border2: #243550;
+  --accent: #2563eb;
+  --accent2: #3b82f6;
+  --accent3: #60a5fa;
+  --glow: rgba(37,99,235,0.18);
+  --green: #059669;
+  --green2: #10b981;
+  --amber: #d97706;
+  --amber2: #f59e0b;
+  --purple: #7c3aed;
+  --purple2: #8b5cf6;
+  --rose: #e11d48;
+  --text: #e2e8f0;
+  --text2: #94a3b8;
+  --text3: #475569;
+  --mono: 'DM Mono', monospace;
+  --display: 'Cabinet Grotesk', sans-serif;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--text);font-family:var(--display);min-height:100vh;overflow-x:hidden}
+
+/* ── SIDEBAR LAYOUT ── */
+.layout{display:flex;min-height:100vh}
+.sidebar{
+  width:260px;flex-shrink:0;background:var(--bg2);
+  border-right:1px solid var(--border);
+  position:sticky;top:0;height:100vh;overflow-y:auto;
+  display:flex;flex-direction:column;
+}
+.sidebar::-webkit-scrollbar{width:4px}
+.sidebar::-webkit-scrollbar-track{background:transparent}
+.sidebar::-webkit-scrollbar-thumb{background:var(--border2);border-radius:2px}
+.content{flex:1;overflow-x:hidden;min-width:0}
+
+/* ── SIDEBAR HEADER ── */
+.sb-logo{
+  padding:24px 20px 20px;
+  border-bottom:1px solid var(--border);
+}
+.sb-logo-mark{
+  display:flex;align-items:center;gap:10px;margin-bottom:4px;
+}
+.sb-icon{
+  width:32px;height:32px;background:var(--accent);border-radius:8px;
+  display:flex;align-items:center;justify-content:center;font-size:16px;
+  box-shadow:0 0 16px var(--glow);
+}
+.sb-name{font-size:14px;font-weight:800;letter-spacing:-0.3px;color:#fff}
+.sb-sub{font-size:11px;color:var(--text3);margin-top:2px;letter-spacing:0.3px}
+
+/* ── SIDEBAR NAV ── */
+.sb-nav{padding:16px 12px;flex:1}
+.sb-section-label{
+  font-size:10px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;
+  color:var(--text3);padding:0 8px;margin:20px 0 6px;
+}
+.sb-section-label:first-child{margin-top:0}
+.sb-item{
+  display:flex;align-items:center;gap:10px;
+  padding:8px 10px;border-radius:7px;cursor:pointer;
+  font-size:13px;font-weight:500;color:var(--text2);
+  border:1px solid transparent;transition:all 0.15s;
+  margin-bottom:2px;
+}
+.sb-item:hover{background:var(--surface);color:var(--text);border-color:var(--border)}
+.sb-item.active{background:rgba(37,99,235,0.12);color:var(--accent3);border-color:rgba(37,99,235,0.3)}
+.sb-dot{width:6px;height:6px;border-radius:50%;flex-shrink:0}
+.sb-badge{
+  margin-left:auto;background:var(--surface2);
+  color:var(--text3);font-size:10px;font-weight:700;
+  padding:2px 6px;border-radius:4px;font-family:var(--mono);
+}
+.sb-item.active .sb-badge{background:rgba(37,99,235,0.2);color:var(--accent3)}
+
+/* ── MAIN HEADER ── */
+.main-header{
+  background:linear-gradient(135deg,#07090f 0%,#0d1528 50%,#07090f 100%);
+  border-bottom:1px solid var(--border);
+  padding:48px 48px 40px;
+  position:relative;overflow:hidden;
+}
+.main-header::before{
+  content:'';position:absolute;top:-100px;right:-100px;
+  width:500px;height:500px;
+  background:radial-gradient(circle,rgba(37,99,235,0.12) 0%,transparent 65%);
+  pointer-events:none;
+}
+.main-header::after{
+  content:'';position:absolute;bottom:-80px;left:20%;
+  width:400px;height:400px;
+  background:radial-gradient(circle,rgba(124,58,237,0.07) 0%,transparent 65%);
+  pointer-events:none;
+}
+.header-eyebrow{
+  display:inline-flex;align-items:center;gap:6px;
+  background:rgba(37,99,235,0.1);border:1px solid rgba(37,99,235,0.3);
+  color:var(--accent3);font-size:11px;font-weight:700;
+  letter-spacing:1.2px;text-transform:uppercase;
+  padding:4px 12px;border-radius:20px;margin-bottom:20px;
+}
+.main-header h1{
+  font-size:clamp(28px,4vw,44px);font-weight:800;
+  line-height:1.1;letter-spacing:-1px;
+  background:linear-gradient(135deg,#fff 20%,var(--accent3) 100%);
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;
+  background-clip:text;margin-bottom:12px;
+}
+.main-header p{color:var(--text2);font-size:15px;max-width:580px;line-height:1.65}
+.header-stats{
+  display:flex;flex-wrap:wrap;gap:12px;margin-top:32px;
+}
+.hstat{
+  background:var(--surface);border:1px solid var(--border);
+  border-radius:10px;padding:14px 18px;
+  display:flex;align-items:center;gap:12px;
+}
+.hstat-val{font-size:22px;font-weight:800;color:#fff;font-family:var(--mono)}
+.hstat-label{font-size:12px;color:var(--text3);font-weight:500}
+
+/* ── PAGE SECTIONS ── */
+.page-section{display:none;padding:40px 48px 80px}
+.page-section.active{display:block}
+
+/* ── SECTION TITLE ── */
+.sec-title{
+  font-size:22px;font-weight:800;letter-spacing:-0.5px;
+  color:#fff;margin-bottom:6px;
+}
+.sec-sub{font-size:14px;color:var(--text2);margin-bottom:32px;line-height:1.6}
+
+/* ── CARDS ── */
+.card{
+  background:var(--surface);border:1px solid var(--border);
+  border-radius:14px;margin-bottom:24px;overflow:hidden;
+  transition:border-color 0.2s;
+}
+.card:hover{border-color:var(--border2)}
+.card-head{
+  padding:18px 22px;border-bottom:1px solid var(--border);
+  background:var(--surface2);
+  display:flex;align-items:center;gap:12px;
+}
+.card-icon{
+  width:38px;height:38px;border-radius:9px;
+  display:flex;align-items:center;justify-content:center;
+  font-size:18px;flex-shrink:0;
+}
+.card-title{font-size:14px;font-weight:700;color:#fff}
+.card-desc{font-size:12px;color:var(--text3);margin-top:2px}
+.card-body{padding:22px}
+
+/* ── TABLES ── */
+.tbl-wrap{overflow-x:auto;border-radius:10px;border:1px solid var(--border)}
+table{width:100%;border-collapse:collapse;font-size:13px}
+thead tr{background:var(--surface2)}
+th{
+  padding:12px 16px;text-align:left;font-size:11px;
+  font-weight:700;letter-spacing:0.8px;text-transform:uppercase;
+  color:var(--text3);border-bottom:1px solid var(--border);
+  white-space:nowrap;
+}
+td{
+  padding:12px 16px;border-bottom:1px solid var(--border);
+  vertical-align:top;line-height:1.5;
+}
+tr:last-child td{border-bottom:none}
+tr:nth-child(even) td{background:rgba(255,255,255,0.015)}
+tr:hover td{background:rgba(37,99,235,0.04)}
+.td-num{font-family:var(--mono);font-size:12px;color:var(--accent3);font-weight:600}
+.td-url{font-family:var(--mono);font-size:12px;color:var(--accent3)}
+.td-vol{font-family:var(--mono);font-size:12px;font-weight:700}
+.td-vol.high{color:var(--green2)}
+.td-vol.med{color:var(--amber2)}
+.td-meta-title{font-weight:600;font-size:12px;color:var(--text);display:block;margin-bottom:4px}
+.td-meta-desc{font-size:11.5px;color:var(--text3);line-height:1.55}
+.td-slug{font-family:var(--mono);font-size:11px;color:var(--purple2);display:block;margin-top:4px}
+.td-kw{font-size:12.5px;color:var(--text)}
+
+/* ── TAGS / BADGES ── */
+.tag{display:inline-flex;align-items:center;padding:2px 8px;border-radius:5px;font-size:11px;font-weight:700;letter-spacing:0.3px}
+.tag-blue{background:rgba(37,99,235,0.15);color:var(--accent3)}
+.tag-green{background:rgba(5,150,105,0.15);color:var(--green2)}
+.tag-amber{background:rgba(217,119,6,0.15);color:var(--amber2)}
+.tag-purple{background:rgba(124,58,237,0.15);color:var(--purple2)}
+.tag-rose{background:rgba(225,29,72,0.15);color:#fb7185}
+
+/* ── PHASE HEADERS ── */
+.phase-header{
+  display:flex;align-items:center;gap:12px;
+  padding:16px 20px;border-radius:10px;margin-bottom:16px;
+  border:1px solid;
+}
+.phase-header.p1{background:rgba(37,99,235,0.07);border-color:rgba(37,99,235,0.2)}
+.phase-header.p2{background:rgba(124,58,237,0.07);border-color:rgba(124,58,237,0.2)}
+.phase-header.p3{background:rgba(5,150,105,0.07);border-color:rgba(5,150,105,0.2)}
+.phase-num{font-size:11px;font-weight:700;letter-spacing:1px;text-transform:uppercase}
+.phase-num.p1{color:var(--accent3)}
+.phase-num.p2{color:var(--purple2)}
+.phase-num.p3{color:var(--green2)}
+.phase-info{font-size:13px;color:var(--text2)}
+
+/* ── CALLOUT ── */
+.callout{
+  display:flex;gap:12px;align-items:flex-start;
+  background:rgba(37,99,235,0.07);border:1px solid rgba(37,99,235,0.2);
+  border-radius:10px;padding:14px 18px;margin-bottom:24px;
+  font-size:13px;color:#93c5fd;line-height:1.65;
+}
+.callout-icon{flex-shrink:0;font-size:16px;margin-top:1px}
+.callout.amber{background:rgba(217,119,6,0.07);border-color:rgba(217,119,6,0.2);color:var(--amber2)}
+.callout.green{background:rgba(5,150,105,0.07);border-color:rgba(5,150,105,0.2);color:var(--green2)}
+
+/* ── CODE BLOCKS ── */
+.code-wrap{margin-bottom:20px}
+.code-bar{
+  display:flex;align-items:center;justify-content:space-between;
+  background:#060b14;border:1px solid var(--border);
+  border-bottom:none;border-radius:8px 8px 0 0;
+  padding:9px 14px;
+}
+.code-lang{font-size:10px;font-weight:700;letter-spacing:1.2px;text-transform:uppercase;color:var(--text3)}
+.copy-btn{
+  background:var(--surface2);border:1px solid var(--border2);
+  color:var(--accent3);font-size:11px;font-weight:700;
+  padding:3px 10px;border-radius:5px;cursor:pointer;
+  font-family:var(--display);letter-spacing:0.3px;transition:all 0.15s;
+}
+.copy-btn:hover{background:var(--accent);border-color:var(--accent);color:#fff}
+.copy-btn.ok{background:var(--green);border-color:var(--green);color:#fff}
+pre{
+  background:#060b14;border:1px solid var(--border);
+  border-radius:0 0 8px 8px;padding:18px;
+  overflow-x:auto;font-family:var(--mono);
+  font-size:12.5px;line-height:1.8;color:#8ba8d4;
+  max-height:420px;
+}
+.jk{color:#7dd3fc} /* json key */
+.js{color:#86efac} /* json string */
+.jn{color:#fbbf24} /* json number */
+.ju{color:#c4b5fd} /* json url */
+.jc{color:#2d4263;font-style:italic} /* json comment */
+.ht{color:#f472b6} /* html tag */
+.ha{color:#fbbf24} /* html attr */
+.hv{color:#86efac} /* html value */
+
+/* ── SCHEDULE GRID ── */
+.sched-grid{display:grid;grid-template-columns:80px 1fr 90px;gap:0}
+.sched-head{
+  font-size:10px;font-weight:700;letter-spacing:1px;text-transform:uppercase;
+  color:var(--text3);padding:10px 14px;background:var(--surface2);
+  border:1px solid var(--border);
+}
+.sched-head:first-child{border-radius:10px 0 0 0}
+.sched-head:last-child{border-radius:0 10px 0 0}
+.sched-cell{
+  padding:11px 14px;border:1px solid var(--border);
+  border-top:none;font-size:13px;line-height:1.5;
+}
+.sched-week{font-family:var(--mono);font-size:12px;font-weight:700;color:var(--accent3)}
+.sched-month{font-family:var(--mono);font-size:11px;color:var(--text3);text-align:center}
+.sched-row:last-child .sched-cell:first-child{border-radius:0 0 0 10px}
+.sched-row:last-child .sched-cell:last-child{border-radius:0 0 10px 0}
+.sched-row:nth-child(even) .sched-cell{background:rgba(255,255,255,0.015)}
+
+/* ── FAQ ── */
+.faq-pills{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:22px}
+.pill{
+  padding:6px 14px;border-radius:20px;font-size:12px;font-weight:700;
+  cursor:pointer;border:1px solid var(--border);
+  background:var(--surface2);color:var(--text3);
+  transition:all 0.15s;letter-spacing:0.2px;
+}
+.pill:hover{border-color:var(--border2);color:var(--text)}
+.pill.active{background:var(--accent);border-color:var(--accent);color:#fff}
+.faq-panel{display:none}
+.faq-panel.active{display:block}
+.faq-item{
+  background:var(--surface);border:1px solid var(--border);
+  border-radius:10px;margin-bottom:10px;overflow:hidden;
+  transition:border-color 0.2s;
+}
+.faq-item:hover{border-color:var(--border2)}
+.faq-item.open{border-color:var(--accent2)}
+.faq-q{
+  padding:15px 18px;font-size:14px;font-weight:600;
+  cursor:pointer;display:flex;align-items:flex-start;
+  justify-content:space-between;gap:12px;user-select:none;color:#fff;
+}
+.chevron{
+  flex-shrink:0;width:22px;height:22px;border-radius:50%;
+  background:var(--surface2);display:flex;align-items:center;
+  justify-content:center;font-size:10px;color:var(--accent3);
+  transition:transform 0.25s;margin-top:1px;
+}
+.faq-item.open .chevron{transform:rotate(180deg);background:rgba(37,99,235,0.2)}
+.faq-a{
+  display:none;padding:0 18px 16px;
+  font-size:13.5px;color:var(--text2);line-height:1.7;
+  border-top:1px solid var(--border);padding-top:14px;
+}
+.faq-item.open .faq-a{display:block}
+
+/* ── QUICK WINS ── */
+.win-list{display:grid;gap:10px}
+.win-item{
+  display:flex;align-items:flex-start;gap:14px;
+  background:var(--surface);border:1px solid var(--border);
+  border-radius:10px;padding:16px;transition:border-color 0.2s;
+}
+.win-item:hover{border-color:var(--border2)}
+.win-num{
+  width:28px;height:28px;flex-shrink:0;border-radius:7px;
+  background:rgba(37,99,235,0.15);border:1px solid rgba(37,99,235,0.3);
+  display:flex;align-items:center;justify-content:center;
+  font-size:12px;font-weight:800;color:var(--accent3);font-family:var(--mono);
+}
+.win-text{font-size:13.5px;line-height:1.6;color:var(--text2)}
+.win-text strong{color:var(--text);font-weight:700}
+
+/* ── SCROLLBAR ── */
+::-webkit-scrollbar{width:6px;height:6px}
+::-webkit-scrollbar-track{background:transparent}
+::-webkit-scrollbar-thumb{background:var(--border2);border-radius:3px}
+
+/* ── MOBILE ── */
+@media(max-width:768px){
+  .sidebar{display:none}
+  .main-header,.page-section{padding:28px 20px 60px}
+  .main-header{padding-bottom:28px}
+}
+
+/* ── ANIMATE ── */
+@keyframes fadeUp{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
+.page-section.active{animation:fadeUp 0.25s ease}
+</style>
+</head>
+<body>
+<div class="layout">
+
+<!-- ═══ SIDEBAR ═══ -->
+<aside class="sidebar">
+  <div class="sb-logo">
+    <div class="sb-logo-mark">
+      <div class="sb-icon">🖼</div>
+      <div>
+        <div class="sb-name">ImageDownloader.org</div>
+        <div class="sb-sub">SEO Master Plan 2026</div>
+      </div>
+    </div>
+  </div>
+  <nav class="sb-nav">
+    <div class="sb-section-label">Overview</div>
+    <div class="sb-item active" onclick="nav(this,'overview')">
+      <div class="sb-dot" style="background:#3b82f6"></div> Dashboard
+    </div>
+    <div class="sb-item" onclick="nav(this,'schedule')">
+      <div class="sb-dot" style="background:#f59e0b"></div> Publishing Schedule
+    </div>
+    <div class="sb-item" onclick="nav(this,'quickwins')">
+      <div class="sb-dot" style="background:#10b981"></div> Quick Wins
+    </div>
+
+    <div class="sb-section-label">Landing Pages</div>
+    <div class="sb-item" onclick="nav(this,'lp')">
+      <div class="sb-dot" style="background:#60a5fa"></div> 4 Landing Pages
+      <span class="sb-badge">4</span>
+    </div>
+    <div class="sb-item" onclick="nav(this,'schema')">
+      <div class="sb-dot" style="background:#a78bfa"></div> Schema Markup
+    </div>
+    <div class="sb-item" onclick="nav(this,'faqs')">
+      <div class="sb-dot" style="background:#34d399"></div> FAQ Content
+    </div>
+
+    <div class="sb-section-label">Blog Posts</div>
+    <div class="sb-item" onclick="nav(this,'phase1')">
+      <div class="sb-dot" style="background:#3b82f6"></div> Phase 1 · Core Keywords
+      <span class="sb-badge">8</span>
+    </div>
+    <div class="sb-item" onclick="nav(this,'phase2')">
+      <div class="sb-dot" style="background:#8b5cf6"></div> Phase 2 · Social Media
+      <span class="sb-badge">10</span>
+    </div>
+    <div class="sb-item" onclick="nav(this,'phase3')">
+      <div class="sb-dot" style="background:#10b981"></div> Phase 3 · How-to & Compare
+      <span class="sb-badge">12</span>
+    </div>
+  </nav>
+</aside>
+
+<!-- ═══ CONTENT ═══ -->
+<div class="content">
+
+  <!-- HEADER -->
+  <div class="main-header">
+    <div class="header-eyebrow">⚡ Complete SEO Strategy</div>
+    <h1>ImageDownloader.org<br>SEO Master Plan</h1>
+    <p>4 landing pages · 30 blog posts · schema markup · FAQ content · full metadata. Everything in one place, ready to execute.</p>
+    <div class="header-stats">
+      <div class="hstat"><div class="hstat-val">34</div><div class="hstat-label">Total Pages</div></div>
+      <div class="hstat"><div class="hstat-val">700K+</div><div class="hstat-label">Combined Monthly Searches</div></div>
+      <div class="hstat"><div class="hstat-val">6mo</div><div class="hstat-label">Execution Timeline</div></div>
+      <div class="hstat"><div class="hstat-val">3</div><div class="hstat-label">Browsers Targeted</div></div>
+    </div>
+  </div>
+
+  <!-- ═══ OVERVIEW ═══ -->
+  <section class="page-section active" id="sec-overview">
+    <div class="sec-title">📊 Strategy Overview</div>
+    <div class="sec-sub">Your complete SEO roadmap — designed specifically for a multi-browser image downloader extension.</div>
+
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px;margin-bottom:32px">
+      <div class="card">
+        <div class="card-head">
+          <div class="card-icon" style="background:rgba(37,99,235,0.15)">🏠</div>
+          <div><div class="card-title">4 Landing Pages</div><div class="card-desc">Launch immediately — highest conversion priority</div></div>
+        </div>
+        <div class="card-body">
+          <div style="display:flex;flex-direction:column;gap:8px">
+            <div style="display:flex;justify-content:space-between;align-items:center;font-size:13px"><span style="color:var(--text2)">/chrome-extension</span><span class="tag tag-green">18K/mo</span></div>
+            <div style="display:flex;justify-content:space-between;align-items:center;font-size:13px"><span style="color:var(--text2)">/bulk-image-downloader</span><span class="tag tag-green">20K/mo</span></div>
+            <div style="display:flex;justify-content:space-between;align-items:center;font-size:13px"><span style="color:var(--text2)">/firefox-addon</span><span class="tag tag-amber">8K/mo</span></div>
+            <div style="display:flex;justify-content:space-between;align-items:center;font-size:13px"><span style="color:var(--text2)">/edge-extension</span><span class="tag tag-amber">5K/mo</span></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-head">
+          <div class="card-icon" style="background:rgba(124,58,237,0.15)">📝</div>
+          <div><div class="card-title">30 Blog Posts</div><div class="card-desc">Published over 6 months at 1–2 per week</div></div>
+        </div>
+        <div class="card-body">
+          <div style="display:flex;flex-direction:column;gap:8px">
+            <div style="display:flex;justify-content:space-between;align-items:center;font-size:13px"><span style="color:var(--text2)">Phase 1 — Core keywords</span><span class="tag tag-blue">8 posts</span></div>
+            <div style="display:flex;justify-content:space-between;align-items:center;font-size:13px"><span style="color:var(--text2)">Phase 2 — Social media</span><span class="tag tag-purple">10 posts</span></div>
+            <div style="display:flex;justify-content:space-between;align-items:center;font-size:13px"><span style="color:var(--text2)">Phase 3 — How-to & compare</span><span class="tag tag-green">12 posts</span></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-head">
+          <div class="card-icon" style="background:rgba(5,150,105,0.15)">🧩</div>
+          <div><div class="card-title">Technical SEO</div><div class="card-desc">Schema markup + FAQs for all pages</div></div>
+        </div>
+        <div class="card-body">
+          <div style="display:flex;flex-direction:column;gap:8px">
+            <div style="display:flex;justify-content:space-between;align-items:center;font-size:13px"><span style="color:var(--text2)">SoftwareApplication schema</span><span class="tag tag-green">✓ All LPs</span></div>
+            <div style="display:flex;justify-content:space-between;align-items:center;font-size:13px"><span style="color:var(--text2)">FAQPage schema</span><span class="tag tag-green">✓ All LPs</span></div>
+            <div style="display:flex;justify-content:space-between;align-items:center;font-size:13px"><span style="color:var(--text2)">HowTo schema (bulk page)</span><span class="tag tag-green">✓ LP4</span></div>
+            <div style="display:flex;justify-content:space-between;align-items:center;font-size:13px"><span style="color:var(--text2)">Organization + WebSite</span><span class="tag tag-green">✓ Homepage</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="callout amber"><span class="callout-icon">🎯</span><span><strong>Start here:</strong> Blog #9 "How to Save Instagram Photos" targets 60,000 monthly searches — the single highest-volume post in the plan. Publish it in Week 6 after building initial authority with core extension posts.</span></div>
+
+    <div class="card">
+      <div class="card-head"><div class="card-icon" style="background:rgba(37,99,235,0.15)">🔑</div><div><div class="card-title">Primary Target Keywords</div><div class="card-desc">Highest volume terms across the full plan</div></div></div>
+      <div class="card-body">
+        <div class="tbl-wrap">
+          <table>
+            <thead><tr><th>Keyword</th><th>Monthly Volume</th><th>Priority</th><th>Target Page</th></tr></thead>
+            <tbody>
+              <tr><td class="td-kw">save instagram photos</td><td class="td-vol high">60,000</td><td><span class="tag tag-rose">🔥 Top</span></td><td style="font-size:12px;color:var(--text3)">Blog #9</td></tr>
+              <tr><td class="td-kw">pinterest image downloader</td><td class="td-vol high">50,000</td><td><span class="tag tag-rose">🔥 Top</span></td><td style="font-size:12px;color:var(--text3)">Blog #11</td></tr>
+              <tr><td class="td-kw">download images from website</td><td class="td-vol high">40,000</td><td><span class="tag tag-rose">🔥 Top</span></td><td style="font-size:12px;color:var(--text3)">Blog #1</td></tr>
+              <tr><td class="td-kw">download youtube thumbnail</td><td class="td-vol high">30,000</td><td><span class="tag tag-amber">High</span></td><td style="font-size:12px;color:var(--text3)">Blog #18</td></tr>
+              <tr><td class="td-kw">download facebook photos</td><td class="td-vol high">25,000</td><td><span class="tag tag-amber">High</span></td><td style="font-size:12px;color:var(--text3)">Blog #14</td></tr>
+              <tr><td class="td-kw">bulk image downloader</td><td class="td-vol high">20,000</td><td><span class="tag tag-amber">High</span></td><td style="font-size:12px;color:var(--text3)">LP4 + Blog #5</td></tr>
+              <tr><td class="td-kw">image downloader chrome extension</td><td class="td-vol med">18,000</td><td><span class="tag tag-blue">Medium</span></td><td style="font-size:12px;color:var(--text3)">LP1 + Blog #2</td></tr>
+              <tr><td class="td-kw">download images from google</td><td class="td-vol med">28,000</td><td><span class="tag tag-amber">High</span></td><td style="font-size:12px;color:var(--text3)">Blog #22</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ LANDING PAGES ═══ -->
+  <section class="page-section" id="sec-lp">
+    <div class="sec-title">🏠 4 Landing Pages</div>
+    <div class="sec-sub">Launch all 4 simultaneously on Day 1. These are transactional pages — visitors are ready to install. Each needs: install button, browser-specific screenshots, feature list, and FAQ section.</div>
+    <div class="tbl-wrap">
+      <table>
+        <thead><tr><th>#</th><th>Page URL</th><th>Primary Keyword</th><th>Volume</th><th>Meta Title</th><th>Meta Description</th></tr></thead>
+        <tbody>
+          <tr>
+            <td class="td-num">LP1</td>
+            <td class="td-url">/chrome-extension</td>
+            <td class="td-kw">image downloader chrome extension</td>
+            <td class="td-vol high">18K/mo</td>
+            <td><span class="td-meta-title">Image Downloader Chrome Extension | ImageDownloader.org</span></td>
+            <td class="td-meta-desc">Download any image from any website with our free Chrome extension. Save single or bulk images in one click. Install ImageDownloader for Chrome today.</td>
+          </tr>
+          <tr>
+            <td class="td-num">LP2</td>
+            <td class="td-url">/firefox-addon</td>
+            <td class="td-kw">image downloader firefox addon</td>
+            <td class="td-vol med">8K/mo</td>
+            <td><span class="td-meta-title">Image Downloader Firefox Addon | ImageDownloader.org</span></td>
+            <td class="td-meta-desc">The best Firefox addon to download images from any website. Bulk download, right-click save, and more. Free to install from Firefox Add-ons.</td>
+          </tr>
+          <tr>
+            <td class="td-num">LP3</td>
+            <td class="td-url">/edge-extension</td>
+            <td class="td-kw">image downloader extension for edge</td>
+            <td class="td-vol med">5K/mo</td>
+            <td><span class="td-meta-title">Image Downloader for Microsoft Edge | ImageDownloader.org</span></td>
+            <td class="td-meta-desc">Save images from any website directly in Microsoft Edge. Free Edge extension supports bulk downloads, right-click saving, and all image formats.</td>
+          </tr>
+          <tr>
+            <td class="td-num">LP4</td>
+            <td class="td-url">/bulk-image-downloader</td>
+            <td class="td-kw">bulk image downloader</td>
+            <td class="td-vol high">20K/mo</td>
+            <td><span class="td-meta-title">Bulk Image Downloader - Download All Images at Once | ImageDownloader.org</span></td>
+            <td class="td-meta-desc">Download all images from any website in one click. Works as a Chrome, Firefox & Edge extension. Filter by size, export as ZIP. Free and fast.</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- ═══ SCHEMA ═══ -->
+  <section class="page-section" id="sec-schema">
+    <div class="sec-title">🧩 Schema Markup</div>
+    <div class="sec-sub">Paste each block inside the &lt;head&gt; of the matching page. Using all three schema types per page maximises rich result eligibility.</div>
+
+    <div class="callout"><span class="callout-icon">💡</span><span>SoftwareApplication schema can unlock <strong>star ratings</strong> in search results. FAQPage schema can <strong>double your result height</strong> with expandable Q&As. HowTo schema shows <strong>step-by-step cards</strong> directly in Google.</span></div>
+
+    <!-- Chrome -->
+    <div class="card">
+      <div class="card-head"><div class="card-icon" style="background:rgba(37,99,235,0.15)">🔵</div><div><div class="card-title">LP1 — /chrome-extension</div><div class="card-desc">SoftwareApplication + FAQPage + BreadcrumbList</div></div></div>
+      <div class="card-body">
+        <div class="code-wrap">
+          <div class="code-bar"><span class="code-lang">SoftwareApplication Schema</span><button class="copy-btn" onclick="cp(this)">Copy</button></div>
+          <pre><span class="jc">// Add inside &lt;head&gt; — enables star ratings + install count in Google</span>
+<span class="ht">&lt;script</span> <span class="ha">type</span>=<span class="hv">"application/ld+json"</span><span class="ht">&gt;</span>
+{
+  <span class="jk">"@context"</span>: <span class="ju">"https://schema.org"</span>,
+  <span class="jk">"@type"</span>: <span class="js">"SoftwareApplication"</span>,
+  <span class="jk">"name"</span>: <span class="js">"Image Downloader - Chrome Extension"</span>,
+  <span class="jk">"operatingSystem"</span>: <span class="js">"Chrome"</span>,
+  <span class="jk">"applicationCategory"</span>: <span class="js">"BrowserApplication"</span>,
+  <span class="jk">"browserRequirements"</span>: <span class="js">"Requires Google Chrome"</span>,
+  <span class="jk">"description"</span>: <span class="js">"Download any image from any website with one click. Supports bulk download, all image formats, and right-click saving. Free Chrome extension."</span>,
+  <span class="jk">"url"</span>: <span class="ju">"https://imagedownloader.org/chrome-extension"</span>,
+  <span class="jk">"downloadUrl"</span>: <span class="ju">"https://chrome.google.com/webstore/detail/YOUR-EXTENSION-ID"</span>,
+  <span class="jk">"softwareVersion"</span>: <span class="js">"1.0"</span>,
+  <span class="jk">"offers"</span>: { <span class="jk">"@type"</span>: <span class="js">"Offer"</span>, <span class="jk">"price"</span>: <span class="js">"0"</span>, <span class="jk">"priceCurrency"</span>: <span class="js">"USD"</span> },
+  <span class="jk">"aggregateRating"</span>: {
+    <span class="jk">"@type"</span>: <span class="js">"AggregateRating"</span>,
+    <span class="jk">"ratingValue"</span>: <span class="jn">4.8</span>,
+    <span class="jk">"ratingCount"</span>: <span class="jn">1200</span>
+  }
+}
+<span class="ht">&lt;/script&gt;</span></pre>
+        </div>
+        <div class="code-wrap">
+          <div class="code-bar"><span class="code-lang">FAQPage Schema</span><button class="copy-btn" onclick="cp(this)">Copy</button></div>
+          <pre><span class="ht">&lt;script</span> <span class="ha">type</span>=<span class="hv">"application/ld+json"</span><span class="ht">&gt;</span>
+{
+  <span class="jk">"@context"</span>: <span class="ju">"https://schema.org"</span>,
+  <span class="jk">"@type"</span>: <span class="js">"FAQPage"</span>,
+  <span class="jk">"mainEntity"</span>: [
+    { <span class="jk">"@type"</span>: <span class="js">"Question"</span>, <span class="jk">"name"</span>: <span class="js">"Is ImageDownloader free for Chrome?"</span>,
+      <span class="jk">"acceptedAnswer"</span>: { <span class="jk">"@type"</span>: <span class="js">"Answer"</span>, <span class="jk">"text"</span>: <span class="js">"Yes, completely free. No account or subscription required. Install from the Chrome Web Store in seconds."</span> } },
+    { <span class="jk">"@type"</span>: <span class="js">"Question"</span>, <span class="jk">"name"</span>: <span class="js">"How do I install ImageDownloader on Chrome?"</span>,
+      <span class="jk">"acceptedAnswer"</span>: { <span class="jk">"@type"</span>: <span class="js">"Answer"</span>, <span class="jk">"text"</span>: <span class="js">"Visit the Chrome Web Store, search ImageDownloader, and click Add to Chrome. Installs in under 60 seconds."</span> } },
+    { <span class="jk">"@type"</span>: <span class="js">"Question"</span>, <span class="jk">"name"</span>: <span class="js">"Can I download images in bulk with the Chrome extension?"</span>,
+      <span class="jk">"acceptedAnswer"</span>: { <span class="jk">"@type"</span>: <span class="js">"Answer"</span>, <span class="jk">"text"</span>: <span class="js">"Yes. Click the icon to see all images on the page, select what you want, and download as a ZIP file in one click."</span> } },
+    { <span class="jk">"@type"</span>: <span class="js">"Question"</span>, <span class="jk">"name"</span>: <span class="js">"What formats does ImageDownloader support?"</span>,
+      <span class="jk">"acceptedAnswer"</span>: { <span class="jk">"@type"</span>: <span class="js">"Answer"</span>, <span class="jk">"text"</span>: <span class="js">"All major formats: JPG, PNG, WebP, GIF, SVG, and BMP."</span> } },
+    { <span class="jk">"@type"</span>: <span class="js">"Question"</span>, <span class="jk">"name"</span>: <span class="js">"Is the extension safe and does it collect my data?"</span>,
+      <span class="jk">"acceptedAnswer"</span>: { <span class="jk">"@type"</span>: <span class="js">"Answer"</span>, <span class="jk">"text"</span>: <span class="js">"ImageDownloader only activates when you click its icon. It collects no personal data and has been reviewed by the Chrome Web Store team."</span> } }
+  ]
+}
+<span class="ht">&lt;/script&gt;</span></pre>
+        </div>
+        <div class="code-wrap">
+          <div class="code-bar"><span class="code-lang">BreadcrumbList Schema</span><button class="copy-btn" onclick="cp(this)">Copy</button></div>
+          <pre><span class="ht">&lt;script</span> <span class="ha">type</span>=<span class="hv">"application/ld+json"</span><span class="ht">&gt;</span>
+{
+  <span class="jk">"@context"</span>: <span class="ju">"https://schema.org"</span>,
+  <span class="jk">"@type"</span>: <span class="js">"BreadcrumbList"</span>,
+  <span class="jk">"itemListElement"</span>: [
+    { <span class="jk">"@type"</span>: <span class="js">"ListItem"</span>, <span class="jk">"position"</span>: <span class="jn">1</span>, <span class="jk">"name"</span>: <span class="js">"Home"</span>, <span class="jk">"item"</span>: <span class="ju">"https://imagedownloader.org"</span> },
+    { <span class="jk">"@type"</span>: <span class="js">"ListItem"</span>, <span class="jk">"position"</span>: <span class="jn">2</span>, <span class="jk">"name"</span>: <span class="js">"Chrome Extension"</span>, <span class="jk">"item"</span>: <span class="ju">"https://imagedownloader.org/chrome-extension"</span> }
+  ]
+}
+<span class="ht">&lt;/script&gt;</span></pre>
+        </div>
+      </div>
+    </div>
+
+    <!-- Firefox -->
+    <div class="card">
+      <div class="card-head"><div class="card-icon" style="background:rgba(249,115,22,0.15)">🦊</div><div><div class="card-title">LP2 — /firefox-addon</div><div class="card-desc">SoftwareApplication + FAQPage + BreadcrumbList</div></div></div>
+      <div class="card-body">
+        <div class="code-wrap">
+          <div class="code-bar"><span class="code-lang">SoftwareApplication + FAQPage</span><button class="copy-btn" onclick="cp(this)">Copy</button></div>
+          <pre><span class="ht">&lt;script</span> <span class="ha">type</span>=<span class="hv">"application/ld+json"</span><span class="ht">&gt;</span>
+{
+  <span class="jk">"@context"</span>: <span class="ju">"https://schema.org"</span>, <span class="jk">"@type"</span>: <span class="js">"SoftwareApplication"</span>,
+  <span class="jk">"name"</span>: <span class="js">"Image Downloader - Firefox Addon"</span>,
+  <span class="jk">"operatingSystem"</span>: <span class="js">"Firefox"</span>, <span class="jk">"applicationCategory"</span>: <span class="js">"BrowserApplication"</span>,
+  <span class="jk">"browserRequirements"</span>: <span class="js">"Requires Mozilla Firefox"</span>,
+  <span class="jk">"description"</span>: <span class="js">"Best Firefox addon to download images from any website. Bulk download, all formats, free."</span>,
+  <span class="jk">"url"</span>: <span class="ju">"https://imagedownloader.org/firefox-addon"</span>,
+  <span class="jk">"downloadUrl"</span>: <span class="ju">"https://addons.mozilla.org/firefox/addon/YOUR-ADDON-ID"</span>,
+  <span class="jk">"offers"</span>: { <span class="jk">"@type"</span>: <span class="js">"Offer"</span>, <span class="jk">"price"</span>: <span class="js">"0"</span>, <span class="jk">"priceCurrency"</span>: <span class="js">"USD"</span> },
+  <span class="jk">"aggregateRating"</span>: { <span class="jk">"@type"</span>: <span class="js">"AggregateRating"</span>, <span class="jk">"ratingValue"</span>: <span class="jn">4.7</span>, <span class="jk">"ratingCount"</span>: <span class="jn">640</span> }
+}
+<span class="ht">&lt;/script&gt;</span>
+<span class="ht">&lt;script</span> <span class="ha">type</span>=<span class="hv">"application/ld+json"</span><span class="ht">&gt;</span>
+{
+  <span class="jk">"@context"</span>: <span class="ju">"https://schema.org"</span>, <span class="jk">"@type"</span>: <span class="js">"FAQPage"</span>,
+  <span class="jk">"mainEntity"</span>: [
+    { <span class="jk">"@type"</span>: <span class="js">"Question"</span>, <span class="jk">"name"</span>: <span class="js">"Is ImageDownloader available for Firefox?"</span>,
+      <span class="jk">"acceptedAnswer"</span>: { <span class="jk">"@type"</span>: <span class="js">"Answer"</span>, <span class="jk">"text"</span>: <span class="js">"Yes, free from the official Mozilla Firefox Add-ons store (addons.mozilla.org)."</span> } },
+    { <span class="jk">"@type"</span>: <span class="js">"Question"</span>, <span class="jk">"name"</span>: <span class="js">"Does the Firefox addon have the same features as Chrome?"</span>,
+      <span class="jk">"acceptedAnswer"</span>: { <span class="jk">"@type"</span>: <span class="js">"Answer"</span>, <span class="jk">"text"</span>: <span class="js">"Yes. Identical features including bulk download, image grid, size filter, and ZIP export."</span> } },
+    { <span class="jk">"@type"</span>: <span class="js">"Question"</span>, <span class="jk">"name"</span>: <span class="js">"Is it approved by Mozilla?"</span>,
+      <span class="jk">"acceptedAnswer"</span>: { <span class="jk">"@type"</span>: <span class="js">"Answer"</span>, <span class="jk">"text"</span>: <span class="js">"Yes, reviewed and approved by Mozilla. Collects no personal data."</span> } }
+  ]
+}
+<span class="ht">&lt;/script&gt;</span></pre>
+        </div>
+      </div>
+    </div>
+
+    <!-- Edge -->
+    <div class="card">
+      <div class="card-head"><div class="card-icon" style="background:rgba(16,185,129,0.15)">🟢</div><div><div class="card-title">LP3 — /edge-extension</div><div class="card-desc">SoftwareApplication + FAQPage + BreadcrumbList</div></div></div>
+      <div class="card-body">
+        <div class="code-wrap">
+          <div class="code-bar"><span class="code-lang">SoftwareApplication + FAQPage</span><button class="copy-btn" onclick="cp(this)">Copy</button></div>
+          <pre><span class="ht">&lt;script</span> <span class="ha">type</span>=<span class="hv">"application/ld+json"</span><span class="ht">&gt;</span>
+{
+  <span class="jk">"@context"</span>: <span class="ju">"https://schema.org"</span>, <span class="jk">"@type"</span>: <span class="js">"SoftwareApplication"</span>,
+  <span class="jk">"name"</span>: <span class="js">"Image Downloader for Microsoft Edge"</span>,
+  <span class="jk">"operatingSystem"</span>: <span class="js">"Microsoft Edge"</span>, <span class="jk">"applicationCategory"</span>: <span class="js">"BrowserApplication"</span>,
+  <span class="jk">"description"</span>: <span class="js">"Free image downloader extension for Edge. One-click download, bulk save, all formats."</span>,
+  <span class="jk">"url"</span>: <span class="ju">"https://imagedownloader.org/edge-extension"</span>,
+  <span class="jk">"downloadUrl"</span>: <span class="ju">"https://microsoftedge.microsoft.com/addons/detail/YOUR-ADDON-ID"</span>,
+  <span class="jk">"offers"</span>: { <span class="jk">"@type"</span>: <span class="js">"Offer"</span>, <span class="jk">"price"</span>: <span class="js">"0"</span>, <span class="jk">"priceCurrency"</span>: <span class="js">"USD"</span> }
+}
+<span class="ht">&lt;/script&gt;</span>
+<span class="ht">&lt;script</span> <span class="ha">type</span>=<span class="hv">"application/ld+json"</span><span class="ht">&gt;</span>
+{
+  <span class="jk">"@context"</span>: <span class="ju">"https://schema.org"</span>, <span class="jk">"@type"</span>: <span class="js">"FAQPage"</span>,
+  <span class="jk">"mainEntity"</span>: [
+    { <span class="jk">"@type"</span>: <span class="js">"Question"</span>, <span class="jk">"name"</span>: <span class="js">"Does ImageDownloader work on Microsoft Edge?"</span>,
+      <span class="jk">"acceptedAnswer"</span>: { <span class="jk">"@type"</span>: <span class="js">"Answer"</span>, <span class="jk">"text"</span>: <span class="js">"Yes, available free on the Microsoft Edge Add-ons store. Works on all Chromium-based Edge versions."</span> } },
+    { <span class="jk">"@type"</span>: <span class="js">"Question"</span>, <span class="jk">"name"</span>: <span class="js">"Can I use the Chrome version on Edge?"</span>,
+      <span class="jk">"acceptedAnswer"</span>: { <span class="jk">"@type"</span>: <span class="js">"Answer"</span>, <span class="jk">"text"</span>: <span class="js">"Yes. Since Edge supports Chrome extensions, you can also install ImageDownloader from the Chrome Web Store."</span> } },
+    { <span class="jk">"@type"</span>: <span class="js">"Question"</span>, <span class="jk">"name"</span>: <span class="js">"Does it work on Edge for Mac and Linux?"</span>,
+      <span class="jk">"acceptedAnswer"</span>: { <span class="jk">"@type"</span>: <span class="js">"Answer"</span>, <span class="jk">"text"</span>: <span class="js">"Yes. Edge is available on Windows, macOS, and Linux, and ImageDownloader works on all platforms."</span> } }
+  ]
+}
+<span class="ht">&lt;/script&gt;</span></pre>
+        </div>
+      </div>
+    </div>
+
+    <!-- Bulk + Homepage -->
+    <div class="card">
+      <div class="card-head"><div class="card-icon" style="background:rgba(139,92,246,0.15)">📦</div><div><div class="card-title">LP4 — /bulk-image-downloader · Unique HowTo Schema</div><div class="card-desc">HowTo schema shows step cards directly in Google search results</div></div></div>
+      <div class="card-body">
+        <div class="code-wrap">
+          <div class="code-bar"><span class="code-lang">HowTo Schema</span><button class="copy-btn" onclick="cp(this)">Copy</button></div>
+          <pre><span class="ht">&lt;script</span> <span class="ha">type</span>=<span class="hv">"application/ld+json"</span><span class="ht">&gt;</span>
+{
+  <span class="jk">"@context"</span>: <span class="ju">"https://schema.org"</span>, <span class="jk">"@type"</span>: <span class="js">"HowTo"</span>,
+  <span class="jk">"name"</span>: <span class="js">"How to Bulk Download Images from Any Website"</span>,
+  <span class="jk">"description"</span>: <span class="js">"Download all images from any webpage at once using the free ImageDownloader browser extension."</span>,
+  <span class="jk">"totalTime"</span>: <span class="js">"PT2M"</span>,
+  <span class="jk">"tool"</span>: { <span class="jk">"@type"</span>: <span class="js">"HowToTool"</span>, <span class="jk">"name"</span>: <span class="js">"ImageDownloader Browser Extension"</span> },
+  <span class="jk">"step"</span>: [
+    { <span class="jk">"@type"</span>: <span class="js">"HowToStep"</span>, <span class="jk">"position"</span>: <span class="jn">1</span>,
+      <span class="jk">"name"</span>: <span class="js">"Install the Extension"</span>,
+      <span class="jk">"text"</span>: <span class="js">"Install ImageDownloader free from Chrome Web Store, Firefox Add-ons, or Edge Add-ons store."</span> },
+    { <span class="jk">"@type"</span>: <span class="js">"HowToStep"</span>, <span class="jk">"position"</span>: <span class="jn">2</span>,
+      <span class="jk">"name"</span>: <span class="js">"Open the Target Website"</span>,
+      <span class="jk">"text"</span>: <span class="js">"Navigate to any webpage containing the images you want to download."</span> },
+    { <span class="jk">"@type"</span>: <span class="js">"HowToStep"</span>, <span class="jk">"position"</span>: <span class="jn">3</span>,
+      <span class="jk">"name"</span>: <span class="js">"Click the ImageDownloader Icon"</span>,
+      <span class="jk">"text"</span>: <span class="js">"Click the ImageDownloader toolbar icon. Every image on the page appears in a filterable grid."</span> },
+    { <span class="jk">"@type"</span>: <span class="js">"HowToStep"</span>, <span class="jk">"position"</span>: <span class="jn">4</span>,
+      <span class="jk">"name"</span>: <span class="js">"Select and Download"</span>,
+      <span class="jk">"text"</span>: <span class="js">"Select individual images or click Select All, then hit Download. All images save as a ZIP instantly."</span> }
+  ]
+}
+<span class="ht">&lt;/script&gt;</span></pre>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-head"><div class="card-icon" style="background:rgba(245,158,11,0.15)">🏠</div><div><div class="card-title">Homepage — Organization + WebSite Schema</div><div class="card-desc">Add to EVERY page — enables sitelinks search box + knowledge panel</div></div></div>
+      <div class="card-body">
+        <div class="code-wrap">
+          <div class="code-bar"><span class="code-lang">Organization + WebSite</span><button class="copy-btn" onclick="cp(this)">Copy</button></div>
+          <pre><span class="ht">&lt;script</span> <span class="ha">type</span>=<span class="hv">"application/ld+json"</span><span class="ht">&gt;</span>
+{
+  <span class="jk">"@context"</span>: <span class="ju">"https://schema.org"</span>,
+  <span class="jk">"@graph"</span>: [
+    {
+      <span class="jk">"@type"</span>: <span class="js">"Organization"</span>,
+      <span class="jk">"name"</span>: <span class="js">"ImageDownloader"</span>,
+      <span class="jk">"url"</span>: <span class="ju">"https://imagedownloader.org"</span>,
+      <span class="jk">"logo"</span>: <span class="ju">"https://imagedownloader.org/logo.png"</span>,
+      <span class="jk">"description"</span>: <span class="js">"Free browser extension to download images from any website. Available on Chrome, Firefox, and Edge."</span>,
+      <span class="jk">"sameAs"</span>: [
+        <span class="ju">"https://chrome.google.com/webstore/detail/YOUR-ID"</span>,
+        <span class="ju">"https://addons.mozilla.org/firefox/addon/YOUR-ID"</span>,
+        <span class="ju">"https://microsoftedge.microsoft.com/addons/detail/YOUR-ID"</span>
+      ]
+    },
+    {
+      <span class="jk">"@type"</span>: <span class="js">"WebSite"</span>,
+      <span class="jk">"name"</span>: <span class="js">"ImageDownloader.org"</span>,
+      <span class="jk">"url"</span>: <span class="ju">"https://imagedownloader.org"</span>
+    }
+  ]
+}
+<span class="ht">&lt;/script&gt;</span></pre>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ FAQS ═══ -->
+  <section class="page-section" id="sec-faqs">
+    <div class="sec-title">❓ FAQ Content</div>
+    <div class="sec-sub">6–8 FAQs per landing page. These are written to match real search queries and power your FAQPage schema above.</div>
+    <div class="faq-pills">
+      <button class="pill active" onclick="faqTab(this,'fq-chrome')">🔵 Chrome Extension</button>
+      <button class="pill" onclick="faqTab(this,'fq-firefox')">🦊 Firefox Addon</button>
+      <button class="pill" onclick="faqTab(this,'fq-edge')">🟢 Edge Extension</button>
+      <button class="pill" onclick="faqTab(this,'fq-bulk')">📦 Bulk Downloader</button>
+    </div>
+
+    <div class="faq-panel active" id="fq-chrome">
+      <div class="faq-item open"><div class="faq-q" onclick="faqToggle(this)">Is ImageDownloader free for Chrome?<span class="chevron">▼</span></div><div class="faq-a">Yes, completely free to install and use. No account, no subscription, no hidden fees. Install from the Chrome Web Store and start downloading images immediately.</div></div>
+      <div class="faq-item"><div class="faq-q" onclick="faqToggle(this)">How do I install ImageDownloader on Chrome?<span class="chevron">▼</span></div><div class="faq-a">Go to the Chrome Web Store, search "ImageDownloader," and click Add to Chrome. Confirm the permissions prompt and the extension appears in your toolbar within 60 seconds.</div></div>
+      <div class="faq-item"><div class="faq-q" onclick="faqToggle(this)">Can I download images in bulk?<span class="chevron">▼</span></div><div class="faq-a">Yes. Click the ImageDownloader icon on any webpage to see every image in a grid. Select individual images or click Select All, then download them all as a ZIP file in one click.</div></div>
+      <div class="faq-item"><div class="faq-q" onclick="faqToggle(this)">What image formats does it support?<span class="chevron">▼</span></div><div class="faq-a">All major formats: JPG/JPEG, PNG, WebP, GIF, SVG, and BMP. ImageDownloader detects and lists all images regardless of format.</div></div>
+      <div class="faq-item"><div class="faq-q" onclick="faqToggle(this)">Is the extension safe? Does it collect my data?<span class="chevron">▼</span></div><div class="faq-a">ImageDownloader only activates when you click its icon — it never runs in the background or tracks your browsing. No personal data is collected, stored, or shared. It is reviewed and approved by the Chrome Web Store.</div></div>
+      <div class="faq-item"><div class="faq-q" onclick="faqToggle(this)">Why can't I download images from some sites?<span class="chevron">▼</span></div><div class="faq-a">Some websites block image access using security policies (CSP headers) or protected CDNs. ImageDownloader can only download images your browser can access. Always ensure you have permission to use downloaded images.</div></div>
+      <div class="faq-item"><div class="faq-q" onclick="faqToggle(this)">Does it download images in full resolution?<span class="chevron">▼</span></div><div class="faq-a">Yes. ImageDownloader downloads the original image file from the server — no compression or resizing is applied during the download process.</div></div>
+      <div class="faq-item"><div class="faq-q" onclick="faqToggle(this)">Can I filter images by size before downloading?<span class="chevron">▼</span></div><div class="faq-a">Yes. Set a minimum width and height to filter out small icons and ads, so you only see and download the large, meaningful images on the page.</div></div>
+    </div>
+
+    <div class="faq-panel" id="fq-firefox">
+      <div class="faq-item open"><div class="faq-q" onclick="faqToggle(this)">Is ImageDownloader available for Firefox?<span class="chevron">▼</span></div><div class="faq-a">Yes! ImageDownloader is a free addon available on the official Mozilla Firefox Add-ons store (addons.mozilla.org). It works on all versions of Firefox including Firefox ESR.</div></div>
+      <div class="faq-item"><div class="faq-q" onclick="faqToggle(this)">Does the Firefox addon have the same features as Chrome?<span class="chevron">▼</span></div><div class="faq-a">Yes, feature-identical to the Chrome extension. You get the same image grid view, bulk download, size filtering, ZIP export, and format support.</div></div>
+      <div class="faq-item"><div class="faq-q" onclick="faqToggle(this)">Is the Firefox addon safe and approved by Mozilla?<span class="chevron">▼</span></div><div class="faq-a">Yes. Reviewed and approved by Mozilla's addon team. It collects no personal data and only activates when you click the icon. Your browsing history is never accessed.</div></div>
+      <div class="faq-item"><div class="faq-q" onclick="faqToggle(this)">How do I install ImageDownloader on Firefox?<span class="chevron">▼</span></div><div class="faq-a">Click Add to Firefox on this page or visit the Firefox Add-ons store. Approve the permissions and the extension appears in your toolbar within seconds.</div></div>
+      <div class="faq-item"><div class="faq-q" onclick="faqToggle(this)">Does it work on Firefox for Android?<span class="chevron">▼</span></div><div class="faq-a">Firefox for Android supports a limited set of extensions. Check the Firefox Add-ons store listing for the latest Android compatibility status.</div></div>
+    </div>
+
+    <div class="faq-panel" id="fq-edge">
+      <div class="faq-item open"><div class="faq-q" onclick="faqToggle(this)">Does ImageDownloader work on Microsoft Edge?<span class="chevron">▼</span></div><div class="faq-a">Yes. A dedicated Edge extension is available free from the Microsoft Edge Add-ons store. Works on all Chromium-based versions of Edge.</div></div>
+      <div class="faq-item"><div class="faq-q" onclick="faqToggle(this)">Can I install the Chrome version on Edge instead?<span class="chevron">▼</span></div><div class="faq-a">Yes. Since Edge is Chromium-based, you can install ImageDownloader from the Chrome Web Store and it works identically on Edge.</div></div>
+      <div class="faq-item"><div class="faq-q" onclick="faqToggle(this)">Is ImageDownloader approved for the Edge Add-ons store?<span class="chevron">▼</span></div><div class="faq-a">Yes. Listed and approved on the official Microsoft Edge Add-ons store, passing Microsoft's security and privacy review.</div></div>
+      <div class="faq-item"><div class="faq-q" onclick="faqToggle(this)">Does it work on Edge for Mac and Linux?<span class="chevron">▼</span></div><div class="faq-a">Yes. Edge is available on Windows, macOS, and Linux. ImageDownloader works on all platforms where Edge is installed.</div></div>
+    </div>
+
+    <div class="faq-panel" id="fq-bulk">
+      <div class="faq-item open"><div class="faq-q" onclick="faqToggle(this)">How do I download all images from a website at once?<span class="chevron">▼</span></div><div class="faq-a">Install ImageDownloader, go to the webpage, click the extension icon. A panel shows every image on the page. Click Select All then Download — all images save as a ZIP file in seconds.</div></div>
+      <div class="faq-item"><div class="faq-q" onclick="faqToggle(this)">Is there a limit to how many images I can download at once?<span class="chevron">▼</span></div><div class="faq-a">No hard limit. You can download hundreds of images at once. Very large batches may take a moment to package into ZIP depending on your connection speed.</div></div>
+      <div class="faq-item"><div class="faq-q" onclick="faqToggle(this)">Can I filter images by size when bulk downloading?<span class="chevron">▼</span></div><div class="faq-a">Yes. Set a minimum width and height threshold to skip icons and ads, so only large, meaningful images appear in the download list.</div></div>
+      <div class="faq-item"><div class="faq-q" onclick="faqToggle(this)">Are bulk downloads saved as a ZIP file?<span class="chevron">▼</span></div><div class="faq-a">Yes. Multiple images are packaged into a ZIP file that downloads to your default downloads folder automatically.</div></div>
+      <div class="faq-item"><div class="faq-q" onclick="faqToggle(this)">Does bulk download work on Pinterest or Instagram?<span class="chevron">▼</span></div><div class="faq-a">Yes. Works on image-heavy sites. Scroll down the page to load more images before opening the extension for the most complete results.</div></div>
+      <div class="faq-item"><div class="faq-q" onclick="faqToggle(this)">What browsers support bulk image download?<span class="chevron">▼</span></div><div class="faq-a">Chrome, Firefox, and Edge. The bulk download feature works identically across all three browsers.</div></div>
+    </div>
+  </section>
+
+  <!-- ═══ PHASE 1 ═══ -->
+  <section class="page-section" id="sec-phase1">
+    <div class="sec-title">Phase 1 — Core Extension Keywords</div>
+    <div class="sec-sub">Month 1–2 · 8 posts · Publish 1 per week · Goal: establish topical authority for extension-related searches</div>
+    <div class="phase-header p1"><span class="phase-num p1">📅 Month 1–2</span><span class="phase-info">· Focus on "how to download" + "best extension" queries · 1,200–1,800 words each · Always link back to /chrome-extension</span></div>
+    <div class="tbl-wrap"><table>
+      <thead><tr><th>#</th><th>Blog Title + URL Slug</th><th>Target Keyword</th><th>Volume</th><th>Meta Title</th><th>Meta Description</th></tr></thead>
+      <tbody>
+        <tr><td class="td-num">1</td><td><b style="font-size:12px">How to Download Images from Any Website in 2026</b><span class="td-slug">/blog/how-to-download-images-from-any-website</span></td><td class="td-kw">download images from website</td><td class="td-vol high">40K/mo</td><td><span class="td-meta-title">How to Download Images from Any Website (2026) | ImageDownloader.org</span></td><td class="td-meta-desc">Learn how to download images from any website in seconds using our free browser extension. Works on Chrome, Firefox & Edge. Step-by-step guide.</td></tr>
+        <tr><td class="td-num">2</td><td><b style="font-size:12px">Best Image Downloader Extensions for Chrome in 2026</b><span class="td-slug">/blog/best-image-downloader-chrome-extensions</span></td><td class="td-kw">best image downloader chrome extension</td><td class="td-vol med">12K/mo</td><td><span class="td-meta-title">Best Image Downloader Chrome Extensions 2026 | ImageDownloader.org</span></td><td class="td-meta-desc">We compared the top image downloader extensions for Chrome. See which is fastest, easiest, and supports bulk downloads.</td></tr>
+        <tr><td class="td-num">3</td><td><b style="font-size:12px">Image Downloader Extension vs Online Tool: Which Is Better?</b><span class="td-slug">/blog/image-downloader-extension-vs-online-tool</span></td><td class="td-kw">image downloader extension vs online tool</td><td class="td-vol med">9K/mo</td><td><span class="td-meta-title">Image Downloader Extension vs Online Tool | ImageDownloader.org</span></td><td class="td-meta-desc">Should you use a browser extension or online tool to download images? We break down speed, privacy, and use cases for each option.</td></tr>
+        <tr><td class="td-num">4</td><td><b style="font-size:12px">How to Install an Image Downloader on Chrome, Firefox & Edge</b><span class="td-slug">/blog/how-to-install-image-downloader-extension</span></td><td class="td-kw">how to install image downloader extension</td><td class="td-vol med">7.5K/mo</td><td><span class="td-meta-title">How to Install Image Downloader on Any Browser | ImageDownloader.org</span></td><td class="td-meta-desc">Step-by-step guide to installing the ImageDownloader extension on Chrome, Firefox, and Edge. Takes less than 60 seconds. Free, no account required.</td></tr>
+        <tr><td class="td-num">5</td><td><b style="font-size:12px">How to Download Multiple Images at Once from Any Website</b><span class="td-slug">/blog/how-to-download-multiple-images-at-once</span></td><td class="td-kw">download multiple images at once</td><td class="td-vol med">12K/mo</td><td><span class="td-meta-title">How to Download Multiple Images at Once | ImageDownloader.org</span></td><td class="td-meta-desc">Stop downloading images one by one. Bulk download all images from any webpage in one click using our free browser extension.</td></tr>
+        <tr><td class="td-num">6</td><td><b style="font-size:12px">How to Download Images Without Losing Quality</b><span class="td-slug">/blog/how-to-download-images-without-losing-quality</span></td><td class="td-kw">download images without losing quality</td><td class="td-vol med">8K/mo</td><td><span class="td-meta-title">How to Download Full Quality Images | ImageDownloader.org</span></td><td class="td-meta-desc">Download full-resolution images from any website without compression. Works for JPEG, PNG, WebP and more.</td></tr>
+        <tr><td class="td-num">7</td><td><b style="font-size:12px">How to Download WebP Images and Convert to JPG or PNG</b><span class="td-slug">/blog/how-to-download-webp-images</span></td><td class="td-kw">download webp images</td><td class="td-vol med">14K/mo</td><td><span class="td-meta-title">How to Download WebP Images & Convert to JPG/PNG | ImageDownloader.org</span></td><td class="td-meta-desc">Modern websites use WebP. Learn how to download WebP images and convert to JPEG or PNG using our browser extension.</td></tr>
+        <tr><td class="td-num">8</td><td><b style="font-size:12px">Is It Legal to Download Images from Websites?</b><span class="td-slug">/blog/is-it-legal-to-download-images-from-websites</span></td><td class="td-kw">is it legal to download images from websites</td><td class="td-vol med">8.5K/mo</td><td><span class="td-meta-title">Is It Legal to Download Images from Websites? | ImageDownloader.org</span></td><td class="td-meta-desc">Understand copyright rules around downloading images. Learn which images are safe to use, share, or publish.</td></tr>
+      </tbody>
+    </table></div>
+  </section>
+
+  <!-- ═══ PHASE 2 ═══ -->
+  <section class="page-section" id="sec-phase2">
+    <div class="sec-title">Phase 2 — Social Media Platform Keywords</div>
+    <div class="sec-sub">Month 3–4 · 10 posts · These target the highest search volumes in the entire plan — social media image saving queries.</div>
+    <div class="phase-header p2"><span class="phase-num p2">📅 Month 3–4</span><span class="phase-info">· Platform-specific content · 1,500–2,000 words · Include platform screenshots · CTA to install extension</span></div>
+    <div class="tbl-wrap"><table>
+      <thead><tr><th>#</th><th>Blog Title + URL Slug</th><th>Target Keyword</th><th>Volume</th><th>Meta Title</th><th>Meta Description</th></tr></thead>
+      <tbody>
+        <tr><td class="td-num">9</td><td><b style="font-size:12px">How to Save Instagram Photos to Your Phone or PC (2026)</b><span class="td-slug">/blog/how-to-save-instagram-photos</span></td><td class="td-kw">save instagram photos</td><td class="td-vol high">60K/mo</td><td><span class="td-meta-title">How to Save Instagram Photos to Phone or PC (2026) | ImageDownloader.org</span></td><td class="td-meta-desc">Download and save Instagram photos to your device. Works for posts, profiles, and stories. Free extension, no login required.</td></tr>
+        <tr><td class="td-num">10</td><td><b style="font-size:12px">How to Download Instagram Profile Pictures in Full Size</b><span class="td-slug">/blog/download-instagram-profile-picture-full-size</span></td><td class="td-kw">download instagram profile picture full size</td><td class="td-vol med">22K/mo</td><td><span class="td-meta-title">Download Instagram Profile Picture Full Size | ImageDownloader.org</span></td><td class="td-meta-desc">Instagram shrinks profile photos. Download anyone's Instagram profile picture in original full resolution for free.</td></tr>
+        <tr><td class="td-num">11</td><td><b style="font-size:12px">How to Download Pinterest Images in Full Quality</b><span class="td-slug">/blog/how-to-download-pinterest-images</span></td><td class="td-kw">pinterest image downloader</td><td class="td-vol high">50K/mo</td><td><span class="td-meta-title">How to Download Pinterest Images in Full Quality | ImageDownloader.org</span></td><td class="td-meta-desc">Pinterest compresses feed images. Download full-resolution Pinterest images using our free browser extension.</td></tr>
+        <tr><td class="td-num">12</td><td><b style="font-size:12px">How to Download All Pinterest Board Images at Once</b><span class="td-slug">/blog/download-all-images-from-pinterest-board</span></td><td class="td-kw">download all images from pinterest board</td><td class="td-vol med">11K/mo</td><td><span class="td-meta-title">Download All Images from a Pinterest Board | ImageDownloader.org</span></td><td class="td-meta-desc">Save an entire Pinterest board in one click with our bulk image downloader extension.</td></tr>
+        <tr><td class="td-num">13</td><td><b style="font-size:12px">How to Download Images from Twitter/X Posts</b><span class="td-slug">/blog/how-to-download-images-from-twitter</span></td><td class="td-kw">download images from twitter</td><td class="td-vol med">18K/mo</td><td><span class="td-meta-title">How to Download Images from Twitter/X | ImageDownloader.org</span></td><td class="td-meta-desc">Save images from any Twitter or X post to your device. Free extension, works on Chrome and Firefox.</td></tr>
+        <tr><td class="td-num">14</td><td><b style="font-size:12px">How to Download Facebook Photos and Albums</b><span class="td-slug">/blog/how-to-download-facebook-photos</span></td><td class="td-kw">download facebook photos</td><td class="td-vol high">25K/mo</td><td><span class="td-meta-title">How to Download Facebook Photos and Albums | ImageDownloader.org</span></td><td class="td-meta-desc">Download Facebook photos, profile pictures, and entire albums. Step-by-step guide with our free extension.</td></tr>
+        <tr><td class="td-num">15</td><td><b style="font-size:12px">How to Download Tumblr Images and Photo Sets</b><span class="td-slug">/blog/how-to-download-tumblr-images</span></td><td class="td-kw">tumblr image downloader</td><td class="td-vol med">9K/mo</td><td><span class="td-meta-title">How to Download Tumblr Images & Photo Sets | ImageDownloader.org</span></td><td class="td-meta-desc">Save Tumblr images, GIFs, and full photo sets to your device. Simple, free browser extension.</td></tr>
+        <tr><td class="td-num">16</td><td><b style="font-size:12px">How to Download Reddit Images and Gallery Posts</b><span class="td-slug">/blog/how-to-download-reddit-images</span></td><td class="td-kw">download images from reddit</td><td class="td-vol med">14K/mo</td><td><span class="td-meta-title">How to Download Reddit Images and Gallery Posts | ImageDownloader.org</span></td><td class="td-meta-desc">Save images from Reddit posts and gallery albums. Works with all Reddit image hosts including Imgur and i.redd.it.</td></tr>
+        <tr><td class="td-num">17</td><td><b style="font-size:12px">How to Download Images from LinkedIn Posts and Profiles</b><span class="td-slug">/blog/how-to-download-linkedin-images</span></td><td class="td-kw">download images from linkedin</td><td class="td-vol med">7K/mo</td><td><span class="td-meta-title">How to Download Images from LinkedIn | ImageDownloader.org</span></td><td class="td-meta-desc">Download images and profile photos from LinkedIn posts, articles, and profiles using our free browser extension.</td></tr>
+        <tr><td class="td-num">18</td><td><b style="font-size:12px">How to Download YouTube Thumbnails in High Resolution</b><span class="td-slug">/blog/how-to-download-youtube-thumbnails</span></td><td class="td-kw">download youtube thumbnail</td><td class="td-vol high">30K/mo</td><td><span class="td-meta-title">Download YouTube Thumbnails in High

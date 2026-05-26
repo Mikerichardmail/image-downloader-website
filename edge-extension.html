@@ -46,9 +46,14 @@
   {
     "@context": "https://schema.org",
     "@type": "SoftwareApplication",
-    "name": "Image Downloader - ImageMaster for Edge",
-    "operatingSystem": "Edge",
+    "name": "Image Downloader for Microsoft Edge",
+    "operatingSystem": "Microsoft Edge",
     "applicationCategory": "BrowserApplication",
+    "browserRequirements": "Requires Microsoft Edge",
+    "description": "Free image downloader extension for Microsoft Edge. Download any image from any website in one click. Supports bulk download and all formats.",
+    "url": "https://imagedownloader.org/edge-extension",
+    "downloadUrl": "https://microsoftedge.microsoft.com/addons/detail/your-addon-id",
+    "softwareVersion": "1.4.2",
     "offers": [
       {
         "@type": "Offer",
@@ -62,8 +67,69 @@
         "priceCurrency": "USD",
         "name": "Pro Lifetime"
       }
-    ],
-    "url": "https://chromewebstore.google.com/detail/image-downloader-imagemas/hmghdknfmhfbbdedplpdakfbhflfikhm"
+    ]
+  }
+  </script>
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "Does ImageDownloader work on Microsoft Edge?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes. ImageDownloader has a dedicated Edge extension available on the Microsoft Edge Add-ons store, free to install."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Can I use the Chrome extension on Edge?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes, since Edge is Chromium-based, it supports Chrome extensions. You can install ImageDownloader from the Chrome Web Store and it will work on Edge just as well."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Is ImageDownloader approved for the Edge Add-ons store?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes, ImageDownloader is listed and approved on the official Microsoft Edge Add-ons store. It has passed Microsoft's security and privacy review."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Does ImageDownloader work on Edge for Mac and Linux?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes. Microsoft Edge is available on Windows, macOS, and Linux, and ImageDownloader works on all platforms where Edge is installed."
+        }
+      }
+    ]
+  }
+  </script>
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      {
+        "@type": "ListItem",
+        "position": 1,
+        "name": "Home",
+        "item": "https://imagedownloader.org"
+      },
+      {
+        "@type": "ListItem",
+        "position": 2,
+        "name": "Edge Extension",
+        "item": "https://imagedownloader.org/edge-extension"
+      }
+    ]
   }
   </script>
 </head>
@@ -236,20 +302,20 @@
         </div>
         <div class="faq-accordion">
           <details>
-            <summary>Why does the extension require permission to read page data?</summary>
-            <p>To detect and extract images embedded on a webpage, Edge requires the extension to read the HTML source of the active tab. This process is done locally on your computer; no browsing history or private data is ever collected or sent to our servers.</p>
+            <summary>Does ImageDownloader work on Microsoft Edge?</summary>
+            <p>Yes. ImageDownloader has a dedicated Edge extension available on the Microsoft Edge Add-ons store, free to install. It works on all Chromium-based Edge versions.</p>
           </details>
           <details>
-            <summary>Does it work natively with Microsoft Edge?</summary>
-            <p>Yes. Edge is built on the Chromium engine. You can install ImageMaster from the Chrome Web Store directly into Edge, and all features will function natively with excellent speed and efficiency.</p>
+            <summary>Can I use the Chrome extension on Edge?</summary>
+            <p>Yes, since Microsoft Edge is Chromium-based, it supports Chrome extensions. You can install ImageDownloader from the Chrome Web Store and it will work on Edge just as well.</p>
           </details>
           <details>
-            <summary>How does the HD Image Resolver work?</summary>
-            <p>Social media and e-commerce websites like Instagram, Pinterest, and Amazon load small cropped thumbnails. When you run ImageMaster on these sites, our resolver automatically rewrites those URL paths to pull the original high-resolution, uncropped master file directly from their content delivery networks (CDNs).</p>
+            <summary>Is ImageDownloader approved for the Edge Add-ons store?</summary>
+            <p>Yes, ImageDownloader is listed and approved on the official Microsoft Edge Add-ons store. It has passed Microsoft's security and privacy review.</p>
           </details>
           <details>
-            <summary>Are updates automatic?</summary>
-            <p>Yes. Microsoft Edge automatically updates extensions in the background as new versions are published on the Web Store.</p>
+            <summary>Does it work on Edge for Mac and Linux?</summary>
+            <p>Yes. Microsoft Edge is available on Windows, macOS, and Linux, and ImageDownloader works on all platforms where Edge is installed.</p>
           </details>
         </div>
       </div>

@@ -16,6 +16,8 @@ function getHtmlInputs() {
     contact: resolve(__dirname, 'contact.html'),
     privacy: resolve(__dirname, 'privacy-policy.html'),
     terms: resolve(__dirname, 'terms-of-service.html'),
+    bulk: resolve(__dirname, 'bulk-image-downloader.html'),
+    error404: resolve(__dirname, '404.html'),
   };
 
   const blogDir = resolve(__dirname, 'blog');

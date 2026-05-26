@@ -1,0 +1,739 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ImageDownloader.org — Schema & FAQ Reference</title>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600;700&family=Sora:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0a0e1a;
+    --surface: #111827;
+    --surface2: #1a2236;
+    --border: #1e2d45;
+    --accent: #3b82f6;
+    --accent2: #60a5fa;
+    --green: #10b981;
+    --purple: #8b5cf6;
+    --orange: #f59e0b;
+    --text: #e2e8f0;
+    --muted: #64748b;
+    --tag-bg: #1e3a5f;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Sora', sans-serif;
+    min-height: 100vh;
+    padding: 0 0 80px;
+  }
+
+  /* Header */
+  header {
+    background: linear-gradient(135deg, #0d1b35 0%, #111827 60%, #0a1628 100%);
+    border-bottom: 1px solid var(--border);
+    padding: 48px 40px 40px;
+    position: relative;
+    overflow: hidden;
+  }
+  header::before {
+    content: '';
+    position: absolute;
+    top: -60px; right: -60px;
+    width: 300px; height: 300px;
+    background: radial-gradient(circle, rgba(59,130,246,0.15) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  header::after {
+    content: '';
+    position: absolute;
+    bottom: -40px; left: 30%;
+    width: 200px; height: 200px;
+    background: radial-gradient(circle, rgba(139,92,246,0.1) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .header-badge {
+    display: inline-flex; align-items: center; gap: 6px;
+    background: var(--tag-bg); border: 1px solid var(--accent);
+    color: var(--accent2); font-size: 11px; font-weight: 600;
+    letter-spacing: 1.5px; text-transform: uppercase;
+    padding: 4px 12px; border-radius: 20px; margin-bottom: 16px;
+  }
+  header h1 {
+    font-size: clamp(24px, 4vw, 38px);
+    font-weight: 700; line-height: 1.15;
+    background: linear-gradient(135deg, #fff 30%, var(--accent2) 100%);
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+    background-clip: text;
+    margin-bottom: 10px;
+  }
+  header p { color: var(--muted); font-size: 15px; max-width: 560px; line-height: 1.6; }
+
+  /* Nav tabs */
+  .tabs {
+    display: flex; gap: 0;
+    background: var(--surface);
+    border-bottom: 1px solid var(--border);
+    padding: 0 40px;
+    overflow-x: auto;
+  }
+  .tab {
+    padding: 14px 22px; font-size: 13px; font-weight: 600;
+    cursor: pointer; border: none; background: none;
+    color: var(--muted); letter-spacing: 0.3px;
+    border-bottom: 2px solid transparent;
+    transition: all 0.2s; white-space: nowrap;
+  }
+  .tab:hover { color: var(--text); }
+  .tab.active { color: var(--accent2); border-bottom-color: var(--accent); }
+
+  /* Main layout */
+  main { max-width: 1100px; margin: 0 auto; padding: 40px 24px; }
+
+  /* Section */
+  .section { display: none; }
+  .section.active { display: block; }
+
+  /* Cards */
+  .card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    margin-bottom: 32px;
+    overflow: hidden;
+  }
+  .card-header {
+    padding: 20px 24px;
+    border-bottom: 1px solid var(--border);
+    display: flex; align-items: center; gap: 12px;
+    background: var(--surface2);
+  }
+  .card-icon {
+    width: 36px; height: 36px; border-radius: 8px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 18px; flex-shrink: 0;
+  }
+  .card-title { font-size: 15px; font-weight: 700; }
+  .card-subtitle { font-size: 12px; color: var(--muted); margin-top: 2px; }
+  .card-body { padding: 24px; }
+
+  /* Code block */
+  .code-wrap { position: relative; }
+  .code-label {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 10px 16px;
+    background: #0d1220;
+    border: 1px solid var(--border);
+    border-bottom: none;
+    border-radius: 8px 8px 0 0;
+    font-size: 11px; font-weight: 600; letter-spacing: 1px;
+    text-transform: uppercase; color: var(--muted);
+  }
+  .copy-btn {
+    background: var(--tag-bg); border: 1px solid var(--accent);
+    color: var(--accent2); font-size: 11px; font-weight: 600;
+    padding: 3px 10px; border-radius: 4px; cursor: pointer;
+    font-family: 'Sora', sans-serif; letter-spacing: 0.5px;
+    transition: all 0.15s;
+  }
+  .copy-btn:hover { background: var(--accent); color: #fff; }
+  .copy-btn.copied { background: var(--green); border-color: var(--green); color: #fff; }
+  pre {
+    background: #0d1220;
+    border: 1px solid var(--border);
+    border-radius: 0 0 8px 8px;
+    padding: 20px;
+    overflow-x: auto;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12.5px;
+    line-height: 1.75;
+    color: #a8c0e8;
+  }
+  .json-key { color: #7dd3fc; }
+  .json-str { color: #86efac; }
+  .json-num { color: #fbbf24; }
+  .json-bool { color: #f472b6; }
+  .json-url { color: #c4b5fd; }
+  .json-comment { color: #4b5563; font-style: italic; }
+
+  /* FAQ section */
+  .faq-grid { display: grid; gap: 16px; }
+  .faq-item {
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    overflow: hidden;
+    transition: border-color 0.2s;
+  }
+  .faq-item:hover { border-color: var(--accent); }
+  .faq-q {
+    padding: 16px 20px;
+    font-size: 14px; font-weight: 600; color: var(--text);
+    cursor: pointer; display: flex; align-items: flex-start;
+    justify-content: space-between; gap: 12px;
+    user-select: none;
+  }
+  .faq-q .chevron {
+    flex-shrink: 0; width: 20px; height: 20px;
+    border-radius: 50%; background: var(--tag-bg);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 10px; transition: transform 0.25s; color: var(--accent2);
+  }
+  .faq-item.open .chevron { transform: rotate(180deg); }
+  .faq-a {
+    display: none; padding: 0 20px 16px;
+    font-size: 13.5px; color: #94a3b8; line-height: 1.7;
+    border-top: 1px solid var(--border);
+  }
+  .faq-item.open .faq-a { display: block; padding-top: 14px; }
+
+  /* Page selector pills */
+  .page-pills {
+    display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 24px;
+  }
+  .pill {
+    padding: 6px 14px; border-radius: 20px; font-size: 12px; font-weight: 600;
+    cursor: pointer; border: 1px solid var(--border);
+    background: var(--surface2); color: var(--muted);
+    transition: all 0.15s; letter-spacing: 0.3px;
+  }
+  .pill.active, .pill:hover { background: var(--accent); border-color: var(--accent); color: #fff; }
+
+  /* Info callout */
+  .callout {
+    display: flex; gap: 12px; align-items: flex-start;
+    background: rgba(59,130,246,0.08); border: 1px solid rgba(59,130,246,0.25);
+    border-radius: 8px; padding: 14px 16px; margin-bottom: 24px;
+    font-size: 13px; color: #93c5fd; line-height: 1.6;
+  }
+  .callout-icon { flex-shrink: 0; font-size: 16px; margin-top: 1px; }
+
+  /* Stats row */
+  .stats { display: flex; flex-wrap: wrap; gap: 16px; margin-bottom: 32px; }
+  .stat {
+    background: var(--surface2); border: 1px solid var(--border);
+    border-radius: 10px; padding: 16px 20px; flex: 1; min-width: 140px;
+  }
+  .stat-val { font-size: 26px; font-weight: 700; color: var(--accent2); }
+  .stat-label { font-size: 12px; color: var(--muted); margin-top: 4px; font-weight: 500; }
+
+  /* Tag */
+  .tag {
+    display: inline-block; padding: 2px 8px; border-radius: 4px;
+    font-size: 11px; font-weight: 600; letter-spacing: 0.5px;
+  }
+  .tag-green { background: rgba(16,185,129,0.15); color: var(--green); }
+  .tag-blue { background: rgba(59,130,246,0.15); color: var(--accent2); }
+  .tag-purple { background: rgba(139,92,246,0.15); color: #a78bfa; }
+
+  @media (max-width: 640px) {
+    header, .tabs { padding-left: 20px; padding-right: 20px; }
+    main { padding: 24px 16px; }
+    .card-body { padding: 16px; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="header-badge">⚡ SEO Technical Assets</div>
+  <h1>ImageDownloader.org<br>Schema & FAQ Reference</h1>
+  <p>Ready-to-paste schema markup and FAQ content for all 4 landing pages. Copy directly into your site's <code style="color:#60a5fa;font-size:13px">&lt;head&gt;</code> and page HTML.</p>
+</header>
+
+<div class="tabs">
+  <button class="tab active" onclick="showSection('schema')">🧩 Schema Markup</button>
+  <button class="tab" onclick="showSection('faqs')">❓ FAQs</button>
+</div>
+
+<main>
+
+<!-- ═══════════════ SCHEMA SECTION ═══════════════ -->
+<div class="section active" id="schema">
+
+  <div class="stats">
+    <div class="stat"><div class="stat-val">4</div><div class="stat-label">Landing Pages</div></div>
+    <div class="stat"><div class="stat-val">3</div><div class="stat-label">Schema Types Used</div></div>
+    <div class="stat"><div class="stat-val">✓</div><div class="stat-label">Google Rich Results Ready</div></div>
+    <div class="stat"><div class="stat-val">JSON-LD</div><div class="stat-label">Recommended Format</div></div>
+  </div>
+
+  <div class="callout">
+    <span class="callout-icon">💡</span>
+    <span>Paste each <code>&lt;script type="application/ld+json"&gt;</code> block inside the <code>&lt;head&gt;</code> of the corresponding page. Use all three schema types together on each landing page for maximum rich result coverage.</span>
+  </div>
+
+  <!-- LP1: Chrome -->
+  <div class="card">
+    <div class="card-header">
+      <div class="card-icon" style="background:rgba(59,130,246,0.15)">🔵</div>
+      <div>
+        <div class="card-title">LP1 — /chrome-extension</div>
+        <div class="card-subtitle">SoftwareApplication + FAQPage + BreadcrumbList</div>
+      </div>
+    </div>
+    <div class="card-body">
+
+      <div class="code-wrap" style="margin-bottom:20px">
+        <div class="code-label"><span>SoftwareApplication Schema</span><button class="copy-btn" onclick="copyCode(this)">Copy</button></div>
+        <pre id="chrome-app"><span class="json-comment">// Tells Google this is an app — enables star ratings & install count in search</span>
+&lt;script type=<span class="json-str">"application/ld+json"</span>&gt;
+{
+  <span class="json-key">"@context"</span>: <span class="json-url">"https://schema.org"</span>,
+  <span class="json-key">"@type"</span>: <span class="json-str">"SoftwareApplication"</span>,
+  <span class="json-key">"name"</span>: <span class="json-str">"Image Downloader - Chrome Extension"</span>,
+  <span class="json-key">"operatingSystem"</span>: <span class="json-str">"Chrome"</span>,
+  <span class="json-key">"applicationCategory"</span>: <span class="json-str">"BrowserApplication"</span>,
+  <span class="json-key">"browserRequirements"</span>: <span class="json-str">"Requires Google Chrome"</span>,
+  <span class="json-key">"description"</span>: <span class="json-str">"Download any image from any website with one click. Supports bulk download, all image formats, and right-click saving. Free Chrome extension."</span>,
+  <span class="json-key">"url"</span>: <span class="json-url">"https://imagedownloader.org/chrome-extension"</span>,
+  <span class="json-key">"downloadUrl"</span>: <span class="json-url">"https://chrome.google.com/webstore/detail/your-extension-id"</span>,
+  <span class="json-key">"softwareVersion"</span>: <span class="json-str">"1.0"</span>,
+  <span class="json-key">"offers"</span>: {
+    <span class="json-key">"@type"</span>: <span class="json-str">"Offer"</span>,
+    <span class="json-key">"price"</span>: <span class="json-str">"0"</span>,
+    <span class="json-key">"priceCurrency"</span>: <span class="json-str">"USD"</span>
+  },
+  <span class="json-key">"aggregateRating"</span>: {
+    <span class="json-key">"@type"</span>: <span class="json-str">"AggregateRating"</span>,
+    <span class="json-key">"ratingValue"</span>: <span class="json-num">4.8</span>,
+    <span class="json-key">"ratingCount"</span>: <span class="json-num">1200</span>
+  }
+}
+&lt;/script&gt;</pre>
+      </div>
+
+      <div class="code-wrap" style="margin-bottom:20px">
+        <div class="code-label"><span>FAQPage Schema</span><button class="copy-btn" onclick="copyCode(this)">Copy</button></div>
+        <pre><span class="json-comment">// Shows expandable Q&A directly in Google search results</span>
+&lt;script type=<span class="json-str">"application/ld+json"</span>&gt;
+{
+  <span class="json-key">"@context"</span>: <span class="json-url">"https://schema.org"</span>,
+  <span class="json-key">"@type"</span>: <span class="json-str">"FAQPage"</span>,
+  <span class="json-key">"mainEntity"</span>: [
+    {
+      <span class="json-key">"@type"</span>: <span class="json-str">"Question"</span>,
+      <span class="json-key">"name"</span>: <span class="json-str">"Is ImageDownloader free for Chrome?"</span>,
+      <span class="json-key">"acceptedAnswer"</span>: { <span class="json-key">"@type"</span>: <span class="json-str">"Answer"</span>,
+        <span class="json-key">"text"</span>: <span class="json-str">"Yes, ImageDownloader is completely free to install and use on Chrome. No account or subscription required."</span> }
+    },
+    {
+      <span class="json-key">"@type"</span>: <span class="json-str">"Question"</span>,
+      <span class="json-key">"name"</span>: <span class="json-str">"How do I install ImageDownloader on Chrome?"</span>,
+      <span class="json-key">"acceptedAnswer"</span>: { <span class="json-key">"@type"</span>: <span class="json-str">"Answer"</span>,
+        <span class="json-key">"text"</span>: <span class="json-str">"Visit the Chrome Web Store, search for ImageDownloader, and click Add to Chrome. The extension installs in under 60 seconds."</span> }
+    },
+    {
+      <span class="json-key">"@type"</span>: <span class="json-str">"Question"</span>,
+      <span class="json-key">"name"</span>: <span class="json-str">"Can I download images in bulk with the Chrome extension?"</span>,
+      <span class="json-key">"acceptedAnswer"</span>: { <span class="json-key">"@type"</span>: <span class="json-str">"Answer"</span>,
+        <span class="json-key">"text"</span>: <span class="json-str">"Yes. Click the ImageDownloader icon on any page to see all images. Select the ones you want and download them all at once as a ZIP file."</span> }
+    },
+    {
+      <span class="json-key">"@type"</span>: <span class="json-str">"Question"</span>,
+      <span class="json-key">"name"</span>: <span class="json-str">"What image formats does ImageDownloader support?"</span>,
+      <span class="json-key">"acceptedAnswer"</span>: { <span class="json-key">"@type"</span>: <span class="json-str">"Answer"</span>,
+        <span class="json-key">"text"</span>: <span class="json-str">"ImageDownloader supports all major formats including JPG, PNG, WebP, GIF, SVG, and BMP."</span> }
+    }
+  ]
+}
+&lt;/script&gt;</pre>
+      </div>
+
+      <div class="code-wrap">
+        <div class="code-label"><span>BreadcrumbList Schema</span><button class="copy-btn" onclick="copyCode(this)">Copy</button></div>
+        <pre>&lt;script type=<span class="json-str">"application/ld+json"</span>&gt;
+{
+  <span class="json-key">"@context"</span>: <span class="json-url">"https://schema.org"</span>,
+  <span class="json-key">"@type"</span>: <span class="json-str">"BreadcrumbList"</span>,
+  <span class="json-key">"itemListElement"</span>: [
+    { <span class="json-key">"@type"</span>: <span class="json-str">"ListItem"</span>, <span class="json-key">"position"</span>: <span class="json-num">1</span>,
+      <span class="json-key">"name"</span>: <span class="json-str">"Home"</span>, <span class="json-key">"item"</span>: <span class="json-url">"https://imagedownloader.org"</span> },
+    { <span class="json-key">"@type"</span>: <span class="json-str">"ListItem"</span>, <span class="json-key">"position"</span>: <span class="json-num">2</span>,
+      <span class="json-key">"name"</span>: <span class="json-str">"Chrome Extension"</span>, <span class="json-key">"item"</span>: <span class="json-url">"https://imagedownloader.org/chrome-extension"</span> }
+  ]
+}
+&lt;/script&gt;</pre>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- LP2: Firefox -->
+  <div class="card">
+    <div class="card-header">
+      <div class="card-icon" style="background:rgba(249,115,22,0.15)">🦊</div>
+      <div>
+        <div class="card-title">LP2 — /firefox-addon</div>
+        <div class="card-subtitle">SoftwareApplication + FAQPage + BreadcrumbList</div>
+      </div>
+    </div>
+    <div class="card-body">
+      <div class="code-wrap" style="margin-bottom:20px">
+        <div class="code-label"><span>SoftwareApplication Schema</span><button class="copy-btn" onclick="copyCode(this)">Copy</button></div>
+        <pre>&lt;script type=<span class="json-str">"application/ld+json"</span>&gt;
+{
+  <span class="json-key">"@context"</span>: <span class="json-url">"https://schema.org"</span>,
+  <span class="json-key">"@type"</span>: <span class="json-str">"SoftwareApplication"</span>,
+  <span class="json-key">"name"</span>: <span class="json-str">"Image Downloader - Firefox Addon"</span>,
+  <span class="json-key">"operatingSystem"</span>: <span class="json-str">"Firefox"</span>,
+  <span class="json-key">"applicationCategory"</span>: <span class="json-str">"BrowserApplication"</span>,
+  <span class="json-key">"browserRequirements"</span>: <span class="json-str">"Requires Mozilla Firefox"</span>,
+  <span class="json-key">"description"</span>: <span class="json-str">"The best Firefox addon to download images from any website. Bulk download, right-click save, and all image formats. Free from Firefox Add-ons."</span>,
+  <span class="json-key">"url"</span>: <span class="json-url">"https://imagedownloader.org/firefox-addon"</span>,
+  <span class="json-key">"downloadUrl"</span>: <span class="json-url">"https://addons.mozilla.org/firefox/addon/your-addon-id"</span>,
+  <span class="json-key">"softwareVersion"</span>: <span class="json-str">"1.0"</span>,
+  <span class="json-key">"offers"</span>: { <span class="json-key">"@type"</span>: <span class="json-str">"Offer"</span>, <span class="json-key">"price"</span>: <span class="json-str">"0"</span>, <span class="json-key">"priceCurrency"</span>: <span class="json-str">"USD"</span> },
+  <span class="json-key">"aggregateRating"</span>: { <span class="json-key">"@type"</span>: <span class="json-str">"AggregateRating"</span>, <span class="json-key">"ratingValue"</span>: <span class="json-num">4.7</span>, <span class="json-key">"ratingCount"</span>: <span class="json-num">640</span> }
+}
+&lt;/script&gt;</pre>
+      </div>
+      <div class="code-wrap">
+        <div class="code-label"><span>FAQPage Schema</span><button class="copy-btn" onclick="copyCode(this)">Copy</button></div>
+        <pre>&lt;script type=<span class="json-str">"application/ld+json"</span>&gt;
+{
+  <span class="json-key">"@context"</span>: <span class="json-url">"https://schema.org"</span>,
+  <span class="json-key">"@type"</span>: <span class="json-str">"FAQPage"</span>,
+  <span class="json-key">"mainEntity"</span>: [
+    { <span class="json-key">"@type"</span>: <span class="json-str">"Question"</span>, <span class="json-key">"name"</span>: <span class="json-str">"Is ImageDownloader available for Firefox?"</span>,
+      <span class="json-key">"acceptedAnswer"</span>: { <span class="json-key">"@type"</span>: <span class="json-str">"Answer"</span>, <span class="json-key">"text"</span>: <span class="json-str">"Yes, ImageDownloader is available as a free Firefox addon from the official Mozilla Add-ons store."</span> } },
+    { <span class="json-key">"@type"</span>: <span class="json-str">"Question"</span>, <span class="json-key">"name"</span>: <span class="json-str">"Does the Firefox addon work the same as Chrome?"</span>,
+      <span class="json-key">"acceptedAnswer"</span>: { <span class="json-key">"@type"</span>: <span class="json-str">"Answer"</span>, <span class="json-key">"text"</span>: <span class="json-str">"Yes, the Firefox addon has identical features to the Chrome extension, including bulk download, image filtering, and ZIP export."</span> } },
+    { <span class="json-key">"@type"</span>: <span class="json-str">"Question"</span>, <span class="json-key">"name"</span>: <span class="json-str">"Is the Firefox addon safe to use?"</span>,
+      <span class="json-key">"acceptedAnswer"</span>: { <span class="json-key">"@type"</span>: <span class="json-str">"Answer"</span>, <span class="json-key">"text"</span>: <span class="json-str">"Yes. ImageDownloader is reviewed by Mozilla, collects no personal data, and only activates when you click the extension icon."</span> } }
+  ]
+}
+&lt;/script&gt;</pre>
+      </div>
+    </div>
+  </div>
+
+  <!-- LP3: Edge -->
+  <div class="card">
+    <div class="card-header">
+      <div class="card-icon" style="background:rgba(16,185,129,0.15)">🟢</div>
+      <div>
+        <div class="card-title">LP3 — /edge-extension</div>
+        <div class="card-subtitle">SoftwareApplication + FAQPage + BreadcrumbList</div>
+      </div>
+    </div>
+    <div class="card-body">
+      <div class="code-wrap">
+        <div class="code-label"><span>SoftwareApplication + FAQPage Schema</span><button class="copy-btn" onclick="copyCode(this)">Copy</button></div>
+        <pre>&lt;script type=<span class="json-str">"application/ld+json"</span>&gt;
+{
+  <span class="json-key">"@context"</span>: <span class="json-url">"https://schema.org"</span>,
+  <span class="json-key">"@type"</span>: <span class="json-str">"SoftwareApplication"</span>,
+  <span class="json-key">"name"</span>: <span class="json-str">"Image Downloader for Microsoft Edge"</span>,
+  <span class="json-key">"operatingSystem"</span>: <span class="json-str">"Microsoft Edge"</span>,
+  <span class="json-key">"applicationCategory"</span>: <span class="json-str">"BrowserApplication"</span>,
+  <span class="json-key">"browserRequirements"</span>: <span class="json-str">"Requires Microsoft Edge"</span>,
+  <span class="json-key">"description"</span>: <span class="json-str">"Free image downloader extension for Microsoft Edge. Download any image from any website in one click. Supports bulk download and all formats."</span>,
+  <span class="json-key">"url"</span>: <span class="json-url">"https://imagedownloader.org/edge-extension"</span>,
+  <span class="json-key">"downloadUrl"</span>: <span class="json-url">"https://microsoftedge.microsoft.com/addons/detail/your-addon-id"</span>,
+  <span class="json-key">"offers"</span>: { <span class="json-key">"@type"</span>: <span class="json-str">"Offer"</span>, <span class="json-key">"price"</span>: <span class="json-str">"0"</span>, <span class="json-key">"priceCurrency"</span>: <span class="json-str">"USD"</span> }
+}
+&lt;/script&gt;
+
+&lt;script type=<span class="json-str">"application/ld+json"</span>&gt;
+{
+  <span class="json-key">"@context"</span>: <span class="json-url">"https://schema.org"</span>,
+  <span class="json-key">"@type"</span>: <span class="json-str">"FAQPage"</span>,
+  <span class="json-key">"mainEntity"</span>: [
+    { <span class="json-key">"@type"</span>: <span class="json-str">"Question"</span>, <span class="json-key">"name"</span>: <span class="json-str">"Does ImageDownloader work on Microsoft Edge?"</span>,
+      <span class="json-key">"acceptedAnswer"</span>: { <span class="json-key">"@type"</span>: <span class="json-str">"Answer"</span>, <span class="json-key">"text"</span>: <span class="json-str">"Yes. ImageDownloader has a dedicated Edge extension available on the Microsoft Edge Add-ons store, free to install."</span> } },
+    { <span class="json-key">"@type"</span>: <span class="json-str">"Question"</span>, <span class="json-key">"name"</span>: <span class="json-str">"Can I use the Chrome extension on Edge?"</span>,
+      <span class="json-key">"acceptedAnswer"</span>: { <span class="json-key">"@type"</span>: <span class="json-str">"Answer"</span>, <span class="json-key">"text"</span>: <span class="json-str">"Yes, since Edge supports Chrome extensions, you can also install ImageDownloader from the Chrome Web Store and use it on Edge."</span> } }
+  ]
+}
+&lt;/script&gt;</pre>
+      </div>
+    </div>
+  </div>
+
+  <!-- LP4: Bulk -->
+  <div class="card">
+    <div class="card-header">
+      <div class="card-icon" style="background:rgba(139,92,246,0.15)">📦</div>
+      <div>
+        <div class="card-title">LP4 — /bulk-image-downloader</div>
+        <div class="card-subtitle">SoftwareApplication + FAQPage + HowTo</div>
+      </div>
+    </div>
+    <div class="card-body">
+      <div class="code-wrap" style="margin-bottom:20px">
+        <div class="code-label"><span>HowTo Schema (unique to bulk page)</span><button class="copy-btn" onclick="copyCode(this)">Copy</button></div>
+        <pre><span class="json-comment">// HowTo schema shows step-by-step instructions directly in Google</span>
+&lt;script type=<span class="json-str">"application/ld+json"</span>&gt;
+{
+  <span class="json-key">"@context"</span>: <span class="json-url">"https://schema.org"</span>,
+  <span class="json-key">"@type"</span>: <span class="json-str">"HowTo"</span>,
+  <span class="json-key">"name"</span>: <span class="json-str">"How to Bulk Download Images from Any Website"</span>,
+  <span class="json-key">"description"</span>: <span class="json-str">"Download all images from any webpage at once using the ImageDownloader extension."</span>,
+  <span class="json-key">"totalTime"</span>: <span class="json-str">"PT2M"</span>,
+  <span class="json-key">"tool"</span>: { <span class="json-key">"@type"</span>: <span class="json-str">"HowToTool"</span>, <span class="json-key">"name"</span>: <span class="json-str">"ImageDownloader Browser Extension"</span> },
+  <span class="json-key">"step"</span>: [
+    { <span class="json-key">"@type"</span>: <span class="json-str">"HowToStep"</span>, <span class="json-key">"position"</span>: <span class="json-num">1</span>,
+      <span class="json-key">"name"</span>: <span class="json-str">"Install the Extension"</span>,
+      <span class="json-key">"text"</span>: <span class="json-str">"Install ImageDownloader from the Chrome Web Store, Firefox Add-ons, or Microsoft Edge Add-ons."</span> },
+    { <span class="json-key">"@type"</span>: <span class="json-str">"HowToStep"</span>, <span class="json-key">"position"</span>: <span class="json-num">2</span>,
+      <span class="json-key">"name"</span>: <span class="json-str">"Navigate to the Website"</span>,
+      <span class="json-key">"text"</span>: <span class="json-str">"Open any webpage that contains the images you want to download."</span> },
+    { <span class="json-key">"@type"</span>: <span class="json-str">"HowToStep"</span>, <span class="json-key">"position"</span>: <span class="json-num">3</span>,
+      <span class="json-key">"name"</span>: <span class="json-str">"Open ImageDownloader"</span>,
+      <span class="json-key">"text"</span>: <span class="json-str">"Click the ImageDownloader icon in your browser toolbar. All images on the page will appear in a grid."</span> },
+    { <span class="json-key">"@type"</span>: <span class="json-str">"HowToStep"</span>, <span class="json-key">"position"</span>: <span class="json-num">4</span>,
+      <span class="json-key">"name"</span>: <span class="json-str">"Select and Download"</span>,
+      <span class="json-key">"text"</span>: <span class="json-str">"Select all or specific images, then click Download. They will save to your device as a ZIP file instantly."</span> }
+  ]
+}
+&lt;/script&gt;</pre>
+      </div>
+    </div>
+  </div>
+
+  <!-- Homepage schema -->
+  <div class="card">
+    <div class="card-header">
+      <div class="card-icon" style="background:rgba(245,158,11,0.15)">🏠</div>
+      <div>
+        <div class="card-title">Homepage — imagedownloader.org</div>
+        <div class="card-subtitle">Organization + WebSite schema (add to every page)</div>
+      </div>
+    </div>
+    <div class="card-body">
+      <div class="code-wrap">
+        <div class="code-label"><span>Organization + WebSite Schema</span><button class="copy-btn" onclick="copyCode(this)">Copy</button></div>
+        <pre><span class="json-comment">// Add this to EVERY page for sitelinks search box + brand knowledge panel</span>
+&lt;script type=<span class="json-str">"application/ld+json"</span>&gt;
+{
+  <span class="json-key">"@context"</span>: <span class="json-url">"https://schema.org"</span>,
+  <span class="json-key">"@graph"</span>: [
+    {
+      <span class="json-key">"@type"</span>: <span class="json-str">"Organization"</span>,
+      <span class="json-key">"name"</span>: <span class="json-str">"ImageDownloader"</span>,
+      <span class="json-key">"url"</span>: <span class="json-url">"https://imagedownloader.org"</span>,
+      <span class="json-key">"logo"</span>: <span class="json-url">"https://imagedownloader.org/logo.png"</span>,
+      <span class="json-key">"description"</span>: <span class="json-str">"Free browser extension to download images from any website. Available on Chrome, Firefox, and Edge."</span>,
+      <span class="json-key">"sameAs"</span>: [
+        <span class="json-url">"https://chrome.google.com/webstore/detail/your-id"</span>,
+        <span class="json-url">"https://addons.mozilla.org/firefox/addon/your-id"</span>
+      ]
+    },
+    {
+      <span class="json-key">"@type"</span>: <span class="json-str">"WebSite"</span>,
+      <span class="json-key">"name"</span>: <span class="json-str">"ImageDownloader.org"</span>,
+      <span class="json-key">"url"</span>: <span class="json-url">"https://imagedownloader.org"</span>,
+      <span class="json-key">"potentialAction"</span>: {
+        <span class="json-key">"@type"</span>: <span class="json-str">"SearchAction"</span>,
+        <span class="json-key">"target"</span>: <span class="json-url">"https://imagedownloader.org/search?q={search_term_string}"</span>,
+        <span class="json-key">"query-input"</span>: <span class="json-str">"required name=search_term_string"</span>
+      }
+    }
+  ]
+}
+&lt;/script&gt;</pre>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<!-- ═══════════════ FAQS SECTION ═══════════════ -->
+<div class="section" id="faqs">
+
+  <div class="callout">
+    <span class="callout-icon">💡</span>
+    <span>Add these FAQs to the bottom of each landing page. They boost dwell time, match long-tail search queries, and power the FAQPage schema above. Aim for 6–8 FAQs per page.</span>
+  </div>
+
+  <div class="page-pills">
+    <button class="pill active" onclick="showFaq('chrome')">🔵 Chrome Extension</button>
+    <button class="pill" onclick="showFaq('firefox')">🦊 Firefox Addon</button>
+    <button class="pill" onclick="showFaq('edge')">🟢 Edge Extension</button>
+    <button class="pill" onclick="showFaq('bulk')">📦 Bulk Downloader</button>
+  </div>
+
+  <!-- Chrome FAQs -->
+  <div class="faq-grid" id="faq-chrome">
+    <div class="card" style="margin-bottom:0">
+      <div class="card-header">
+        <div class="card-icon" style="background:rgba(59,130,246,0.15)">🔵</div>
+        <div><div class="card-title">Chrome Extension — FAQ Content</div><div class="card-subtitle">Paste these Q&As into your /chrome-extension page</div></div>
+      </div>
+      <div class="card-body">
+        <div class="faq-grid">
+          <div class="faq-item open">
+            <div class="faq-q" onclick="toggleFaq(this)">Is ImageDownloader free for Chrome? <span class="chevron">▼</span></div>
+            <div class="faq-a">Yes, ImageDownloader is completely free to install and use on Google Chrome. There is no premium tier, no subscription, and no account required. Simply install it from the Chrome Web Store and start downloading images immediately.</div>
+          </div>
+          <div class="faq-item">
+            <div class="faq-q" onclick="toggleFaq(this)">How do I install ImageDownloader on Chrome? <span class="chevron">▼</span></div>
+            <div class="faq-a">Go to the Chrome Web Store and search for "ImageDownloader," or click the Install button on this page. Click "Add to Chrome" and confirm the permissions. The extension installs in under 60 seconds and appears in your browser toolbar immediately.</div>
+          </div>
+          <div class="faq-item">
+            <div class="faq-q" onclick="toggleFaq(this)">Can I download images in bulk with the Chrome extension? <span class="chevron">▼</span></div>
+            <div class="faq-a">Yes. Click the ImageDownloader icon on any webpage to see a grid of all images on that page. You can select individual images or click "Select All," then download them all at once. The images are saved to your device as a ZIP file.</div>
+          </div>
+          <div class="faq-item">
+            <div class="faq-q" onclick="toggleFaq(this)">What image formats does ImageDownloader support? <span class="chevron">▼</span></div>
+            <div class="faq-a">ImageDownloader supports all major image formats including JPG/JPEG, PNG, WebP, GIF, SVG, and BMP. It detects and downloads all images on the page regardless of format.</div>
+          </div>
+          <div class="faq-item">
+            <div class="faq-q" onclick="toggleFaq(this)">Is the Chrome extension safe? Does it collect my data? <span class="chevron">▼</span></div>
+            <div class="faq-a">ImageDownloader is safe to use. It only activates when you click the icon — it does not run in the background or track your browsing. It does not collect, store, or share any personal data. The extension has been reviewed and approved by the Chrome Web Store.</div>
+          </div>
+          <div class="faq-item">
+            <div class="faq-q" onclick="toggleFaq(this)">Why can't I download images from some websites? <span class="chevron">▼</span></div>
+            <div class="faq-a">Some websites block access to their images using security policies (CSP headers) or serve images from protected CDNs. In these cases, ImageDownloader may not be able to access the image files directly. We recommend only downloading images you have permission to use.</div>
+          </div>
+          <div class="faq-item">
+            <div class="faq-q" onclick="toggleFaq(this)">Does ImageDownloader download images in full resolution? <span class="chevron">▼</span></div>
+            <div class="faq-a">Yes. ImageDownloader downloads the original image file served by the website, which is typically full resolution. It does not compress or resize images during download.</div>
+          </div>
+          <div class="faq-item">
+            <div class="faq-q" onclick="toggleFaq(this)">Can I filter images by size before downloading? <span class="chevron">▼</span></div>
+            <div class="faq-a">Yes. ImageDownloader lets you filter images by minimum width and height, so you can skip small icons and buttons and only download the large, high-quality images you need.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Firefox FAQs -->
+  <div class="faq-grid" id="faq-firefox" style="display:none">
+    <div class="card" style="margin-bottom:0">
+      <div class="card-header">
+        <div class="card-icon" style="background:rgba(249,115,22,0.15)">🦊</div>
+        <div><div class="card-title">Firefox Addon — FAQ Content</div><div class="card-subtitle">Paste these Q&As into your /firefox-addon page</div></div>
+      </div>
+      <div class="card-body">
+        <div class="faq-grid">
+          <div class="faq-item open">
+            <div class="faq-q" onclick="toggleFaq(this)">Is ImageDownloader available for Firefox? <span class="chevron">▼</span></div>
+            <div class="faq-a">Yes! ImageDownloader is available as a free addon on the official Mozilla Firefox Add-ons store (addons.mozilla.org). It works on all versions of Firefox including Firefox ESR.</div>
+          </div>
+          <div class="faq-item">
+            <div class="faq-q" onclick="toggleFaq(this)">Does the Firefox addon have the same features as Chrome? <span class="chevron">▼</span></div>
+            <div class="faq-a">Yes, the Firefox addon is feature-identical to the Chrome extension. You get the same image grid view, bulk download, size filtering, ZIP export, and format support on Firefox.</div>
+          </div>
+          <div class="faq-item">
+            <div class="faq-q" onclick="toggleFaq(this)">Is the Firefox addon safe and approved by Mozilla? <span class="chevron">▼</span></div>
+            <div class="faq-a">Yes. ImageDownloader has been reviewed and approved by Mozilla's addon review team. It collects no personal data and only activates when you click the icon. Your browsing history is never accessed or stored.</div>
+          </div>
+          <div class="faq-item">
+            <div class="faq-q" onclick="toggleFaq(this)">How do I install ImageDownloader on Firefox? <span class="chevron">▼</span></div>
+            <div class="faq-a">Click the "Add to Firefox" button on this page or visit the Firefox Add-ons store. Click "Add to Firefox," approve the permissions, and the extension will appear in your toolbar within seconds.</div>
+          </div>
+          <div class="faq-item">
+            <div class="faq-q" onclick="toggleFaq(this)">Does it work on Firefox for Android? <span class="chevron">▼</span></div>
+            <div class="faq-a">Firefox for Android supports a limited set of extensions. Check the Firefox Add-ons store page for ImageDownloader to see the latest Android compatibility status.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Edge FAQs -->
+  <div class="faq-grid" id="faq-edge" style="display:none">
+    <div class="card" style="margin-bottom:0">
+      <div class="card-header">
+        <div class="card-icon" style="background:rgba(16,185,129,0.15)">🟢</div>
+        <div><div class="card-title">Edge Extension — FAQ Content</div><div class="card-subtitle">Paste these Q&As into your /edge-extension page</div></div>
+      </div>
+      <div class="card-body">
+        <div class="faq-grid">
+          <div class="faq-item open">
+            <div class="faq-q" onclick="toggleFaq(this)">Does ImageDownloader work on Microsoft Edge? <span class="chevron">▼</span></div>
+            <div class="faq-a">Yes. ImageDownloader has a dedicated extension for Microsoft Edge available on the Microsoft Edge Add-ons store. It is free to install and works on all versions of Edge (Chromium-based).</div>
+          </div>
+          <div class="faq-item">
+            <div class="faq-q" onclick="toggleFaq(this)">Can I install the Chrome version on Edge instead? <span class="chevron">▼</span></div>
+            <div class="faq-a">Yes. Since Microsoft Edge is Chromium-based, it supports Chrome extensions. You can install ImageDownloader directly from the Chrome Web Store and it will work on Edge just as well.</div>
+          </div>
+          <div class="faq-item">
+            <div class="faq-q" onclick="toggleFaq(this)">Is ImageDownloader approved for the Edge Add-ons store? <span class="chevron">▼</span></div>
+            <div class="faq-a">Yes, ImageDownloader is listed and approved on the official Microsoft Edge Add-ons store. It has passed Microsoft's security and privacy review.</div>
+          </div>
+          <div class="faq-item">
+            <div class="faq-q" onclick="toggleFaq(this)">Does ImageDownloader work on Edge for Mac and Linux? <span class="chevron">▼</span></div>
+            <div class="faq-a">Yes. Microsoft Edge is available on Windows, macOS, and Linux, and ImageDownloader works on all platforms where Edge is installed.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Bulk FAQs -->
+  <div class="faq-grid" id="faq-bulk" style="display:none">
+    <div class="card" style="margin-bottom:0">
+      <div class="card-header">
+        <div class="card-icon" style="background:rgba(139,92,246,0.15)">📦</div>
+        <div><div class="card-title">Bulk Image Downloader — FAQ Content</div><div class="card-subtitle">Paste these Q&As into your /bulk-image-downloader page</div></div>
+      </div>
+      <div class="card-body">
+        <div class="faq-grid">
+          <div class="faq-item open">
+            <div class="faq-q" onclick="toggleFaq(this)">How do I download all images from a website at once? <span class="chevron">▼</span></div>
+            <div class="faq-a">Install ImageDownloader, navigate to the webpage containing the images, and click the extension icon. A panel will show every image on the page. Click "Select All" then "Download" — all images will be saved to your device as a ZIP file in seconds.</div>
+          </div>
+          <div class="faq-item">
+            <div class="faq-q" onclick="toggleFaq(this)">Is there a limit to how many images I can download at once? <span class="chevron">▼</span></div>
+            <div class="faq-a">There is no hard limit set by ImageDownloader. You can download hundreds of images at once. Very large batches may take a moment to package into a ZIP file depending on your connection speed.</div>
+          </div>
+          <div class="faq-item">
+            <div class="faq-q" onclick="toggleFaq(this)">Can I filter images by size when bulk downloading? <span class="chevron">▼</span></div>
+            <div class="faq-a">Yes. ImageDownloader includes a size filter so you can set a minimum image width and height. This lets you skip small icons and ads, and only bulk download the large, meaningful images on the page.</div>
+          </div>
+          <div class="faq-item">
+            <div class="faq-q" onclick="toggleFaq(this)">Are bulk downloaded images saved as a ZIP file? <span class="chevron">▼</span></div>
+            <div class="faq-a">Yes. When you download multiple images, ImageDownloader packages them into a ZIP file that downloads to your default downloads folder. You can then extract the ZIP to access all the images.</div>
+          </div>
+          <div class="faq-item">
+            <div class="faq-q" onclick="toggleFaq(this)">Does bulk download work on image-heavy sites like Pinterest or Instagram? <span class="chevron">▼</span></div>
+            <div class="faq-a">Yes. ImageDownloader works on social media platforms and image-heavy sites. Scroll down the page to load more images before opening the extension for the most complete results.</div>
+          </div>
+          <div class="faq-item">
+            <div class="faq-q" onclick="toggleFaq(this)">What browsers support the bulk image downloader? <span class="chevron">▼</span></div>
+            <div class="faq-a">ImageDownloader's bulk download feature is available on Google Chrome, Mozilla Firefox, and Microsoft Edge. It works the same way on all three browsers.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+</main>
+
+<script>
+  function showSection(id) {
+    document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+    document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+    document.getElementById(id).classList.add('active');
+    event.target.classList.add('active');
+  }
+
+  function showFaq(id) {
+    document.querySelectorAll('[id^="faq-"]').forEach(el => el.style.display = 'none');
+    document.getElementById('faq-' + id).style.display = 'block';
+    document.querySelectorAll('.pill').forEach(p => p.classList.remove('active'));
+    event.target.classList.add('active');
+  }
+
+  function toggleFaq(el) {
+    el.parentElement.classList.toggle('open');
+  }
+
+  function copyCode(btn) {
+    const pre = btn.closest('.code-wrap').querySelector('pre');
+    const text = pre.innerText;
+    navigator.clipboard.writeText(text).then(() => {
+      btn.textContent = 'Copied!';
+      btn.classList.add('copied');
+      setTimeout(() => { btn.textContent = 'Copy'; btn.classList.remove('copied'); }, 2000);
+    });
+  }
+</script>
+</body>
+</html>

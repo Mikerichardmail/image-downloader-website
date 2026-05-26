@@ -48,7 +48,7 @@
     "@type": "WebApplication",
     "name": "Image Downloader — imagedownloader.org",
     "url": "https://imagedownloader.org",
-    "description": "Free bulk image downloader. Paste any URL and download all images from any webpage instantly.",
+    "description": "Free online bulk image downloader. Paste any website URL to extract, filter, and download all images in one click or save as ZIP.",
     "applicationCategory": "UtilitiesApplication",
     "operatingSystem": "All",
     "offers": {
@@ -56,6 +56,35 @@
       "price": "0",
       "priceCurrency": "USD"
     }
+  }
+  </script>
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "Organization",
+        "name": "ImageDownloader",
+        "url": "https://imagedownloader.org",
+        "logo": "https://imagedownloader.org/logo.png",
+        "description": "Free browser extension to download images from any website. Available on Chrome, Firefox, and Edge.",
+        "sameAs": [
+          "https://chromewebstore.google.com/detail/image-downloader-imagemas/hmghdknfmhfbbdedplpdakfbhflfikhm",
+          "https://addons.mozilla.org/en-US/firefox/addon/bulk-image-download/"
+        ]
+      },
+      {
+        "@type": "WebSite",
+        "name": "ImageDownloader.org",
+        "url": "https://imagedownloader.org",
+        "potentialAction": {
+          "@type": "SearchAction",
+          "target": "https://imagedownloader.org/search?q={search_term_string}",
+          "query-input": "required name=search_term_string"
+        }
+      }
+    ]
   }
   </script>
 

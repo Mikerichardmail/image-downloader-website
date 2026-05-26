@@ -46,9 +46,14 @@
   {
     "@context": "https://schema.org",
     "@type": "SoftwareApplication",
-    "name": "Bulk Image Downloader - Firefox Addon",
+    "name": "Image Downloader - Firefox Addon",
     "operatingSystem": "Firefox",
     "applicationCategory": "BrowserApplication",
+    "browserRequirements": "Requires Mozilla Firefox",
+    "description": "The best Firefox addon to download images from any website. Bulk download, right-click save, and all image formats. Free from Firefox Add-ons.",
+    "url": "https://imagedownloader.org/firefox-addon",
+    "downloadUrl": "https://addons.mozilla.org/en-US/firefox/addon/bulk-image-download/",
+    "softwareVersion": "1.4.2",
     "offers": [
       {
         "@type": "Offer",
@@ -63,7 +68,81 @@
         "name": "Pro Lifetime"
       }
     ],
-    "url": "https://addons.mozilla.org/en-US/firefox/addon/bulk-image-download/"
+    "aggregateRating": {
+      "@type": "AggregateRating",
+      "ratingValue": 4.7,
+      "ratingCount": 640
+    }
+  }
+  </script>
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "Is ImageDownloader available for Firefox?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes! ImageDownloader is available as a free addon on the official Mozilla Firefox Add-ons store (addons.mozilla.org). It works on all versions of Firefox including Firefox ESR."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Does the Firefox addon have the same features as Chrome?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes, the Firefox addon is feature-identical to the Chrome extension. You get the same image grid view, bulk download, size filtering, ZIP export, and format support on Firefox."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Is the Firefox addon safe and approved by Mozilla?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes. ImageDownloader has been reviewed and approved by Mozilla's addon review team. It collects no personal data and only activates when you click the icon. Your browsing history is never accessed or stored."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How do I install ImageDownloader on Firefox?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Click the \"Add to Firefox\" button on this page or visit the Firefox Add-ons store. Click \"Add to Firefox,\" approve the permissions, and the extension will appear in your toolbar within seconds."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Does it work on Firefox for Android?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Firefox for Android supports a limited set of extensions. Check the Firefox Add-ons store page for ImageDownloader to see the latest Android compatibility status."
+        }
+      }
+    ]
+  }
+  </script>
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      {
+        "@type": "ListItem",
+        "position": 1,
+        "name": "Home",
+        "item": "https://imagedownloader.org"
+      },
+      {
+        "@type": "ListItem",
+        "position": 2,
+        "name": "Firefox Addon",
+        "item": "https://imagedownloader.org/firefox-addon"
+      }
+    ]
   }
   </script>
 </head>
@@ -229,16 +308,24 @@
         </div>
         <div class="faq-accordion">
           <details>
-            <summary>Does the Firefox Addon support Private Browsing?</summary>
-            <p>Yes. By default, Firefox disables extensions in Private Windows. To enable ImageMaster in Private mode, go to `about:addons`, select ImageMaster, and under 'Run in Private Windows', check 'Allow'.</p>
+            <summary>Is ImageDownloader available for Firefox?</summary>
+            <p>Yes! ImageDownloader is available as a free addon on the official Mozilla Firefox Add-ons store (addons.mozilla.org). It works on all versions of Firefox including Firefox ESR.</p>
           </details>
           <details>
-            <summary>If I buy the Pro license, does it work on Chrome too?</summary>
-            <p>Yes! Your Gumroad license key is universal. It works to unlock Pro features on both our Google Chrome Extension and Firefox Addon.</p>
+            <summary>Does the Firefox addon have the same features as Chrome?</summary>
+            <p>Yes, the Firefox addon is feature-identical to the Chrome extension. You get the same image grid view, bulk download, size filtering, ZIP export, and format support on Firefox.</p>
           </details>
           <details>
-            <summary>Why can't the extension fetch images on local file:// links?</summary>
-            <p>Browser security guidelines prevent extensions from accessing local file paths by default. You can enable local file access in the extension's settings panel under `about:addons` if you need to scrape local HTML files.</p>
+            <summary>Is the Firefox addon safe and approved by Mozilla?</summary>
+            <p>Yes. ImageDownloader has been reviewed and approved by Mozilla's addon review team. It collects no personal data and only activates when you click the icon. Your browsing history is never accessed or stored.</p>
+          </details>
+          <details>
+            <summary>How do I install ImageDownloader on Firefox?</summary>
+            <p>Click the "Add to Firefox" button on this page or visit the Firefox Add-ons store. Click "Add to Firefox," approve the permissions, and the extension will appear in your toolbar within seconds.</p>
+          </details>
+          <details>
+            <summary>Does it work on Firefox for Android?</summary>
+            <p>Firefox for Android supports a limited set of extensions. Check the Firefox Add-ons store page for ImageDownloader to see the latest Android compatibility status.</p>
           </details>
         </div>
       </div>

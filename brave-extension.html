@@ -46,9 +46,14 @@
   {
     "@context": "https://schema.org",
     "@type": "SoftwareApplication",
-    "name": "Image Downloader - ImageMaster for Brave",
+    "name": "Image Downloader for Brave Browser",
     "operatingSystem": "Brave",
     "applicationCategory": "BrowserApplication",
+    "browserRequirements": "Requires Brave Browser",
+    "description": "Download any image from any website with our free Brave extension. Save single or bulk images in one click. Fully compatible with Brave shields.",
+    "url": "https://imagedownloader.org/brave-extension",
+    "downloadUrl": "https://chromewebstore.google.com/detail/image-downloader-imagemas/hmghdknfmhfbbdedplpdakfbhflfikhm",
+    "softwareVersion": "1.4.2",
     "offers": [
       {
         "@type": "Offer",
@@ -62,8 +67,69 @@
         "priceCurrency": "USD",
         "name": "Pro Lifetime"
       }
-    ],
-    "url": "https://chromewebstore.google.com/detail/image-downloader-imagemas/hmghdknfmhfbbdedplpdakfbhflfikhm"
+    ]
+  }
+  </script>
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "Is ImageDownloader free for Brave Browser?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes, ImageDownloader is completely free to install and use on Brave Browser. There is no premium tier, no subscription, and no account required. Simply install it from the Chrome Web Store and start downloading images immediately."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Does the extension work with Brave Shields turned on?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes. ImageDownloader is fully compatible with Brave's aggressive ad-blocking shields. Since the extension parses loaded elements on your side, it works perfectly alongside Brave's security filters."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How do I install ImageDownloader on Brave Browser?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Visit the Chrome Web Store, search for ImageDownloader, and click Add to Chrome (or Add to Brave). The extension installs in under 60 seconds and appears in your browser toolbar immediately."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Is ImageDownloader safe to use on Brave?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes. Following Brave's strict privacy standards, all image scraping and packaging functions run entirely in your local browser sandbox. No telemetry, third-party analytics, or tracking scripts are embedded in the extension."
+        }
+      }
+    ]
+  }
+  </script>
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      {
+        "@type": "ListItem",
+        "position": 1,
+        "name": "Home",
+        "item": "https://imagedownloader.org"
+      },
+      {
+        "@type": "ListItem",
+        "position": 2,
+        "name": "Brave Extension",
+        "item": "https://imagedownloader.org/brave-extension"
+      }
+    ]
   }
   </script>
 </head>
@@ -236,20 +302,20 @@
         </div>
         <div class="faq-accordion">
           <details>
-            <summary>Why does the extension require permission to read page data?</summary>
-            <p>To detect and extract images embedded on a webpage, Brave requires the extension to read the HTML source of the active tab. This process is done locally on your computer; no data is ever uploaded to any servers.</p>
+            <summary>Is ImageDownloader free for Brave Browser?</summary>
+            <p>Yes, ImageDownloader is completely free to install and use on Brave Browser. There is no premium tier, no subscription, and no account required. Simply install it from the Chrome Web Store and start downloading images immediately.</p>
           </details>
           <details>
-            <summary>Does it work with Brave Shields turned on?</summary>
-            <p>Yes. ImageMaster is fully compatible with Brave's aggressive ad-blocking shields. Since the extension parses loaded elements on your side, it works perfectly alongside Brave's security filters.</p>
+            <summary>Does the extension work with Brave Shields turned on?</summary>
+            <p>Yes. ImageDownloader is fully compatible with Brave's aggressive ad-blocking shields. Since the extension parses loaded elements on your side, it works perfectly alongside Brave's security filters.</p>
           </details>
           <details>
-            <summary>How does the HD Image Resolver work?</summary>
-            <p>Websites like Instagram, Pinterest, and Amazon load small cropped thumbnails. When you run ImageMaster on these sites, our resolver automatically rewrites those URL paths to pull the original high-resolution, uncropped master file directly from their content delivery networks (CDNs).</p>
+            <summary>How do I install ImageDownloader on Brave Browser?</summary>
+            <p>Visit the Chrome Web Store, search for "ImageDownloader," and click "Add to Chrome" (or "Add to Brave"). The extension installs in under 60 seconds and appears in your browser toolbar immediately.</p>
           </details>
           <details>
-            <summary>Are updates automatic?</summary>
-            <p>Yes. Brave automatically checks for updates in the background and will update ImageMaster to the latest release version without interrupting your workflow.</p>
+            <summary>Is ImageDownloader safe to use on Brave?</summary>
+            <p>Yes. Following Brave's strict privacy standards, all image scraping and packaging functions run entirely in your local browser sandbox. No telemetry, third-party analytics, or tracking scripts are embedded in the extension.</p>
           </details>
         </div>
       </div>
