@@ -488,19 +488,19 @@ function personalizeHomepageCTA() {
 
   if (browser === 'firefox') {
     primaryHTML = `<a href="/firefox-extension" class="btn btn-primary" style="background: linear-gradient(135deg, var(--accent-indigo) 0%, var(--accent-cyan) 100%); line-height: 1.5; padding: 12px 24px; border-radius: var(--radius-sm); font-weight: 600;">Get Firefox Addon</a>`;
-    secondaryHTML = `<a href="/chrome-extension"><img src="https://developer.chrome.com/static/docs/webstore/brand-guidelines/image/crx-badge-install.png" alt="Install Chrome Extension" style="height: 48px; border-radius: 6px;"></a>`;
+    secondaryHTML = `<a href="/chrome-extension"><img src="/src/images/crx-badge-install.png" alt="Install Chrome Extension" width="170" height="48" style="height: 48px; border-radius: 6px;"></a>`;
   } else if (browser === 'edge') {
     primaryHTML = `<a href="/edge-extension" class="btn btn-primary" style="background: linear-gradient(135deg, var(--accent-indigo) 0%, var(--accent-cyan) 100%); line-height: 1.5; padding: 12px 24px; border-radius: var(--radius-sm); font-weight: 600;">Get Edge Extension</a>`;
-    secondaryHTML = `<a href="/chrome-extension"><img src="https://developer.chrome.com/static/docs/webstore/brand-guidelines/image/crx-badge-install.png" alt="Install Chrome Extension" style="height: 48px; border-radius: 6px;"></a>`;
+    secondaryHTML = `<a href="/chrome-extension"><img src="/src/images/crx-badge-install.png" alt="Install Chrome Extension" width="170" height="48" style="height: 48px; border-radius: 6px;"></a>`;
   } else if (browser === 'brave') {
     primaryHTML = `<a href="/brave-extension" class="btn btn-primary" style="background: linear-gradient(135deg, var(--accent-indigo) 0%, var(--accent-cyan) 100%); line-height: 1.5; padding: 12px 24px; border-radius: var(--radius-sm); font-weight: 600;">Get Brave Extension</a>`;
-    secondaryHTML = `<a href="/chrome-extension"><img src="https://developer.chrome.com/static/docs/webstore/brand-guidelines/image/crx-badge-install.png" alt="Install Chrome Extension" style="height: 48px; border-radius: 6px;"></a>`;
+    secondaryHTML = `<a href="/chrome-extension"><img src="/src/images/crx-badge-install.png" alt="Install Chrome Extension" width="170" height="48" style="height: 48px; border-radius: 6px;"></a>`;
   } else if (browser === 'opera') {
     primaryHTML = `<a href="/opera-extension" class="btn btn-primary" style="background: linear-gradient(135deg, var(--accent-indigo) 0%, var(--accent-cyan) 100%); line-height: 1.5; padding: 12px 24px; border-radius: var(--radius-sm); font-weight: 600;">Get Opera Extension</a>`;
-    secondaryHTML = `<a href="/chrome-extension"><img src="https://developer.chrome.com/static/docs/webstore/brand-guidelines/image/crx-badge-install.png" alt="Install Chrome Extension" style="height: 48px; border-radius: 6px;"></a>`;
+    secondaryHTML = `<a href="/chrome-extension"><img src="/src/images/crx-badge-install.png" alt="Install Chrome Extension" width="170" height="48" style="height: 48px; border-radius: 6px;"></a>`;
   } else {
     // Chrome (default)
-    primaryHTML = `<a href="/chrome-extension"><img src="https://developer.chrome.com/static/docs/webstore/brand-guidelines/image/crx-badge-install.png" alt="Install Chrome Extension" style="height: 48px; border-radius: 6px;"></a>`;
+    primaryHTML = `<a href="/chrome-extension"><img src="/src/images/crx-badge-install.png" alt="Install Chrome Extension" width="170" height="48" style="height: 48px; border-radius: 6px;"></a>`;
     secondaryHTML = `<a href="/firefox-extension" class="btn btn-secondary">Get Firefox Addon</a>`;
   }
 

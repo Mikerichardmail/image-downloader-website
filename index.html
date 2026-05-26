@@ -29,6 +29,16 @@
   <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2280%22>🖼️</text></svg>">
   
   <!-- CSS -->
+    <!-- Preconnect to Google Fonts domains -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  
+  <!-- Asynchronous high-performance Google Fonts loading -->
+  <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
+  <noscript>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  </noscript>
   <link rel="stylesheet" href="/src/css/style.css">
 
   <!-- SCHEMA MARKUPS -->
@@ -390,7 +400,7 @@
             <h2>Download the Extension for Full Power</h2>
             <p>Automate page scroll, bypass CORS restrictions on protected domains, and fetch full-size HD sources on Instagram, Amazon, Pinterest, and Shopify.</p>
             <div class="badge-row">
-              <a href="/chrome-extension"><img src="https://developer.chrome.com/static/docs/webstore/brand-guidelines/image/crx-badge-install.png" alt="Install Chrome Extension"></a>
+              <a href="/chrome-extension"><img src="/src/images/crx-badge-install.png" alt="Install Chrome Extension" width="170" height="48" loading="lazy"></a>
               <a href="/firefox-extension" class="btn btn-secondary">Get Firefox Addon</a>
               <a href="/pricing" class="btn btn-glow">Get Pro Lifetime ($5.99)</a>
             </div>
