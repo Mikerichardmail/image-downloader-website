@@ -1049,12 +1049,14 @@ footer {
   max-width: 320px;
 }
 
-.footer-links h4 {
+.footer-links .footer-title {
+  font-family: var(--font-heading);
+  font-weight: 700;
   font-size: 0.95rem;
   margin-bottom: 20px;
   letter-spacing: 0.05em;
   text-transform: uppercase;
-  color: var(--text-muted);
+  color: var(--text-secondary);
 }
 
 .footer-links ul {
@@ -1082,7 +1084,7 @@ footer {
   flex-wrap: wrap;
   gap: 20px;
   font-size: 0.85rem;
-  color: var(--text-muted);
+  color: var(--text-secondary);
 }
 
 /* --- LEGAL & INFO PAGES --- */

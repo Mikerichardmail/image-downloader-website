@@ -1,4 +1,3 @@
-import JSZip from 'jszip';
 
 /**
  * Downloads a single image using the browser's download prompt.
@@ -55,6 +54,7 @@ function triggerDownload(url, filename) {
  * @param {Function} onProgress - Callback function for progress (completedCount, totalCount)
  */
 export async function downloadSelectedAsZip(images, zipName, onProgress) {
+  const JSZip = (await import('jszip')).default;
   const zip = new JSZip();
   let completed = 0;
   const total = images.length;
