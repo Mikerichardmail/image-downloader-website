@@ -409,9 +409,6 @@ function detectBrowser() {
 }
 
 function initSmartExtensionBanner() {
-  // Only show on desktop screens
-  if (window.innerWidth <= 768) return;
-
   // Check if dismissed
   if (localStorage.getItem('dismiss-smart-banner') === 'true') return;
 
