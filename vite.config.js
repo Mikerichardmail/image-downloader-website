@@ -18,6 +18,8 @@ function getHtmlInputs() {
     terms: resolve(__dirname, 'terms-of-service.html'),
     bulk: resolve(__dirname, 'bulk-image-downloader.html'),
     error404: resolve(__dirname, '404.html'),
+    install: resolve(__dirname, 'install.html'),
+    uninstall: resolve(__dirname, 'uninstall.html'),
   };
 
   const blogDir = resolve(__dirname, 'blog');

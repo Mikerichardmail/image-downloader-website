@@ -7,6 +7,7 @@ let activeFormats = new Set();
 let widthFilter = 0;
 let heightFilter = 0;
 let searchQuery = '';
+let cardMap = new Map();
 
 // DOM Elements
 const urlForm = document.getElementById('url-form');
@@ -133,7 +134,8 @@ async function handleExtract(e) {
     // Show controls and render initially
     gridControls.style.display = 'block';
     setupFormatTags();
-    updateFiltersAndRender();
+    renderInitialGrid();
+    applyFilters();
 
   } catch (error) {
     console.error('Extraction failed:', error);
@@ -153,13 +155,45 @@ function preloadDimensions() {
       img.width = tempImg.naturalWidth;
       img.height = tempImg.naturalHeight;
       img.loaded = true;
-      // Re-trigger render to display new dimensions on cards and adjust filters
-      updateFiltersAndRender();
+      
+      // Update card in-place
+      const card = cardMap.get(img.url);
+      if (card) {
+        const dimSpan = card.querySelector('.dimension-text');
+        if (dimSpan) {
+          dimSpan.textContent = `${img.width}x${img.height}`;
+        }
+        
+        // Re-evaluate filter for this single card
+        const matchesSearch = !searchQuery || 
+                              (img.alt && img.alt.toLowerCase().includes(searchQuery)) ||
+                              img.url.toLowerCase().includes(searchQuery);
+        const matchesFormat = activeFormats.size === 0 || activeFormats.has(img.ext.toUpperCase());
+        const matchesWidth = img.width >= widthFilter;
+        const matchesHeight = img.height >= heightFilter;
+        
+        if (matchesSearch && matchesFormat && matchesWidth && matchesHeight) {
+          card.style.display = '';
+        } else {
+          card.style.display = 'none';
+        }
+      }
+      
+      scheduleStatsUpdate();
     };
     tempImg.onerror = () => {
       img.width = 0;
       img.height = 0;
       img.loaded = true;
+      
+      const card = cardMap.get(img.url);
+      if (card) {
+        const dimSpan = card.querySelector('.dimension-text');
+        if (dimSpan) {
+          dimSpan.textContent = '0x0';
+        }
+      }
+      scheduleStatsUpdate();
     };
   });
 }
@@ -183,7 +217,7 @@ function setupFormatTags() {
         activeFormats.add(format);
         tag.classList.add('active');
       }
-      updateFiltersAndRender();
+      applyFilters();
     });
     formatTagsContainer.appendChild(tag);
   });
@@ -194,7 +228,7 @@ function setupFilterEvents() {
   if (searchInput) {
     searchInput.addEventListener('input', (e) => {
       searchQuery = e.target.value.toLowerCase();
-      updateFiltersAndRender();
+      applyFilters();
     });
   }
 
@@ -202,7 +236,7 @@ function setupFilterEvents() {
     widthSlider.addEventListener('input', (e) => {
       widthFilter = parseInt(e.target.value);
       widthValue.textContent = `${widthFilter}px`;
-      updateFiltersAndRender();
+      applyFilters();
     });
   }
 
@@ -210,48 +244,32 @@ function setupFilterEvents() {
     heightSlider.addEventListener('input', (e) => {
       heightFilter = parseInt(e.target.value);
       heightValue.textContent = `${heightFilter}px`;
-      updateFiltersAndRender();
+      applyFilters();
     });
   }
 }
 
-// Apply filters and render the grid
-function updateFiltersAndRender() {
+// Render all cards initially inside a DocumentFragment
+function renderInitialGrid() {
   if (!imageGrid) return;
-
-  // Filter list
-  const filtered = extractedImages.filter(img => {
-    // 1. Search Query
-    const matchesSearch = !searchQuery || 
-                          (img.alt && img.alt.toLowerCase().includes(searchQuery)) ||
-                          img.url.toLowerCase().includes(searchQuery);
-
-    // 2. Format
-    const matchesFormat = activeFormats.size === 0 || activeFormats.has(img.ext.toUpperCase());
-
-    // 3. Size Dimensions (only filter if dimension is loaded)
-    const matchesWidth = !img.loaded || img.width >= widthFilter;
-    const matchesHeight = !img.loaded || img.height >= heightFilter;
-
-    return matchesSearch && matchesFormat && matchesWidth && matchesHeight;
-  });
-
-  // Render cards
   imageGrid.innerHTML = '';
-  
-  filtered.forEach(img => {
+  cardMap.clear();
+
+  const fragment = document.createDocumentFragment();
+
+  extractedImages.forEach(img => {
     const card = document.createElement('div');
     card.className = `image-card${selectedUrls.has(img.url) ? ' selected' : ''}`;
-    
+
     // Size text display
     const dimensionText = img.loaded ? `${img.width}x${img.height}` : 'Loading...';
-    
+
     card.innerHTML = `
       <div class="image-card-checkbox"></div>
       <img src="${img.url}" alt="${img.alt || 'Extracted Image'}" loading="lazy">
       <div class="image-card-meta">
         <span>.${img.ext.toUpperCase()}</span>
-        <span>${dimensionText}</span>
+        <span class="dimension-text">${dimensionText}</span>
       </div>
     `;
 
@@ -267,7 +285,7 @@ function updateFiltersAndRender() {
         selectedUrls.add(img.url);
         card.classList.add('selected');
       }
-      updateStats(filtered.length);
+      updateStats();
     });
 
     // Add individual quick download button in meta
@@ -289,10 +307,52 @@ function updateFiltersAndRender() {
     });
     metaContainer.appendChild(downloadIcon);
 
-    imageGrid.appendChild(card);
+    fragment.appendChild(card);
+    cardMap.set(img.url, card);
   });
 
-  updateStats(filtered.length);
+  imageGrid.appendChild(fragment);
+}
+
+// Update card visibility in-place based on active filters
+function applyFilters() {
+  if (!imageGrid) return;
+
+  extractedImages.forEach(img => {
+    const card = cardMap.get(img.url);
+    if (!card) return;
+
+    // 1. Search Query
+    const matchesSearch = !searchQuery || 
+                          (img.alt && img.alt.toLowerCase().includes(searchQuery)) ||
+                          img.url.toLowerCase().includes(searchQuery);
+
+    // 2. Format
+    const matchesFormat = activeFormats.size === 0 || activeFormats.has(img.ext.toUpperCase());
+
+    // 3. Size Dimensions (only filter if dimension is loaded)
+    const matchesWidth = !img.loaded || img.width >= widthFilter;
+    const matchesHeight = !img.loaded || img.height >= heightFilter;
+
+    const matchesAll = matchesSearch && matchesFormat && matchesWidth && matchesHeight;
+
+    if (matchesAll) {
+      card.style.display = '';
+    } else {
+      card.style.display = 'none';
+    }
+  });
+
+  updateStats();
+}
+
+let statsUpdateTimeout = null;
+function scheduleStatsUpdate() {
+  if (statsUpdateTimeout) return;
+  statsUpdateTimeout = requestAnimationFrame(() => {
+    updateStats();
+    statsUpdateTimeout = null;
+  });
 }
 
 // Setup Selection Action Listeners
@@ -301,8 +361,14 @@ function setupSelectionActions() {
     selectAllBtn.addEventListener('click', () => {
       // Add all currently filtered images to selection
       const filtered = getFilteredImages();
-      filtered.forEach(img => selectedUrls.add(img.url));
-      updateFiltersAndRender();
+      filtered.forEach(img => {
+        selectedUrls.add(img.url);
+        const card = cardMap.get(img.url);
+        if (card) {
+          card.classList.add('selected');
+        }
+      });
+      updateStats();
     });
   }
 
@@ -310,8 +376,14 @@ function setupSelectionActions() {
     deselectAllBtn.addEventListener('click', () => {
       // Remove all currently filtered images from selection
       const filtered = getFilteredImages();
-      filtered.forEach(img => selectedUrls.delete(img.url));
-      updateFiltersAndRender();
+      filtered.forEach(img => {
+        selectedUrls.delete(img.url);
+        const card = cardMap.get(img.url);
+        if (card) {
+          card.classList.remove('selected');
+        }
+      });
+      updateStats();
     });
   }
 
@@ -323,25 +395,27 @@ function setupSelectionActions() {
 // Get images that match the active filters
 function getFilteredImages() {
   return extractedImages.filter(img => {
-    const matchesSearch = !searchQuery || 
-                          (img.alt && img.alt.toLowerCase().includes(searchQuery)) ||
-                          img.url.toLowerCase().includes(searchQuery);
-    const matchesFormat = activeFormats.size === 0 || activeFormats.has(img.ext.toUpperCase());
-    const matchesWidth = !img.loaded || img.width >= widthFilter;
-    const matchesHeight = !img.loaded || img.height >= heightFilter;
-    return matchesSearch && matchesFormat && matchesWidth && matchesHeight;
+    const card = cardMap.get(img.url);
+    return card && card.style.display !== 'none';
   });
 }
 
 // Update stats bar UI
-function updateStats(filteredCount) {
+function updateStats() {
   if (!statsText) return;
   
+  let visibleCount = 0;
+  cardMap.forEach(card => {
+    if (card.style.display !== 'none') {
+      visibleCount++;
+    }
+  });
+
   const selectedCount = [...selectedUrls].filter(url => 
     extractedImages.some(img => img.url === url)
   ).length;
 
-  statsText.textContent = `Showing ${filteredCount} of ${extractedImages.length} images | ${selectedCount} selected`;
+  statsText.textContent = `Showing ${visibleCount} of ${extractedImages.length} images | ${selectedCount} selected`;
 
   if (downloadSelectedBtn) {
     downloadSelectedBtn.disabled = selectedCount === 0;
@@ -428,10 +502,13 @@ function initSmartExtensionBanner() {
     storeUrl = 'https://addons.mozilla.org/en-US/firefox/addon/bulk-image-download/';
     browserName = 'Firefox';
     browserIcon = '🦊';
+  } else if (browser === 'edge') {
+    storeUrl = 'https://microsoftedge.microsoft.com/addons/detail/bulk-image-downloader-and/klankjlbkmmhpnldkckiaifbmnpafpfg';
+    browserName = 'Edge';
+    browserIcon = '🌀';
   } else {
     storeUrl = 'https://chromewebstore.google.com/detail/image-downloader-imagemas/hmghdknfmhfbbdedplpdakfbhflfikhm';
     if (browser === 'chrome') { browserName = 'Chrome'; browserIcon = '🌐'; }
-    else if (browser === 'edge') { browserName = 'Edge'; browserIcon = '🌀'; }
     else if (browser === 'brave') { browserName = 'Brave'; browserIcon = '🦁'; }
     else if (browser === 'opera') { browserName = 'Opera'; browserIcon = '⭕'; }
   }
