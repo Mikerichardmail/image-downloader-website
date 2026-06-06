@@ -1651,3 +1651,16 @@ footer {
 .error-card-close:hover {
   color: var(--text-primary);
 }
+
+/* --- SVG PROMO ICONS --- */
+.promo-icon-svg {
+  flex-shrink: 0;
+  display: inline-block;
+  vertical-align: middle;
+  filter: drop-shadow(0 2px 5px rgba(0, 0, 0, 0.3));
+  transition: transform 0.3s ease;
+}
+
+.promo-card-content:hover .promo-icon-svg {
+  transform: scale(1.1) rotate(5deg);
+}
