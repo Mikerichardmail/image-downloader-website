@@ -518,116 +518,34 @@ function isMobile() {
   return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) || window.innerWidth <= 768;
 }
 
-// Generate premium custom SVG browser icons
+// Get browser's original brand SVG icon from official/Wikimedia CDN
 function getBrowserIcon(browser, isMobileView) {
   if (isMobileView) {
-    return `
-      <svg class="promo-icon-svg mobile" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="url(#mobile-grad)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-        <defs>
-          <linearGradient id="mobile-grad" x1="0%" y1="0%" x2="100%" y2="100%">
-            <stop offset="0%" stop-color="#34d399" />
-            <stop offset="100%" stop-color="#059669" />
-          </linearGradient>
-        </defs>
-        <rect x="5" y="2" width="14" height="20" rx="2" ry="2"></rect>
-        <line x1="12" y1="18" x2="12.01" y2="18"></line>
-      </svg>
-    `;
+    return `<img src="https://upload.wikimedia.org/wikipedia/commons/6/64/Smartphone_Icon.svg" class="promo-icon-img mobile" alt="Mobile">`;
   }
   
   if (browser === 'firefox') {
-    return `
-      <svg class="promo-icon-svg firefox" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="url(#firefox-grad)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-        <defs>
-          <linearGradient id="firefox-grad" x1="0%" y1="0%" x2="100%" y2="100%">
-            <stop offset="0%" stop-color="#ff9400" />
-            <stop offset="100%" stop-color="#ff3c00" />
-          </linearGradient>
-        </defs>
-        <path d="M12 22a10 10 0 1 0 0-20 10 10 0 0 0 0 20z"></path>
-        <path d="M12 6a1 1 0 0 1 1-1h2a2 2 0 0 1 2 2v2a1 1 0 0 1-1 1h-2a1 1 0 0 1-1-1V6z"></path>
-        <path d="M16 10c0 3-2.5 5-5.5 5S5 13 5 10c0-1.5.5-3 1.5-4.5C8 7 10 8.5 12 8.5c2 0 4-1.5 4-1.5s0 2 0 3z"></path>
-      </svg>
-    `;
+    return `<img src="https://upload.wikimedia.org/wikipedia/commons/a/a0/Firefox_logo%2C_2019.svg" class="promo-icon-img firefox" alt="Firefox">`;
   }
   
   if (browser === 'edge') {
-    return `
-      <svg class="promo-icon-svg edge" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="url(#edge-grad)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-        <defs>
-          <linearGradient id="edge-grad" x1="0%" y1="0%" x2="100%" y2="100%">
-            <stop offset="0%" stop-color="#00bcf2" />
-            <stop offset="100%" stop-color="#0078d7" />
-          </linearGradient>
-        </defs>
-        <path d="M2 10a10 10 0 0 1 16-8l-2 6a4 4 0 0 0-4-2H8a4 4 0 0 0-4 4v4a4 4 0 0 0 4 4h4a4 4 0 0 0 4-4v-2h-6"></path>
-      </svg>
-    `;
+    return `<img src="https://upload.wikimedia.org/wikipedia/commons/f/f6/Edge_Logo_2019.svg" class="promo-icon-img edge" alt="Edge">`;
   }
   
   if (browser === 'chrome') {
-    return `
-      <svg class="promo-icon-svg chrome" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="url(#chrome-grad)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-        <defs>
-          <linearGradient id="chrome-grad" x1="0%" y1="0%" x2="100%" y2="100%">
-            <stop offset="0%" stop-color="#4285F4" />
-            <stop offset="30%" stop-color="#34A853" />
-            <stop offset="70%" stop-color="#FBBC05" />
-            <stop offset="100%" stop-color="#EA4335" />
-          </linearGradient>
-        </defs>
-        <circle cx="12" cy="12" r="10"></circle>
-        <circle cx="12" cy="12" r="4"></circle>
-        <line x1="21.17" y1="8" x2="12" y2="8"></line>
-        <line x1="3.95" y1="6.06" x2="8.54" y2="14"></line>
-        <line x1="10.88" y1="21.94" x2="15.46" y2="14"></line>
-      </svg>
-    `;
+    return `<img src="https://upload.wikimedia.org/wikipedia/commons/e/e1/Google_Chrome_icon_%28February_2022%29.svg" class="promo-icon-img chrome" alt="Chrome">`;
   }
   
   if (browser === 'brave') {
-    return `
-      <svg class="promo-icon-svg brave" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="url(#brave-grad)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-        <defs>
-          <linearGradient id="brave-grad" x1="0%" y1="0%" x2="100%" y2="100%">
-            <stop offset="0%" stop-color="#ff5500" />
-            <stop offset="100%" stop-color="#ff8c00" />
-          </linearGradient>
-        </defs>
-        <path d="M12 2L3 7v6c0 5.52 4.48 10 10 10s10-4.48 10-10V7l-9-5z"></path>
-        <path d="M12 22V12"></path>
-        <path d="M12 12H7"></path>
-      </svg>
-    `;
+    return `<img src="https://upload.wikimedia.org/wikipedia/commons/9/9d/Brave-logo-color.svg" class="promo-icon-img brave" alt="Brave">`;
   }
   
   if (browser === 'opera') {
-    return `
-      <svg class="promo-icon-svg opera" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="url(#opera-grad)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-        <defs>
-          <linearGradient id="opera-grad" x1="0%" y1="0%" x2="100%" y2="100%">
-            <stop offset="0%" stop-color="#ff0000" />
-            <stop offset="100%" stop-color="#cc0000" />
-          </linearGradient>
-        </defs>
-        <ellipse cx="12" cy="12" rx="6" ry="10"></ellipse>
-      </svg>
-    `;
+    return `<img src="https://upload.wikimedia.org/wikipedia/commons/d/d0/Opera_O.svg" class="promo-icon-img opera" alt="Opera">`;
   }
 
-  return `
-    <svg class="promo-icon-svg generic" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="url(#generic-grad)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-      <defs>
-        <linearGradient id="generic-grad" x1="0%" y1="0%" x2="100%" y2="100%">
-          <stop offset="0%" stop-color="#a5b4fc" />
-          <stop offset="100%" stop-color="#6366f1" />
-        </linearGradient>
-      </defs>
-      <polygon points="12 2 2 7 12 12 22 7 12 2"></polygon>
-      <polyline points="2 17 12 22 22 17"></polyline>
-      <polyline points="2 12 12 17 22 12"></polyline>
-    </svg>
-  `;
+  // Generic/Safari logo fallback
+  return `<img src="https://upload.wikimedia.org/wikipedia/commons/5/52/Safari_browser_logo.svg" class="promo-icon-img safari" alt="Safari">`;
 }
 
 // Show Post Extraction Promotion (either Inline banner or Slide-in Toast)
@@ -806,7 +724,7 @@ function showPostExtractPromo(layoutType) {
 }
 
 // Show interactive, informative error notifications
-function showExtractionError(message, is403OrBlocked = false) {
+function showExtractionError(message, is403OrBlocked = true) {
   // If there's an existing error, remove it
   const existingError = document.getElementById('extraction-error-card');
   if (existingError) existingError.remove();
@@ -821,36 +739,39 @@ function showExtractionError(message, is403OrBlocked = false) {
   const browser = detectBrowser();
   let extensionLinkHTML = '';
 
-  if (is403OrBlocked) {
-    let storeUrl = '';
-    let browserName = '';
-    if (browser === 'firefox') {
-      storeUrl = 'https://addons.mozilla.org/en-US/firefox/addon/bulk-image-download/';
-      browserName = 'Firefox';
-    } else if (browser === 'edge') {
-      storeUrl = 'https://microsoftedge.microsoft.com/addons/detail/bulk-image-downloader-and/klankjlbkmmhpnldkckiaifbmnpafpfg';
-      browserName = 'Edge';
-    } else if (['chrome', 'brave', 'opera'].includes(browser)) {
-      storeUrl = 'https://chromewebstore.google.com/detail/image-downloader-imagemas/hmghdknfmhfbbdedplpdakfbhflfikhm';
-      browserName = browser === 'chrome' ? 'Chrome' : browser === 'brave' ? 'Brave' : 'Opera';
-    }
+  let storeUrl = '';
+  let browserName = '';
+  if (browser === 'firefox') {
+    storeUrl = 'https://addons.mozilla.org/en-US/firefox/addon/bulk-image-download/';
+    browserName = 'Firefox';
+  } else if (browser === 'edge') {
+    storeUrl = 'https://microsoftedge.microsoft.com/addons/detail/bulk-image-downloader-and/klankjlbkmmhpnldkckiaifbmnpafpfg';
+    browserName = 'Edge';
+  } else if (['chrome', 'brave', 'opera'].includes(browser)) {
+    storeUrl = 'https://chromewebstore.google.com/detail/image-downloader-imagemas/hmghdknfmhfbbdedplpdakfbhflfikhm';
+    browserName = browser === 'chrome' ? 'Chrome' : browser === 'brave' ? 'Brave' : 'Opera';
+  }
 
-    if (storeUrl && !isMobile()) {
-      extensionLinkHTML = `
-        <div class="error-solution">
-          <p><strong>Bypass security blocks instantly:</strong> Sites like Amazon, Pinterest, and Instagram block automated cloud scrapers. Install our extension to download images directly from your browser tab.</p>
-          <a href="${storeUrl}" target="_blank" class="promo-btn" style="margin-top: 10px; font-size: 0.8rem; padding: 6px 14px;">
-            Install Extension
-          </a>
-        </div>
-      `;
-    } else if (isMobile()) {
-      extensionLinkHTML = `
-        <div class="error-solution">
-          <p><strong>Mobile Viewport Limit:</strong> Many sites block automated remote fetches. For full extraction, try using our extension on a desktop browser.</p>
-        </div>
-      `;
-    }
+  if (storeUrl && !isMobile()) {
+    extensionLinkHTML = `
+      <div class="error-solution">
+        <p><strong>Bypass extraction blocks instantly:</strong> Use our free browser extension to extract and download images directly from your browser tab without restrictions.</p>
+        <a href="${storeUrl}" target="_blank" class="promo-btn" style="margin-top: 10px; font-size: 0.85rem; padding: 10px 22px;">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="margin-right: 4px;">
+            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+            <polyline points="7 10 12 15 17 10"></polyline>
+            <line x1="12" y1="15" x2="12" y2="3"></line>
+          </svg>
+          Install for ${browserName}
+        </a>
+      </div>
+    `;
+  } else if (isMobile()) {
+    extensionLinkHTML = `
+      <div class="error-solution">
+        <p><strong>Mobile Viewport Limit:</strong> Many sites block automated remote fetches. For full extraction, try using our extension on a desktop browser.</p>
+      </div>
+    `;
   }
 
   errorCard.innerHTML = `

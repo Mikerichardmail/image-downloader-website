@@ -1680,15 +1680,18 @@ footer {
   color: var(--text-primary);
 }
 
-/* --- SVG PROMO ICONS --- */
-.promo-icon-svg {
+/* --- ORIGINAL PROMO BRAND ICONS --- */
+.promo-icon-img {
+  width: 38px;
+  height: 38px;
+  object-fit: contain;
   flex-shrink: 0;
   display: inline-block;
   vertical-align: middle;
-  filter: drop-shadow(0 2px 5px rgba(0, 0, 0, 0.3));
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.25));
   transition: transform 0.3s ease;
 }
 
-.promo-card-content:hover .promo-icon-svg {
+.promo-card-content:hover .promo-icon-img {
   transform: scale(1.1) rotate(5deg);
 }
