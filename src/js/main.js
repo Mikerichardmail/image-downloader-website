@@ -149,6 +149,9 @@ async function handleExtract(e) {
       }, 1500);
     } else {
       showPostExtractPromo('inline');
+      setTimeout(() => {
+        showPostExtractPromo('toast');
+      }, 1000);
     }
 
   } catch (error) {
