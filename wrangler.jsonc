@@ -16,5 +16,11 @@
   },
   "compatibility_flags": [
     "nodejs_compat"
+  ],
+  "kv_namespaces": [
+    {
+      "binding": "FORMS_DB",
+      "id": "8e066d676b6f4a588ab09da21408cb70"
+    }
   ]
 }

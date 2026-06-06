@@ -1,5 +1,6 @@
 import { onRequest as extractRequest } from '../api/extract.js';
 import { onRequest as proxyRequest } from '../api/proxy.js';
+import { onRequest as submitFormRequest } from '../api/submit-form.js';
 
 export default {
   async fetch(request, env, ctx) {
@@ -12,6 +13,8 @@ export default {
       response = await extractRequest({ request, env, params: {}, next: () => {} });
     } else if (url.pathname === '/api/proxy') {
       response = await proxyRequest({ request, env, params: {}, next: () => {} });
+    } else if (url.pathname === '/api/submit-form') {
+      response = await submitFormRequest({ request, env, params: {}, next: () => {} });
     } else if (env.ASSETS) {
       response = await env.ASSETS.fetch(request);
     } else {

@@ -282,13 +282,34 @@
   <script type="module" src="/src/js/main.js"></script>
   
   <script>
-    // Handle form submission success animation
+    // Handle form submission
     const form = document.getElementById('feedback-form');
     const successState = document.getElementById('success-state');
     
     if (form && successState) {
-      form.addEventListener('submit', (e) => {
+      form.addEventListener('submit', async (e) => {
         e.preventDefault();
+
+        const submitBtn = form.querySelector('button[type="submit"]');
+        const originalText = submitBtn.textContent;
+        submitBtn.textContent = 'Submitting...';
+        submitBtn.disabled = true;
+
+        const formData = new FormData(form);
+        const data = {
+          reasons: formData.getAll('reason'),
+          details: formData.get('details') || ''
+        };
+
+        try {
+          await fetch('/api/submit-form?type=feedback', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(data)
+          });
+        } catch (error) {
+          console.error('Failed to submit feedback:', error);
+        }
         
         // Hide form and show success message
         form.style.display = 'none';
