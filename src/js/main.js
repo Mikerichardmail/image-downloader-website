@@ -92,6 +92,10 @@ async function handleExtract(e) {
   const url = urlInput.value.trim();
   if (!url) return;
 
+  // Clear any existing error card
+  const existingError = document.getElementById('extraction-error-card');
+  if (existingError) existingError.remove();
+
   // UI loading state
   extractBtn.disabled = true;
   loader.style.display = 'flex';
@@ -107,14 +111,15 @@ async function handleExtract(e) {
     const data = await response.json();
 
     if (data.error) {
-      alert(`Error: ${data.error}`);
+      const is403 = data.error.includes('403') || data.error.includes('Forbidden') || data.error.includes('Blocked');
+      showExtractionError(data.error, is403);
       loader.style.display = 'none';
       extractBtn.disabled = false;
       return;
     }
 
     if (!data.images || data.images.length === 0) {
-      alert('No images were found on this page.');
+      showExtractionError('No images were found on this page. Some websites load images dynamically or restrict remote scraper access.', false);
       loader.style.display = 'none';
       extractBtn.disabled = false;
       return;
@@ -137,9 +142,18 @@ async function handleExtract(e) {
     renderInitialGrid();
     applyFilters();
 
+    // Trigger promotional prompts safely
+    if (isMobile()) {
+      setTimeout(() => {
+        showPostExtractPromo('toast');
+      }, 1500);
+    } else {
+      showPostExtractPromo('inline');
+    }
+
   } catch (error) {
     console.error('Extraction failed:', error);
-    alert('Extraction failed. Check console or verify if server is running.');
+    showExtractionError(error.message || 'Extraction failed. Please verify the URL or check your internet connection.', false);
   } finally {
     loader.style.display = 'none';
     extractBtn.disabled = false;
@@ -304,6 +318,13 @@ function renderInitialGrid() {
     downloadIcon.addEventListener('click', (e) => {
       e.stopPropagation();
       downloadSingle(img.url, `download.${img.ext}`);
+      
+      // High-intent trigger: slide-in toast promotion for desktop
+      if (!isMobile()) {
+        setTimeout(() => {
+          showPostExtractPromo('toast');
+        }, 1000);
+      }
     });
     metaContainer.appendChild(downloadIcon);
 
@@ -429,6 +450,13 @@ async function triggerBulkDownload() {
   const selectedImages = extractedImages.filter(img => selectedUrls.has(img.url));
   if (selectedImages.length === 0) return;
 
+  // High-intent trigger: slide-in toast promotion for desktop
+  if (!isMobile()) {
+    setTimeout(() => {
+      showPostExtractPromo('toast');
+    }, 1000);
+  }
+
   // Show progress modal
   if (progressContainer) {
     progressContainer.style.display = 'block';
@@ -480,6 +508,248 @@ function detectBrowser() {
   if (/safari/i.test(ua) && !/chrome|crios|edg|opr|opera/i.test(ua)) return 'safari';
   
   return 'other';
+}
+
+// Check if mobile device viewport
+function isMobile() {
+  return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) || window.innerWidth <= 768;
+}
+
+// Show Post Extraction Promotion (either Inline banner or Slide-in Toast)
+function showPostExtractPromo(layoutType) {
+  // Check if dismissed
+  if (localStorage.getItem(`dismiss-post-extract-${layoutType}`) === 'true') {
+    return;
+  }
+
+  // Prevent duplicate rendering
+  if (document.querySelector(`.post-extract-promo-${layoutType}`)) {
+    return;
+  }
+
+  const mobileMode = isMobile();
+  const browser = detectBrowser();
+
+  // If mobileMode and layoutType is 'inline', skip it (mobile only uses toast bottom sheets)
+  if (mobileMode && layoutType === 'inline') {
+    return;
+  }
+
+  // Determine browser extension store details
+  let storeUrl = '';
+  let browserName = '';
+  let browserIcon = '🔌';
+
+  if (browser === 'firefox') {
+    storeUrl = 'https://addons.mozilla.org/en-US/firefox/addon/bulk-image-download/';
+    browserName = 'Firefox';
+    browserIcon = '🦊';
+  } else if (browser === 'edge') {
+    storeUrl = 'https://microsoftedge.microsoft.com/addons/detail/bulk-image-downloader-and/klankjlbkmmhpnldkckiaifbmnpafpfg';
+    browserName = 'Edge';
+    browserIcon = '🌀';
+  } else if (browser === 'chrome' || browser === 'brave' || browser === 'opera') {
+    storeUrl = 'https://chromewebstore.google.com/detail/image-downloader-imagemas/hmghdknfmhfbbdedplpdakfbhflfikhm';
+    if (browser === 'chrome') { browserName = 'Chrome'; browserIcon = '🌐'; }
+    else if (browser === 'brave') { browserName = 'Brave'; browserIcon = '🦁'; }
+    else if (browser === 'opera') { browserName = 'Opera'; browserIcon = '⭕'; }
+  }
+
+  // Create card element
+  const card = document.createElement('div');
+  card.className = `post-extract-promo-${layoutType}`;
+
+  let htmlContent = '';
+
+  if (mobileMode) {
+    // Mobile bottom sheet layout
+    htmlContent = `
+      <div class="promo-card-content">
+        <div class="promo-card-icon">📱</div>
+        <div class="promo-card-details">
+          <div class="promo-card-title">Extraction Successful!</div>
+          <div class="promo-card-desc">Since mobile browsers don't support desktop extensions, bookmark this page or <strong>Add to Home Screen</strong> for instant access.</div>
+        </div>
+      </div>
+      <div class="promo-card-actions">
+        <div class="promo-dont-show-container">
+          <input type="checkbox" id="dont-show-${layoutType}">
+          <label for="dont-show-${layoutType}">Don't show again</label>
+        </div>
+        <a href="/pricing" class="promo-btn">Get Pro Lifetime</a>
+      </div>
+      <button class="promo-close" aria-label="Dismiss">&times;</button>
+    `;
+  } else {
+    // Desktop View Card Layout
+    if (storeUrl) {
+      htmlContent = `
+        <div class="promo-card-content">
+          <div class="promo-card-icon">${browserIcon}</div>
+          <div class="promo-card-details">
+            <div class="promo-card-title">Get <span>ImageMaster Pro</span> for ${browserName}</div>
+            <div class="promo-card-desc">Extract from protected sites (Instagram, Amazon) and auto-scroll lazy images with our free extension.</div>
+          </div>
+        </div>
+        <div class="promo-card-actions">
+          <div class="promo-dont-show-container">
+            <input type="checkbox" id="dont-show-${layoutType}">
+            <label for="dont-show-${layoutType}">Don't show again</label>
+          </div>
+          <a href="${storeUrl}" target="_blank" class="promo-btn">Add Extension</a>
+        </div>
+        <button class="promo-close" aria-label="Dismiss">&times;</button>
+      `;
+    } else {
+      // Safari or other desktop browsers
+      htmlContent = `
+        <div class="promo-card-content">
+          <div class="promo-card-icon">⚡</div>
+          <div class="promo-card-details">
+            <div class="promo-card-title">Want more power?</div>
+            <div class="promo-card-desc">Bypass site blockages and auto-scroll feeds. Try our Chrome or Firefox extensions on desktop!</div>
+          </div>
+        </div>
+        <div class="promo-card-actions">
+          <div class="promo-dont-show-container">
+            <input type="checkbox" id="dont-show-${layoutType}">
+            <label for="dont-show-${layoutType}">Don't show again</label>
+          </div>
+          <a href="/chrome-extension" class="promo-btn">Learn More</a>
+        </div>
+        <button class="promo-close" aria-label="Dismiss">&times;</button>
+      `;
+    }
+  }
+
+  card.innerHTML = htmlContent;
+
+  // Append to correct DOM position depending on layoutType
+  if (layoutType === 'inline') {
+    const gridControls = document.getElementById('grid-controls');
+    if (gridControls) {
+      gridControls.insertBefore(card, gridControls.firstChild);
+    }
+  } else if (layoutType === 'toast') {
+    document.body.appendChild(card);
+    // Trigger slide-in animation reflow
+    setTimeout(() => {
+      card.classList.add('active');
+    }, 100);
+  }
+
+  // Setup dismiss events
+  const closeBtn = card.querySelector('.promo-close');
+  const checkbox = card.querySelector(`#dont-show-${layoutType}`);
+
+  const dismissPromo = () => {
+    if (checkbox && checkbox.checked) {
+      localStorage.setItem(`dismiss-post-extract-${layoutType}`, 'true');
+    }
+    
+    if (layoutType === 'toast') {
+      card.classList.remove('active');
+      setTimeout(() => {
+        card.remove();
+      }, 500);
+    } else {
+      card.style.opacity = '0';
+      card.style.transition = 'opacity 0.3s ease';
+      setTimeout(() => {
+        card.remove();
+      }, 300);
+    }
+  };
+
+  closeBtn.addEventListener('click', dismissPromo);
+  
+  const actionBtn = card.querySelector('.promo-btn');
+  if (actionBtn) {
+    actionBtn.addEventListener('click', () => {
+      localStorage.setItem(`dismiss-post-extract-${layoutType}`, 'true');
+      setTimeout(dismissPromo, 1000);
+    });
+  }
+}
+
+// Show interactive, informative error notifications
+function showExtractionError(message, is403OrBlocked = false) {
+  // If there's an existing error, remove it
+  const existingError = document.getElementById('extraction-error-card');
+  if (existingError) existingError.remove();
+
+  const urlForm = document.getElementById('url-form');
+  if (!urlForm) return;
+
+  const errorCard = document.createElement('div');
+  errorCard.id = 'extraction-error-card';
+  errorCard.className = 'error-card';
+
+  const browser = detectBrowser();
+  let extensionLinkHTML = '';
+
+  if (is403OrBlocked) {
+    let storeUrl = '';
+    let browserName = '';
+    if (browser === 'firefox') {
+      storeUrl = 'https://addons.mozilla.org/en-US/firefox/addon/bulk-image-download/';
+      browserName = 'Firefox';
+    } else if (browser === 'edge') {
+      storeUrl = 'https://microsoftedge.microsoft.com/addons/detail/bulk-image-downloader-and/klankjlbkmmhpnldkckiaifbmnpafpfg';
+      browserName = 'Edge';
+    } else if (['chrome', 'brave', 'opera'].includes(browser)) {
+      storeUrl = 'https://chromewebstore.google.com/detail/image-downloader-imagemas/hmghdknfmhfbbdedplpdakfbhflfikhm';
+      browserName = browser === 'chrome' ? 'Chrome' : browser === 'brave' ? 'Brave' : 'Opera';
+    }
+
+    if (storeUrl && !isMobile()) {
+      extensionLinkHTML = `
+        <div class="error-solution">
+          <p><strong>Bypass security blocks instantly:</strong> Sites like Amazon, Pinterest, and Instagram block automated cloud scrapers. Install our extension to download images directly from your browser tab.</p>
+          <a href="${storeUrl}" target="_blank" class="promo-btn" style="margin-top: 10px; font-size: 0.8rem; padding: 6px 14px;">
+            Install Extension
+          </a>
+        </div>
+      `;
+    } else if (isMobile()) {
+      extensionLinkHTML = `
+        <div class="error-solution">
+          <p><strong>Mobile Viewport Limit:</strong> Many sites block automated remote fetches. For full extraction, try using our extension on a desktop browser.</p>
+        </div>
+      `;
+    }
+  }
+
+  errorCard.innerHTML = `
+    <div class="error-card-header">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="error-icon">
+        <circle cx="12" cy="12" r="10"></circle>
+        <line x1="12" y1="8" x2="12" y2="12"></line>
+        <line x1="12" y1="16" x2="12.01" y2="16"></line>
+      </svg>
+      <strong>Extraction Failed / Blocked</strong>
+    </div>
+    <div class="error-card-body">
+      <p class="error-desc">${message}</p>
+      ${extensionLinkHTML}
+    </div>
+    <button class="error-card-close" aria-label="Dismiss">&times;</button>
+  `;
+
+  // Insert immediately after the form
+  urlForm.parentNode.insertBefore(errorCard, urlForm.nextSibling);
+
+  // Setup dismiss event
+  const closeBtn = errorCard.querySelector('.error-card-close');
+  if (closeBtn) {
+    closeBtn.addEventListener('click', () => {
+      errorCard.style.opacity = '0';
+      errorCard.style.transition = 'opacity 0.2s ease';
+      setTimeout(() => {
+        errorCard.remove();
+      }, 200);
+    });
+  }
 }
 
 function initSmartExtensionBanner() {
