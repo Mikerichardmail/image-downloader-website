@@ -523,31 +523,31 @@ function isMobile() {
 // Get browser's original brand SVG icon from official/Wikimedia CDN
 function getBrowserIcon(browser, isMobileView) {
   if (isMobileView) {
-    return `<img src="https://upload.wikimedia.org/wikipedia/commons/6/64/Smartphone_Icon.svg" class="promo-icon-img mobile" alt="Mobile">`;
+    return `<img src="/images/browsers/mobile.svg" class="promo-icon-img mobile" alt="Mobile">`;
   }
   
   if (browser === 'firefox') {
-    return `<img src="https://upload.wikimedia.org/wikipedia/commons/a/a0/Firefox_logo%2C_2019.svg" class="promo-icon-img firefox" alt="Firefox">`;
+    return `<img src="/images/browsers/firefox.svg" class="promo-icon-img firefox" alt="Firefox">`;
   }
   
   if (browser === 'edge') {
-    return `<img src="https://upload.wikimedia.org/wikipedia/commons/f/f6/Edge_Logo_2019.svg" class="promo-icon-img edge" alt="Edge">`;
+    return `<img src="/images/browsers/edge.svg" class="promo-icon-img edge" alt="Edge">`;
   }
   
   if (browser === 'chrome') {
-    return `<img src="https://upload.wikimedia.org/wikipedia/commons/e/e1/Google_Chrome_icon_%28February_2022%29.svg" class="promo-icon-img chrome" alt="Chrome">`;
+    return `<img src="/images/browsers/chrome.svg" class="promo-icon-img chrome" alt="Chrome">`;
   }
   
   if (browser === 'brave') {
-    return `<img src="https://upload.wikimedia.org/wikipedia/commons/9/9d/Brave-logo-color.svg" class="promo-icon-img brave" alt="Brave">`;
+    return `<img src="/images/browsers/brave.svg" class="promo-icon-img brave" alt="Brave">`;
   }
   
   if (browser === 'opera') {
-    return `<img src="https://upload.wikimedia.org/wikipedia/commons/d/d0/Opera_O.svg" class="promo-icon-img opera" alt="Opera">`;
+    return `<img src="/images/browsers/opera.svg" class="promo-icon-img opera" alt="Opera">`;
   }
 
   // Generic/Safari logo fallback
-  return `<img src="https://upload.wikimedia.org/wikipedia/commons/5/52/Safari_browser_logo.svg" class="promo-icon-img safari" alt="Safari">`;
+  return `<img src="/images/browsers/safari.svg" class="promo-icon-img safari" alt="Safari">`;
 }
 
 // Show Post Extraction Promotion (either Inline banner or Slide-in Toast)
@@ -948,7 +948,7 @@ function initFloatingAddonPromo() {
         ${browserIconHTML}
       </div>
       <div class="addon-promo-info">
-        <h4 class="addon-promo-title">Add <span>ImageMaster Pro</span> to ${browserName}</h4>
+        <div class="addon-promo-title">Add <span>ImageMaster Pro</span> to ${browserName}</div>
         <p class="addon-promo-desc">Extract images behind logins, download files from private portals, and auto-scroll pages to trigger lazy-loading.</p>
       </div>
     </div>
