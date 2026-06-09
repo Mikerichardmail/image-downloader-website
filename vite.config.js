@@ -20,6 +20,8 @@ function getHtmlInputs() {
     error404: resolve(__dirname, '404.html'),
     install: resolve(__dirname, 'install.html'),
     uninstall: resolve(__dirname, 'uninstall.html'),
+    imagedownloader: resolve(__dirname, 'image-downloader.html'),
+    imagedownloaderonline: resolve(__dirname, 'image-downloader-online.html'),
   };
 
   const blogDir = resolve(__dirname, 'blog');

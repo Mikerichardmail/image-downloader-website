@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url><loc>https://imagedownloader.org/</loc><priority>1.0</priority></url>
+  <url><loc>https://imagedownloader.org/image-downloader</loc><priority>0.95</priority></url>
+  <url><loc>https://imagedownloader.org/image-downloader-online</loc><priority>0.85</priority></url>
   <url><loc>https://imagedownloader.org/chrome-extension</loc><priority>0.9</priority></url>
   <url><loc>https://imagedownloader.org/firefox-extension</loc><priority>0.9</priority></url>
   <url><loc>https://imagedownloader.org/edge-extension</loc><priority>0.8</priority></url>
@@ -13,6 +15,12 @@
   <url><loc>https://imagedownloader.org/privacy-policy</loc><priority>0.3</priority></url>
   <url><loc>https://imagedownloader.org/terms-of-service</loc><priority>0.3</priority></url>
   <url><loc>https://imagedownloader.org/blog</loc><priority>0.8</priority></url>
+  <url><loc>https://imagedownloader.org/blog/what-is-an-image-downloader</loc><priority>0.8</priority></url>
+  <url><loc>https://imagedownloader.org/blog/best-image-downloader-tools-2026</loc><priority>0.8</priority></url>
+  <url><loc>https://imagedownloader.org/blog/image-downloader-from-url</loc><priority>0.8</priority></url>
+  <url><loc>https://imagedownloader.org/blog/image-downloader-app-for-pc</loc><priority>0.8</priority></url>
+  <url><loc>https://imagedownloader.org/blog/photo-downloader-online-free</loc><priority>0.8</priority></url>
+  <url><loc>https://imagedownloader.org/blog/how-to-download-images-in-bulk-free</loc><priority>0.8</priority></url>
   <url><loc>https://imagedownloader.org/blog/how-to-download-images-from-any-website</loc><priority>0.8</priority></url>
   <url><loc>https://imagedownloader.org/blog/best-image-downloader-chrome-extensions</loc><priority>0.8</priority></url>
   <url><loc>https://imagedownloader.org/blog/image-downloader-extension-vs-online-tool</loc><priority>0.7</priority></url>

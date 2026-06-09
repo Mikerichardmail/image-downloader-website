@@ -50,6 +50,7 @@ document.addEventListener('DOMContentLoaded', () => {
   setupSelectionActions();
   initSmartExtensionBanner();
   personalizeHomepageCTA();
+  initFloatingAddonPromo();
 });
 
 // Setup Mobile Menu Toggle
@@ -903,4 +904,87 @@ function personalizeHomepageCTA() {
   }
 
   badgeRow.innerHTML = `${primaryHTML}${secondaryHTML}${proHTML}`;
+}
+
+function initFloatingAddonPromo() {
+  // Check if already dismissed
+  if (localStorage.getItem('dismiss-floating-addon-promo') === 'true') return;
+
+  const browser = detectBrowser();
+  
+  // We want to target supported browsers
+  if (!['chrome', 'firefox', 'edge', 'brave', 'opera'].includes(browser)) {
+    return;
+  }
+
+  // Determine store URL & Browser Name
+  let storeUrl = '';
+  let browserName = '';
+  if (browser === 'firefox') {
+    storeUrl = 'https://addons.mozilla.org/en-US/firefox/addon/bulk-image-download/';
+    browserName = 'Firefox';
+  } else if (browser === 'edge') {
+    storeUrl = 'https://microsoftedge.microsoft.com/addons/detail/bulk-image-downloader-and/klankjlbkmmhpnldkckiaifbmnpafpfg';
+    browserName = 'Edge';
+  } else {
+    storeUrl = 'https://chromewebstore.google.com/detail/image-downloader-imagemas/hmghdknfmhfbbdedplpdakfbhflfikhm';
+    if (browser === 'chrome') browserName = 'Chrome';
+    else if (browser === 'brave') browserName = 'Brave';
+    else if (browser === 'opera') browserName = 'Opera';
+  }
+
+  const browserIconHTML = getBrowserIcon(browser, false);
+
+  // Create Popup Element
+  const promoCard = document.createElement('div');
+  promoCard.className = 'addon-promo-floating-card';
+  promoCard.id = 'addon-promo-card';
+  
+  promoCard.innerHTML = `
+    <button class="addon-promo-close-btn" id="addon-promo-close" aria-label="Close">&times;</button>
+    <div class="addon-promo-body">
+      <div class="addon-promo-icon-container">
+        ${browserIconHTML}
+      </div>
+      <div class="addon-promo-info">
+        <h4 class="addon-promo-title">Add <span>ImageMaster Pro</span> to ${browserName}</h4>
+        <p class="addon-promo-desc">Extract images behind logins, download files from private portals, and auto-scroll pages to trigger lazy-loading.</p>
+      </div>
+    </div>
+    <div class="addon-promo-footer">
+      <button class="addon-promo-btn-secondary" id="addon-promo-dismiss">Maybe Later</button>
+      <a href="${storeUrl}" target="_blank" class="btn btn-glow addon-promo-btn-primary" id="addon-promo-download-btn">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="margin-right: 4px;">
+          <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+          <polyline points="7 10 12 15 17 10"></polyline>
+          <line x1="12" y1="15" x2="12" y2="3"></line>
+        </svg>
+        Download for ${browserName}
+      </a>
+    </div>
+  `;
+
+  document.body.appendChild(promoCard);
+
+  // Smooth slide-in after 2 seconds
+  setTimeout(() => {
+    promoCard.classList.add('active');
+  }, 2000);
+
+  // Setup event listeners
+  const closeBtn = promoCard.querySelector('#addon-promo-close');
+  const dismissBtn = promoCard.querySelector('#addon-promo-dismiss');
+  const downloadBtn = promoCard.querySelector('#addon-promo-download-btn');
+
+  const dismissPromo = () => {
+    promoCard.classList.remove('active');
+    localStorage.setItem('dismiss-floating-addon-promo', 'true');
+    setTimeout(() => {
+      promoCard.remove();
+    }, 500);
+  };
+
+  closeBtn.addEventListener('click', dismissPromo);
+  dismissBtn.addEventListener('click', dismissPromo);
+  downloadBtn.addEventListener('click', dismissPromo);
 }
