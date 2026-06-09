@@ -39,7 +39,42 @@ function getHtmlInputs() {
 }
 
 export default defineConfig({
-  plugins: [process.env.NODE_ENV !== 'production' && cloudflare()].filter(Boolean),
+  plugins: [
+    process.env.NODE_ENV !== 'production' && cloudflare(),
+    {
+      name: 'async-css-plugin',
+      transformIndexHtml(html) {
+        // Find any link tag containing rel="stylesheet"
+        const linkRegex = /<link\s+([\s\S]*?)>/gi;
+        
+        let newHtml = html.replace(linkRegex, (fullMatch, attributes) => {
+          if (/rel=["']stylesheet["']/i.test(attributes)) {
+            const hrefMatch = attributes.match(/href=["']([^"']+)["']/i);
+            if (hrefMatch) {
+              const cssUrl = hrefMatch[1];
+              return `<!-- Critical CSS inlined to prevent white flash -->
+  <style>
+    :root {
+      --bg-primary: #0b0f19;
+      --text-primary: #f9fafb;
+    }
+    body {
+      background-color: #0b0f19;
+      color: #f9fafb;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    }
+  </style>
+  <link rel="preload" href="${cssUrl}" as="style" onload="this.onload=null;this.rel='stylesheet'">
+  <noscript><link rel="stylesheet" href="${cssUrl}"></noscript>`;
+            }
+          }
+          return fullMatch;
+        });
+        
+        return newHtml;
+      }
+    }
+  ].filter(Boolean),
   build: {
     rollupOptions: {
       input: getHtmlInputs()
