@@ -51,6 +51,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initSmartExtensionBanner();
   personalizeHomepageCTA();
   initFloatingAddonPromo();
+  initEmailObfuscation();
 });
 
 // Setup Mobile Menu Toggle
@@ -987,4 +988,20 @@ function initFloatingAddonPromo() {
   closeBtn.addEventListener('click', dismissPromo);
   dismissBtn.addEventListener('click', dismissPromo);
   downloadBtn.addEventListener('click', dismissPromo);
+}
+
+// Obfuscated email decoder to protect contact details from scraper bots
+function initEmailObfuscation() {
+  document.querySelectorAll('.email-obfuscated').forEach(el => {
+    const name = el.getAttribute('data-name');
+    const domain = el.getAttribute('data-domain');
+    const tld = el.getAttribute('data-tld');
+    if (name && domain && tld) {
+      const email = `${name}@${domain}.${tld}`;
+      el.setAttribute('href', `mailto:${email}`);
+      if (el.textContent.includes('[at]')) {
+        el.textContent = email;
+      }
+    }
+  });
 }
