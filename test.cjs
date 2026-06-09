@@ -39,29 +39,31 @@ test('Performance Optimization Verification Suite', async (t) => {
     assert.strictEqual(hasImport, false, 'style.css must not contain render-blocking font imports');
   });
 
-  await t.test('3. Verify Preconnect and Async Google Fonts are present in all HTML heads', () => {
+  await t.test('3. Verify self-hosted fonts references are present in all HTML heads', () => {
     htmlFiles.forEach(file => {
       const content = fs.readFileSync(file, 'utf8');
       const relativePath = path.relative(ROOT_DIR, file);
 
-      // Verify preconnects
+      // Verify Google Fonts preconnects are removed
       assert.ok(
-        content.includes('href="https://fonts.googleapis.com"'),
-        `${relativePath} is missing fonts.googleapis.com preconnect link`
-      );
-      assert.ok(
-        content.includes('href="https://fonts.gstatic.com"'),
-        `${relativePath} is missing fonts.gstatic.com preconnect link`
+        !content.includes('fonts.googleapis.com'),
+        `${relativePath} should not contain references to fonts.googleapis.com`
       );
 
-      // Verify async stylesheet preload/load swapping pattern
+      // Verify local fonts stylesheet
       assert.ok(
-        content.includes('rel="preload" as="style"'),
-        `${relativePath} is missing fonts stylesheet preload link`
+        content.includes('href="/src/css/fonts.css"'),
+        `${relativePath} is missing local fonts stylesheet link`
+      );
+
+      // Verify font file preloads
+      assert.ok(
+        content.includes('/fonts/UcC73FwrK3iLTeHuS_nVMrMxCp50SjIa1ZL7.woff2'),
+        `${relativePath} is missing Inter Latin font preload`
       );
       assert.ok(
-        content.includes('media="print" onload="this.media=\'all\'"'),
-        `${relativePath} is missing fonts onload print swap handler`
+        content.includes('/fonts/QGYvz_MVcBeNP4NJtEtq.woff2'),
+        `${relativePath} is missing Outfit Latin font preload`
       );
     });
   });

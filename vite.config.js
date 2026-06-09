@@ -52,6 +52,18 @@ export default defineConfig({
             const hrefMatch = attributes.match(/href=["']([^"']+)["']/i);
             if (hrefMatch) {
               const cssUrl = hrefMatch[1];
+              
+              // If it's the fonts stylesheet, inline it directly
+              if (cssUrl.includes('fonts.css')) {
+                try {
+                  const fontsCssPath = resolve(__dirname, 'src/css/fonts.css');
+                  const fontsCssContent = fs.readFileSync(fontsCssPath, 'utf-8');
+                  return `<style>${fontsCssContent}</style>`;
+                } catch (e) {
+                  console.error("Failed to inline fonts.css:", e);
+                }
+              }
+              
               return `<!-- Critical CSS inlined to prevent white flash -->
   <style>
     :root {

@@ -23,6 +23,21 @@ export default {
 
     // Clone response to make headers mutable
     const newResponse = new Response(response.body, response);
+
+    // Apply Cache-Control headers for static assets
+    if (response.status >= 200 && response.status < 300) {
+      if (url.pathname.startsWith('/assets/')) {
+        newResponse.headers.set('Cache-Control', 'public, max-age=31536000, immutable');
+      } else if (
+        url.pathname.startsWith('/fonts/') ||
+        url.pathname.startsWith('/images/') ||
+        url.pathname === '/favicon.ico' ||
+        url.pathname === '/favicon.png'
+      ) {
+        newResponse.headers.set('Cache-Control', 'public, max-age=31536000');
+      }
+    }
+
     const contentType = newResponse.headers.get('content-type');
 
     if (contentType) {
